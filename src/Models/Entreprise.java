@@ -3,6 +3,7 @@ package Models;
 import java.util.ArrayList;
 
 public class Entreprise extends Utilisateur {
+	private int idEntreprise;
 	private String raisonSociale;
 	private String adresseVilleEnt;
 	private String adresseRueEnt;
@@ -15,10 +16,11 @@ public class Entreprise extends Utilisateur {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Entreprise(int idType, String pseudo, String mdp, String raisonSociale, String adresseVilleEnt,
-			String adresseRueEnt, String adresseCodePostaleEnt, String mail, String tel, String secteurActivite,
+	public Entreprise(int idEntreprise, String raisonSociale, String adresseVilleEnt, String adresseRueEnt,
+			String adresseCodePostaleEnt, String mail, String tel, String secteurActivite,
 			ArrayList<OffreStage> listOfOffreSTage) {
-		super(idType, pseudo, mdp);
+		super();
+		this.idEntreprise = idEntreprise;
 		this.raisonSociale = raisonSociale;
 		this.adresseVilleEnt = adresseVilleEnt;
 		this.adresseRueEnt = adresseRueEnt;
@@ -27,6 +29,9 @@ public class Entreprise extends Utilisateur {
 		this.tel = tel;
 		this.secteurActivite = secteurActivite;
 		this.listOfOffreSTage = listOfOffreSTage;
+	}
+	public int getIdEntreprise() {
+		return idEntreprise;
 	}
 	public String getRaisonSociale() {
 		return raisonSociale;
@@ -51,6 +56,9 @@ public class Entreprise extends Utilisateur {
 	}
 	public ArrayList<OffreStage> getListOfOffreSTage() {
 		return listOfOffreSTage;
+	}
+	public void setIdEntreprise(int idEntreprise) {
+		this.idEntreprise = idEntreprise;
 	}
 	public void setRaisonSociale(String raisonSociale) {
 		this.raisonSociale = raisonSociale;

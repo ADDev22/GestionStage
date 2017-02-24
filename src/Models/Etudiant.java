@@ -1,5 +1,7 @@
 package Models;
 
+import java.util.ArrayList;
+
 public class Etudiant  extends Utilisateur{
 private String nom;
 private String prenom;
@@ -7,11 +9,12 @@ private int idEtudiant;
 private String nivEtude;
 private String tel;
 private String mail;
-public Etudiant(int idType, String pseudo, String mdp, String nom, String prenom, int idEtudiant, String nivEtude,
+private ArrayList<EtuPostStage> listStagePostule = new ArrayList<EtuPostStage>();
+public Etudiant(int idType, int idEtudiant, String pseudo, String mdp, String nom, String prenom, String nivEtude,
 		String tel, String mail) {
 	super(idType, pseudo, mdp);
 	this.nom = nom;
-	prenom = prenom;
+	this.prenom = prenom;
 	this.idEtudiant = idEtudiant;
 	this.nivEtude = nivEtude;
 	this.tel = tel;
@@ -39,11 +42,14 @@ public String getTel() {
 public String getMail() {
 	return mail;
 }
+public ArrayList<EtuPostStage> getListStagePostule() {
+	return listStagePostule;
+}
 public void setNom(String nom) {
 	this.nom = nom;
 }
 public void setPrenom(String prenom) {
-	prenom = prenom;
+	this.prenom = prenom;
 }
 public void setIdEtudiant(int idEtudiant) {
 	this.idEtudiant = idEtudiant;
@@ -57,5 +63,15 @@ public void setTel(String tel) {
 public void setMail(String mail) {
 	this.mail = mail;
 }
+public void setListStagePostule(ArrayList<EtuPostStage> listStagePostule) {
+	this.listStagePostule = listStagePostule;
+}
+// Ajouter un offre qu'on a postulé
+public void addStagePostule(EtuPostStage stagePostule){
+	this.listStagePostule.add(stagePostule);
+}
+// Obtenir un offre qu'on a postulé
+public EtuPostStage getPostulant(int indice){
+return this.listStagePostule.get(indice);
 
 }
