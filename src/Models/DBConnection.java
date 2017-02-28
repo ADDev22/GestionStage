@@ -1,4 +1,4 @@
-package tp2_jdbc_swing;
+package Models;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
