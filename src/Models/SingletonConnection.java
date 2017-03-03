@@ -8,7 +8,7 @@ public class SingletonConnection {
 	 static {
 		 try {
 			 Class.forName("com.mysql.jdbc.Driver");
-			 connection=DriverManager.getConnection("jdbc:mysql://localhost:8889/DB_NMBD","root1","");
+	connection=DriverManager.getConnection("jdbc:mysql://localhost:8889/gestion_stage","BDPrStage","");
 			// System.out.println("Creation d'une connexion");
 		 } catch (Exception e) {
 			e.printStackTrace();
