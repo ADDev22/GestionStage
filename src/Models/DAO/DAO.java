@@ -1,6 +1,8 @@
-package Models;
+package Models.DAO;
 
 import java.sql.Connection;
+
+import Models.SingletonConnection;
 
 public interface DAO<T> {
 public Connection connect = SingletonConnection.getConnection();
