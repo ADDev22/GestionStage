@@ -11,12 +11,22 @@ import com.mysql.jdbc.Statement;
 
 public class Utilisateur
 {
-	//Déclaration
+	//Dï¿½claration
 	
 	protected int utilisateurId;
 	protected String utilisateurUserName;
 	protected String utilisateurMdp;
 	protected Fonction fonction;
+
+	//Constructeur
+
+	public Utilisateur(int utilisateurId, String utilisateurUserName, String utilisateurMdp, Fonction fonction)
+	{
+		this.utilisateurId = utilisateurId;
+		this.utilisateurUserName = utilisateurUserName;
+		this.utilisateurMdp = utilisateurMdp;
+		this.fonction = fonction;
+	}
 		
 	//Getter
 		
@@ -95,7 +105,7 @@ public class Utilisateur
 		return false;		
 	}
 		
-	//Traitement du resultat renvoyé par une requête --> correspodance avec un objet
+	//Traitement du resultat renvoyï¿½ par une requï¿½te --> correspodance avec un objet
 	private Utilisateur traitementLigne(ResultSet rs) throws SQLException 
 	{
 		Utilisateur utilisateur = new Utilisateur();
@@ -107,7 +117,7 @@ public class Utilisateur
 		return utilisateur;
 	}
 		
-	//Recupération des information de la fonction à partir de l'Id
+	//Recupï¿½ration des information de la fonction ï¿½ partir de l'Id
 	private Fonction getFonction(int fonctionId)
 	{
 		Connection conn = null;
