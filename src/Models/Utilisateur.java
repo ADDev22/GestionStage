@@ -40,6 +40,11 @@ public class Utilisateur
 		return this.utilisateurUserName;
 	}
 		
+	public Utilisateur() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getUtilisateurMdp()
 	{
 		return this.utilisateurMdp;
