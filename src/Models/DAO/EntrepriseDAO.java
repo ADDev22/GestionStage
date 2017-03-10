@@ -1,5 +1,4 @@
 package Models.DAO;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,6 +10,7 @@ public class EntrepriseDAO implements DAO<Entreprise> {
 public Entreprise create(Entreprise obj) {
 	try {
 		   // On insere d'abord Utilisateur puis on recupere last id utilisateur
+		            new UtilisateurDAO().create(obj);
 		PreparedStatement ps = connect.prepareStatement
 				   ("INSERT INTO entreprise()   VALUES(?,?,?,?,?,?,?)");
 		            ps.setString(1, obj.getRaisonSociale());
@@ -20,6 +20,7 @@ public Entreprise create(Entreprise obj) {
 		            ps.setString(5, obj.getMail());
 		            ps.setString(6, obj.getTel());
 		            ps.setString(7, obj.getSecteurActivite());
+		            ps.setInt(8, obj.getUitilisateurId());
 		            ps.executeUpdate();
 		            ps.close();
 		            
