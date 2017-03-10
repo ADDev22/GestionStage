@@ -73,5 +73,5 @@ public void addStagePostule(EtuPostStage stagePostule){
 // Obtenir un offre qu'on a postulé
 public EtuPostStage getPostulant(int indice){
 return this.listStagePostule.get(indice);
-
+}
 }

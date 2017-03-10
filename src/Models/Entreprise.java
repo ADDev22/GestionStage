@@ -18,8 +18,8 @@ public class Entreprise extends Utilisateur {
 	}
 	public Entreprise(int idEntreprise, String raisonSociale, String adresseVilleEnt, String adresseRueEnt,
 			String adresseCodePostaleEnt, String mail, String tel, String secteurActivite,
-			ArrayList<OffreStage> listOfOffreSTage) {
-		super();
+			ArrayList<OffreStage> listOfOffreSTage, Fonction fonction) {
+		super(idEntreprise, secteurActivite, secteurActivite, fonction);
 		this.idEntreprise = idEntreprise;
 		this.raisonSociale = raisonSociale;
 		this.adresseVilleEnt = adresseVilleEnt;
