@@ -8,6 +8,7 @@ import Models.Etudiant;
 public class EtudiantDAO implements DAO<Etudiant> {
 
 	public Etudiant create(Etudiant obj) {
+						//new UtilisateurDAO().create(obj);
 		try {
 			PreparedStatement ps = connect.prepareStatement
 					   ("INSERT INTO entreprise VALUES(?,?,?,?,?,?)");

@@ -10,7 +10,7 @@ public class EntrepriseDAO implements DAO<Entreprise> {
 public Entreprise create(Entreprise obj) {
 	try {
 		   // On insere d'abord Utilisateur puis on recupere last id utilisateur
-		            new UtilisateurDAO().create(obj);
+		            //new UtilisateurDAO().create(obj);
 		PreparedStatement ps = connect.prepareStatement
 				   ("INSERT INTO entreprise()   VALUES(?,?,?,?,?,?,?)");
 		            ps.setString(1, obj.getRaisonSociale());
