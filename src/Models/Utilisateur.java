@@ -1,13 +1,13 @@
 package Models;
 
 import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.Statement;
 
 public class Utilisateur
 {
@@ -18,7 +18,12 @@ public class Utilisateur
 	protected String utilisateurMdp;
 	protected Fonction fonction;
 
-	//Constructeur
+	//Constructeurs
+
+    public Utilisateur()
+    {
+
+    }
 
 	public Utilisateur(int utilisateurId, String utilisateurUserName, String utilisateurMdp, Fonction fonction)
 	{
@@ -104,6 +109,76 @@ public class Utilisateur
 			
 		return false;		
 	}
+
+	//Methode insertion utilisateur
+	public void create()
+	{
+		Connection conn = null;
+		PreparedStatement ps = null;
+		Statement s = null;
+		//Enregistrement de l'utilisateur
+		String sql = "INSERT INTO utilisateur (utilisateurUserName, utilisateurMdp, fonction_fonctionId) VALUES (?, ?, ?)";
+
+		try {
+			conn = DBConnection.getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, this.getUtilisateurUserName());
+			ps.setString(2, this.getUtilisateurMdp());
+			ps.setInt(3, this.getFonction().getFonctionId());
+			ps.executeQuery();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			DBConnection.close(conn);
+		}
+
+		//Recuperation de l'id
+		String sqlRecuperation = "SELECT LAST(utilisateurId) FROM utilisateur";
+
+		try {
+			conn = DBConnection.getConnection();
+			s = (Statement) conn.createStatement();
+			ResultSet rs = s.executeQuery(sqlRecuperation);
+			if (rs.next())
+				this.setUtilisateurId(rs.getInt("utilisateurId"));
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			DBConnection.close(conn);
+		}
+	}
+
+	//Recup�ration des information de la fonction � partir de l'Id
+	private Fonction getFonction(int fonctionId)
+	{
+		Connection conn = null;
+		PreparedStatement ps = null;
+		Fonction fonction = new Fonction();
+		String sql = "SELECT * FROM fonction WHERE fonctionId = ?";
+
+		try {
+			conn = DBConnection.getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, fonctionId);
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next())
+			{
+				fonction.setFonctionId(rs.getInt("fonctionId"));
+				fonction.setFonctionNom(rs.getString("fonctionNom"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			DBConnection.close(conn);
+		}
+
+		return fonction;
+	}
 		
 	//Traitement du resultat renvoy� par une requ�te --> correspodance avec un objet
 	private Utilisateur traitementLigne(ResultSet rs) throws SQLException 
@@ -115,34 +190,5 @@ public class Utilisateur
 		utilisateur.setFonction(getFonction(rs.getInt("fonction_fonctionId")));
 		    
 		return utilisateur;
-	}
-		
-	//Recup�ration des information de la fonction � partir de l'Id
-	private Fonction getFonction(int fonctionId)
-	{
-		Connection conn = null;
-		PreparedStatement ps = null;
-		Fonction fonction = new Fonction();
-		String sql = "SELECT * FROM fonction WHERE fonctionId = ?";
-			
-		try {
-			conn = DBConnection.getConnection();
-			ps = conn.prepareStatement(sql);			
-			ps.setInt(1, fonctionId);			
-			ResultSet rs = ps.executeQuery();
-				
-			if (rs.next())
-			{
-				fonction.setFonctionId(rs.getInt("fonctionId"));
-				fonction.setFonctionNom(rs.getString("fonctionNom"));
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-	        throw new RuntimeException(e);
-	    } finally {
-	        DBConnection.close(conn);
-	    }
-			
-		return fonction;
 	}
 }
