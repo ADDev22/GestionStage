@@ -9,7 +9,7 @@ import java.util.List;
 
 import com.mysql.jdbc.Connection;
 
-public class Utilisateur
+public class Utilisateur implements IAuthentification
 {
 	//D�claration
 	
@@ -86,7 +86,7 @@ public class Utilisateur
 		String sql = "SELECT * FROM utilisateur";
 		try
 		{
-			conn = DBConnection.getConnection();
+			conn = (Connection) DBConnection.getConnection();
 			Statement s = (Statement) conn.createStatement();
 			ResultSet rs = s.executeQuery(sql);
 			while (rs.next())
@@ -120,7 +120,7 @@ public class Utilisateur
 		String sql = "INSERT INTO utilisateur (utilisateurUserName, utilisateurMdp, fonction_fonctionId) VALUES (?, ?, ?)";
 
 		try {
-			conn = DBConnection.getConnection();
+			conn = (Connection) DBConnection.getConnection();
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, this.getUtilisateurUserName());
 			ps.setString(2, this.getUtilisateurMdp());
@@ -138,7 +138,7 @@ public class Utilisateur
 		String sqlRecuperation = "SELECT LAST(utilisateurId) FROM utilisateur";
 
 		try {
-			conn = DBConnection.getConnection();
+			conn = (Connection) DBConnection.getConnection();
 			s = (Statement) conn.createStatement();
 			ResultSet rs = s.executeQuery(sqlRecuperation);
 			if (rs.next())
@@ -160,7 +160,7 @@ public class Utilisateur
 		String sql = "SELECT * FROM fonction WHERE fonctionId = ?";
 
 		try {
-			conn = DBConnection.getConnection();
+			conn = (Connection) DBConnection.getConnection();
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, fonctionId);
 			ResultSet rs = ps.executeQuery();
