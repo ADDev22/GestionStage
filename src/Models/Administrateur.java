@@ -83,7 +83,7 @@ public class Administrateur extends Utilisateur
 	
 	//Setter
 
-	public void setAdministrateurId(int administrateurId) { this.administrateurId = administrateurId }
+	public void setAdministrateurId(int administrateurId) { this.administrateurId = administrateurId; }
 	
 	public void setAdministrateurNom(String administrateurNom)
 	{
@@ -149,7 +149,7 @@ public class Administrateur extends Utilisateur
         String sql = "INSERT INTO administrateur(administrateurNom, administrateurPrenom, adresseNoRue, adresseRue, adresseComplement, adresseCdePostal, adresseVille, adressePays, administrateurMail, administrateurTel, utilisateur_utilisateurId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?))";
         try
         {
-            conn = DBConnection.getConnection();
+            conn = (Connection) DBConnection.getConnection();
             ps = conn.prepareStatement(sql);
             ps.setString(1, this.getAdministrateurNom());
             ps.setString(2, this.getAdministrateurPrenom());
