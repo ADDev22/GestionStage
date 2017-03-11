@@ -90,5 +90,3 @@ public class Entreprise extends Utilisateur {
 	}
 		
 	}
-
-}

@@ -12,7 +12,7 @@ private String mail;
 private ArrayList<EtuPostStage> listStagePostule = new ArrayList<EtuPostStage>();
 public Etudiant(int idType, int idEtudiant, String pseudo, String mdp, String nom, String prenom, String nivEtude,
 		String tel, String mail) {
-	super(idType, pseudo, mdp);
+	//super(idType, pseudo, mdp);
 	this.nom = nom;
 	this.prenom = prenom;
 	this.idEtudiant = idEtudiant;
