@@ -2,7 +2,6 @@ package Models.DAO;
 
 import Models.Administrateur;
 import Models.DBConnection;
-import Models.Utilisateur;
 import com.mysql.jdbc.Connection;
 
 import java.sql.PreparedStatement;
