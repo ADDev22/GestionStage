@@ -15,7 +15,8 @@ import java.util.List;
 /**
  * Created by Allam on 13/03/2017.
  */
-public class UtilisateurDAO extends Utilisateur implements IAuthentification, DAO<Utilisateur> {
+public class UtilisateurDAO extends Utilisateur implements IAuthentification, DAO<Utilisateur>
+{
     //Authentification
     @Override
     public Boolean connexion(String userName, String mdp)
@@ -26,7 +27,7 @@ public class UtilisateurDAO extends Utilisateur implements IAuthentification, DA
         try
         {
             conn = (Connection) DBConnection.getConnection();
-            Statement s = (Statement) conn.createStatement();
+            Statement s = conn.createStatement();
             ResultSet rs = s.executeQuery(sql);
             while (rs.next())
             {
@@ -49,21 +50,50 @@ public class UtilisateurDAO extends Utilisateur implements IAuthentification, DA
         return false;
     }
 
+    //Consultation utilisateur
+    @Override
+    public Utilisateur find(int utilisateurId)
+    {
+        Connection conn = null;
+        PreparedStatement ps;
+        Utilisateur utilisateur = new Utilisateur();
+        String sql = "SELECT * FROM utilisateur WHERE utilisateurId = ?";
+
+        try {
+            conn = (Connection) DBConnection.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, utilisateurId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next())
+            {
+                utilisateur = traitementLigne(rs);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            DBConnection.close(conn);
+        }
+
+        return utilisateur;
+    }
+
     //Methode insertion utilisateur
     @Override
-    public Utilisateur create(Utilisateur obj) {
+    public Utilisateur create(Utilisateur utilisateur)
+    {
         Connection conn = null;
-        PreparedStatement ps = null;
-        Statement s = null;
-        //Enregistrement de l'utilisateur
+        PreparedStatement ps;
+        Statement s;
         String sql = "INSERT INTO utilisateur (utilisateurUserName, utilisateurMdp, fonction_fonctionId) VALUES (?, ?, ?)";
 
         try {
             conn = (Connection) DBConnection.getConnection();
             ps = conn.prepareStatement(sql);
-            ps.setString(1, this.getUtilisateurUserName());
-            ps.setString(2, this.getUtilisateurMdp());
-            ps.setInt(3, this.getFonction().getFonctionId());
+            ps.setString(1, utilisateur.getUtilisateurUserName());
+            ps.setString(2, utilisateur.getUtilisateurMdp());
+            ps.setInt(3, utilisateur.getFonction().getFonctionId());
             ps.executeQuery();
 
         } catch (Exception e) {
@@ -78,10 +108,10 @@ public class UtilisateurDAO extends Utilisateur implements IAuthentification, DA
 
         try {
             conn = (Connection) DBConnection.getConnection();
-            s = (Statement) conn.createStatement();
+            s = conn.createStatement();
             ResultSet rs = s.executeQuery(sqlRecuperation);
             if (rs.next())
-                this.setUtilisateurId(rs.getInt("utilisateurId"));
+                utilisateur.setUtilisateurId(rs.getInt("utilisateurId"));
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);
@@ -89,14 +119,63 @@ public class UtilisateurDAO extends Utilisateur implements IAuthentification, DA
             DBConnection.close(conn);
         }
 
-        return null;
+        return utilisateur;
+    }
+
+    @Override
+    public Utilisateur update(Utilisateur utilisateur)
+    {
+        Connection conn = null;
+        PreparedStatement ps;
+        String sql = "UPDATE utilisateur SET utilisateurUserName = ?, utilisateurMdp = ?, fonction_fonctionId = ? WHERE utilisateurId = ?";
+
+        try {
+            conn = (Connection) DBConnection.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, utilisateur.getUtilisateurUserName());
+            ps.setString(2, utilisateur.getUtilisateurMdp());
+            ps.setInt(3, utilisateur.getFonction().getFonctionId());
+            ps.setInt(4, utilisateur.getUitilisateurId());
+            ps.executeQuery();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            DBConnection.close(conn);
+        }
+
+        return utilisateur;
+    }
+
+    @Override
+    public boolean delete(Utilisateur utilisateur)
+    {
+        Connection conn = null;
+        PreparedStatement ps;
+        String sql = "DELETE FROM utilisateur WHERE utilisateurId = ?";
+
+        try {
+            conn = (Connection) DBConnection.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, utilisateurId);
+            ps.executeQuery();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            DBConnection.close(conn);
+        }
+
+        return true;
     }
 
     //Recup�ration des information de la fonction � partir de l'Id
     private Fonction getFonction(int fonctionId)
     {
         Connection conn = null;
-        PreparedStatement ps = null;
+        PreparedStatement ps;
         Fonction fonction = new Fonction();
         String sql = "SELECT * FROM fonction WHERE fonctionId = ?";
 
@@ -131,20 +210,5 @@ public class UtilisateurDAO extends Utilisateur implements IAuthentification, DA
         utilisateur.setFonction(getFonction(rs.getInt("fonction_fonctionId")));
 
         return utilisateur;
-    }
-
-    @Override
-    public Utilisateur find(int id) {
-        return null;
-    }
-
-    @Override
-    public Utilisateur update(Utilisateur obj) {
-        return null;
-    }
-
-    @Override
-    public void delete(Utilisateur obj) {
-
     }
 }
