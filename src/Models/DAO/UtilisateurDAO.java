@@ -171,43 +171,15 @@ public class UtilisateurDAO extends Utilisateur implements IAuthentification, DA
         return true;
     }
 
-    //Recup�ration des information de la fonction � partir de l'Id
-    private Fonction getFonction(int fonctionId)
-    {
-        Connection conn = null;
-        PreparedStatement ps;
-        Fonction fonction = new Fonction();
-        String sql = "SELECT * FROM fonction WHERE fonctionId = ?";
-
-        try {
-            conn = (Connection) DBConnection.getConnection();
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, fonctionId);
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next())
-            {
-                fonction.setFonctionId(rs.getInt("fonctionId"));
-                fonction.setFonctionNom(rs.getString("fonctionNom"));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        } finally {
-            DBConnection.close(conn);
-        }
-
-        return fonction;
-    }
-
     //Traitement du resultat renvoy� par une requ�te --> correspodance avec un objet
     private Utilisateur traitementLigne(ResultSet rs) throws SQLException
     {
         Utilisateur utilisateur = new Utilisateur();
+        FonctionDAO fDAO = new FonctionDAO();
         utilisateur.setUtilisateurId(rs.getInt("utilisateurId"));
         utilisateur.setUtilisateurUserName(rs.getString("utilisateurUserName"));
         utilisateur.setUtilisateurMdp(rs.getString("utilisateurMdp"));
-        utilisateur.setFonction(getFonction(rs.getInt("fonction_fonctionId")));
+        utilisateur.setFonction(fDAO.getFonction(rs.getInt("fonction_fonctionId")));
 
         return utilisateur;
     }
