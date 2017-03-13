@@ -15,6 +15,7 @@ public class Administrateur extends Utilisateur
 	private String adressePays;
 	private String administrateurMail;
 	private int administrateurTel;
+	private Utilisateur utilisateur;
 	
 	//Getter
 	
@@ -72,6 +73,8 @@ public class Administrateur extends Utilisateur
 	{
 		return this.administrateurTel;
 	}
+
+	public Utilisateur getUtilisateur() { return this.utilisateur; }
 	
 	//Setter
 
@@ -126,4 +129,6 @@ public class Administrateur extends Utilisateur
 	{
 		this.administrateurTel = administrateurTel;
 	}
+
+	public void setUtilisateur(Utilisateur utilisateur) { this.utilisateur = utilisateur; }
 }
