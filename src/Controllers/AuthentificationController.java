@@ -1,6 +1,6 @@
 package Controllers;
 
-import Models.IAuthentification;
+import Models.DAO.IAuthentification;
 import Models.Utilisateur;
 
 public class AuthentificationController {
