@@ -158,7 +158,7 @@ public class UtilisateurDAO extends Utilisateur implements IAuthentification, DA
         try {
             conn = (Connection) DBConnection.getConnection();
             ps = conn.prepareStatement(sql);
-            ps.setInt(1, utilisateurId);
+            ps.setInt(1, utilisateur.getUitilisateurId());
             ps.executeQuery();
 
         } catch (Exception e) {
