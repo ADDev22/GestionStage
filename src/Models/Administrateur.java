@@ -2,7 +2,7 @@ package Models;
 
 public class Administrateur extends Utilisateur
 {
-	//Déclaration
+	//Dï¿½claration
 	
 	private int administrateurId;
 	private String administrateurNom;
@@ -64,22 +64,21 @@ public class Administrateur extends Utilisateur
 		return this.adressePays;
 	}
 	
-	public String getAdminstrateurMail()
+	public String getAdministrateurMail()
 	{
 		return this.administrateurMail;
 	}
 	
-	public int getAdminstrateurTel()
+	public int getAdministrateurTel()
 	{
 		return this.administrateurTel;
 	}
-	
-	public Utilisateur getUtilisateur()
-	{
-		return this.utilisateur;
-	}
+
+	public Utilisateur getUtilisateur() { return this.utilisateur; }
 	
 	//Setter
+
+	public void setAdministrateurId(int administrateurId) { this.administrateurId = administrateurId; }
 	
 	public void setAdministrateurNom(String administrateurNom)
 	{
@@ -130,4 +129,6 @@ public class Administrateur extends Utilisateur
 	{
 		this.administrateurTel = administrateurTel;
 	}
+
+	public void setUtilisateur(Utilisateur utilisateur) { this.utilisateur = utilisateur; }
 }
