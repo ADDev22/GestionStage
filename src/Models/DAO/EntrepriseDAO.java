@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import Models.Entreprise;
 import Models.OffreStage;
+import Models.Utilisateur;
 
 public class EntrepriseDAO implements DAO<Entreprise> {
 public Entreprise create(Entreprise obj) {
@@ -60,7 +61,14 @@ public Entreprise find(int id) {
 					e.setMail(result.getString("mail"));
 					e.setTel(result.getString("tel"));
 					e.setSecteurActivite(result.getString("secteurActivite"));
+					 e.setUtilisateurId(result.getInt("idUtilisateur"));
 					ps.close();
+					// On remplit les valeue des on pere ->HERITAGE
+					UtilisateurDAO uDAO = new UtilisateurDAO();
+			        Utilisateur u = uDAO.find(e.getUitilisateurId());
+			        e.setFonction(u.getFonction());
+			        e.setUtilisateurUserName(u.getUtilisateurUserName());
+			        e.setUtilisateurMdp(u.getUtilisateurMdp());
 					return e;
 					}
 	} catch (SQLException e) {
@@ -91,15 +99,18 @@ public Entreprise update(Entreprise obj) {
 	}
 	return obj;
 }
-public void delete(Entreprise obj) {
+public boolean delete(Entreprise obj) {
 	      try {
 			PreparedStatement ps = connect.prepareStatement("DELETE FROM entreprise WHERE id = ?");
 					ps.setInt(1, obj.getIdEntreprise());
 					ps.executeUpdate();
+					ps.close();
+					return true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	      return false;
 }
 public  void getAllOffreStage(Entreprise obj){
 		try {
