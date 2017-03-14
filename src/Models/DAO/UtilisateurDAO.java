@@ -149,7 +149,7 @@ public class UtilisateurDAO extends Utilisateur implements IAuthentification, DA
     }
 
     @Override
-    public boolean delete(Utilisateur utilisateur)
+    public void delete(Utilisateur utilisateur)
     {
         Connection conn = null;
         PreparedStatement ps;
@@ -168,7 +168,7 @@ public class UtilisateurDAO extends Utilisateur implements IAuthentification, DA
             DBConnection.close(conn);
         }
 
-        return true;
+        //return true;
     }
 
     //Traitement du resultat renvoy� par une requ�te --> correspodance avec un objet

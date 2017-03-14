@@ -18,11 +18,10 @@ public class AdministrateurDAO extends Administrateur implements DAO<Administrat
         Connection conn = null;
         PreparedStatement ps;
         Administrateur admin = new Administrateur();
-        String sql = "SELECT * FROM administrateur WHERE administrateurId = ?";
 
         try {
             conn = (Connection) DBConnection.getConnection();
-            ps = conn.prepareStatement(sql);
+            ps = conn.prepareStatement("SELECT * FROM administrateur WHERE administrateurId = ?");
             ps.setInt(1, administrateurId);
             ResultSet rs = ps.executeQuery();
 
@@ -110,7 +109,7 @@ public class AdministrateurDAO extends Administrateur implements DAO<Administrat
     }
 
     @Override
-    public boolean delete(Administrateur admin)
+    public void delete(Administrateur admin)
     {
         Connection conn = null;
         PreparedStatement ps;
@@ -129,7 +128,7 @@ public class AdministrateurDAO extends Administrateur implements DAO<Administrat
             DBConnection.close(conn);
         }
 
-        return true;
+        //return true;
     }
 
     //Traitement du resultat renvoyé par une requête --> correspodance avec un objet
