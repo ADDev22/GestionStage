@@ -2,7 +2,7 @@ package Models;
 
 public class Administrateur extends Utilisateur
 {
-	//D�claration
+	//Déclaration
 	
 	private int administrateurId;
 	private String administrateurNom;
@@ -16,6 +16,28 @@ public class Administrateur extends Utilisateur
 	private String administrateurMail;
 	private int administrateurTel;
 	private Utilisateur utilisateur;
+
+	//Constructeurs
+	public Administrateur()
+	{
+
+	}
+
+	public Administrateur(int administrateurId, String administrateurNom, String administrateurPrenom, int adresseNoRue, String adresseRue, String adresseComplement, int adresseCdePostal, String adresseVille, String adressePays, String administrateurMail, int administrateurTel, Utilisateur utilisateur)
+	{
+		this.administrateurId = administrateurId;
+		this.administrateurNom = administrateurNom;
+		this.administrateurPrenom = administrateurPrenom;
+		this.adresseNoRue = adresseNoRue;
+		this.adresseRue = adresseRue;
+		this.adresseComplement = adresseComplement;
+		this.adresseCdePostal = adresseCdePostal;
+		this.adresseVille = adresseVille;
+		this.adressePays = adressePays;
+		this.administrateurMail = administrateurMail;
+		this.administrateurTel = administrateurTel;
+		this.utilisateur = utilisateur;
+	}
 	
 	//Getter
 	

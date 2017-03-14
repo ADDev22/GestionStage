@@ -49,7 +49,7 @@ public class AdministrateurDAO extends Administrateur implements DAO<Administrat
         //Enregistrement des informations utilisateur associés
         uDAO.create(admin);
 
-        String sql = "INSERT INTO administrateur(administrateurNom, administrateurPrenom, adresseNoRue, adresseRue, adresseComplement, adresseCdePostal, adresseVille, adressePays, administrateurMail, administrateurTel, utilisateur_utilisateurId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?))";
+        String sql = "INSERT INTO administrateur(administrateurNom, administrateurPrenom, adresseNoRue, adresseRue, adresseComplement, adresseCdePostal, adresseVille, adressePays, administrateurMail, administrateurTel, utilisateur_utilisateurId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try
         {
             conn = (Connection) DBConnection.getConnection();
@@ -65,7 +65,7 @@ public class AdministrateurDAO extends Administrateur implements DAO<Administrat
             ps.setString(9, admin.getAdministrateurMail());
             ps.setInt(10, admin.getAdministrateurTel());
             ps.setInt(11, admin.getUitilisateurId());
-            ps.executeQuery();
+            ps.execute();
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);
@@ -96,7 +96,7 @@ public class AdministrateurDAO extends Administrateur implements DAO<Administrat
             ps.setString(8, admin.getAdressePays());
             ps.setString(9, admin.getAdministrateurMail());
             ps.setInt(10, admin.getAdministrateurTel());
-            ps.executeQuery();
+            ps.execute();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -119,7 +119,7 @@ public class AdministrateurDAO extends Administrateur implements DAO<Administrat
             conn = (Connection) DBConnection.getConnection();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, admin.getAdminstrateurId());
-            ps.executeQuery();
+            ps.execute();
 
         } catch (Exception e) {
             e.printStackTrace();

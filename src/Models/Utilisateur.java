@@ -2,7 +2,7 @@ package Models;
 
 public class Utilisateur
 {
-	//D�claration
+	//Déclaration
 	
 	protected int utilisateurId;
 	protected String utilisateurUserName;
@@ -34,11 +34,6 @@ public class Utilisateur
 	public String getUtilisateurUserName()
 	{
 		return this.utilisateurUserName;
-	}
-		
-	public Utilisateur() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getUtilisateurMdp()
