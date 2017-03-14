@@ -85,16 +85,18 @@ public class EtuPostStageDAO implements DAO<EtuPostStage> {
 	}
 
 	@Override
-	public void delete(EtuPostStage obj) {
+	public boolean delete(EtuPostStage obj) {
 		 try {
 				PreparedStatement ps = connect.prepareStatement("DELETE FROM candidature WHERE id = ?");
 						ps.setInt(1, obj.getIdEtuPostStage());
 						ps.executeUpdate();
+						return true;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		
+		return false;
 	}
+	
 
 }
