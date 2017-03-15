@@ -94,7 +94,7 @@ public class UtilisateurDAO extends Utilisateur implements IAuthentification, DA
             ps.setString(1, utilisateur.getUtilisateurUserName());
             ps.setString(2, utilisateur.getUtilisateurMdp());
             ps.setInt(3, utilisateur.getFonction().getFonctionId());
-            ps.executeQuery();
+            ps.execute();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -104,7 +104,7 @@ public class UtilisateurDAO extends Utilisateur implements IAuthentification, DA
         }
 
         //Recuperation de l'id
-        String sqlRecuperation = "SELECT LAST(utilisateurId) FROM utilisateur";
+        String sqlRecuperation = "SELECT MAX(utilisateurId) AS utilisateurId FROM utilisateur";
 
         try {
             conn = (Connection) DBConnection.getConnection();
@@ -136,7 +136,7 @@ public class UtilisateurDAO extends Utilisateur implements IAuthentification, DA
             ps.setString(2, utilisateur.getUtilisateurMdp());
             ps.setInt(3, utilisateur.getFonction().getFonctionId());
             ps.setInt(4, utilisateur.getUitilisateurId());
-            ps.executeQuery();
+            ps.execute();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -149,7 +149,7 @@ public class UtilisateurDAO extends Utilisateur implements IAuthentification, DA
     }
 
     @Override
-    public boolean delete(Utilisateur utilisateur)
+    public void delete(Utilisateur utilisateur)
     {
         Connection conn = null;
         PreparedStatement ps;
@@ -159,7 +159,7 @@ public class UtilisateurDAO extends Utilisateur implements IAuthentification, DA
             conn = (Connection) DBConnection.getConnection();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, utilisateur.getUitilisateurId());
-            ps.executeQuery();
+            ps.execute();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -168,10 +168,10 @@ public class UtilisateurDAO extends Utilisateur implements IAuthentification, DA
             DBConnection.close(conn);
         }
 
-        return true;
+        //return true;
     }
 
-    //Traitement du resultat renvoy� par une requ�te --> correspodance avec un objet
+    //Traitement du resultat renvoyé par une requ�te --> correspodance avec un objet
     private Utilisateur traitementLigne(ResultSet rs) throws SQLException
     {
         Utilisateur utilisateur = new Utilisateur();
@@ -179,7 +179,7 @@ public class UtilisateurDAO extends Utilisateur implements IAuthentification, DA
         utilisateur.setUtilisateurId(rs.getInt("utilisateurId"));
         utilisateur.setUtilisateurUserName(rs.getString("utilisateurUserName"));
         utilisateur.setUtilisateurMdp(rs.getString("utilisateurMdp"));
-        utilisateur.setFonction(fDAO.getFonction(rs.getInt("fonction_fonctionId")));
+        utilisateur.setFonction(fDAO.find(rs.getInt("fonction_fonctionId")));
 
         return utilisateur;
     }

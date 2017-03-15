@@ -18,11 +18,10 @@ public class AdministrateurDAO extends Administrateur implements DAO<Administrat
         Connection conn = null;
         PreparedStatement ps;
         Administrateur admin = new Administrateur();
-        String sql = "SELECT * FROM administrateur WHERE administrateurId = ?";
 
         try {
             conn = (Connection) DBConnection.getConnection();
-            ps = conn.prepareStatement(sql);
+            ps = conn.prepareStatement("SELECT * FROM administrateur WHERE administrateurId = ?");
             ps.setInt(1, administrateurId);
             ResultSet rs = ps.executeQuery();
 
@@ -50,7 +49,7 @@ public class AdministrateurDAO extends Administrateur implements DAO<Administrat
         //Enregistrement des informations utilisateur associés
         uDAO.create(admin);
 
-        String sql = "INSERT INTO administrateur(administrateurNom, administrateurPrenom, adresseNoRue, adresseRue, adresseComplement, adresseCdePostal, adresseVille, adressePays, administrateurMail, administrateurTel, utilisateur_utilisateurId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?))";
+        String sql = "INSERT INTO administrateur(administrateurNom, administrateurPrenom, adresseNoRue, adresseRue, adresseComplement, adresseCdePostal, adresseVille, adressePays, administrateurMail, administrateurTel, utilisateur_utilisateurId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try
         {
             conn = (Connection) DBConnection.getConnection();
@@ -66,7 +65,7 @@ public class AdministrateurDAO extends Administrateur implements DAO<Administrat
             ps.setString(9, admin.getAdministrateurMail());
             ps.setInt(10, admin.getAdministrateurTel());
             ps.setInt(11, admin.getUitilisateurId());
-            ps.executeQuery();
+            ps.execute();
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);
@@ -97,7 +96,7 @@ public class AdministrateurDAO extends Administrateur implements DAO<Administrat
             ps.setString(8, admin.getAdressePays());
             ps.setString(9, admin.getAdministrateurMail());
             ps.setInt(10, admin.getAdministrateurTel());
-            ps.executeQuery();
+            ps.execute();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -110,7 +109,7 @@ public class AdministrateurDAO extends Administrateur implements DAO<Administrat
     }
 
     @Override
-    public boolean delete(Administrateur admin)
+    public void delete(Administrateur admin)
     {
         Connection conn = null;
         PreparedStatement ps;
@@ -120,7 +119,7 @@ public class AdministrateurDAO extends Administrateur implements DAO<Administrat
             conn = (Connection) DBConnection.getConnection();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, admin.getAdminstrateurId());
-            ps.executeQuery();
+            ps.execute();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -129,7 +128,7 @@ public class AdministrateurDAO extends Administrateur implements DAO<Administrat
             DBConnection.close(conn);
         }
 
-        return true;
+        //return true;
     }
 
     //Traitement du resultat renvoyé par une requête --> correspodance avec un objet

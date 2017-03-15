@@ -6,15 +6,16 @@ import com.mysql.jdbc.Connection;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 
 /**
  * Created by Allam on 13/03/2017.
  */
-public class FonctionDAO
+public class FonctionDAO implements DAO<Fonction>
 {
     //Recupération des information de la fonction à partir de l'Id
-    public Fonction getFonction(int fonctionId)
-    {
+    @Override
+    public Fonction find(int fonctionId) {
         Connection conn = null;
         PreparedStatement ps;
         Fonction fonction = new Fonction();
@@ -39,5 +40,70 @@ public class FonctionDAO
         }
 
         return fonction;
+    }
+
+    @Override
+    public Fonction create(Fonction fonction) {
+        Connection conn = null;
+        PreparedStatement ps;
+        String sql = "INSERT INTO fonction (fonctionNom) VALUES (?, ?, ?)";
+
+        try {
+            conn = (Connection) DBConnection.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, fonction.getFonctionNom());
+            ps.execute();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            DBConnection.close(conn);
+        }
+
+        return fonction;
+    }
+
+    @Override
+    public Fonction update(Fonction fonction) {
+        Connection conn = null;
+        PreparedStatement ps;
+        String sql = "UPDATE fonction SET fonctionNom = ? WHERE fonctionId = ?";
+
+        try {
+            conn = (Connection) DBConnection.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, fonction.getFonctionNom());
+            ps.setInt(2, fonction.getFonctionId());
+            ps.execute();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            DBConnection.close(conn);
+        }
+
+        return fonction;
+    }
+
+    @Override
+    public void delete(Fonction fonction) {
+        Connection conn = null;
+        PreparedStatement ps;
+        String sql = "DELETE FROM fonction WHERE fonctionId = ?";
+
+        try {
+            conn = (Connection) DBConnection.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, fonction.getFonctionId());
+            ps.execute();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            DBConnection.close(conn);
+        }
     }
 }
