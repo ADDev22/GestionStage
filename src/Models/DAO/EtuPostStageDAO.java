@@ -52,11 +52,11 @@ public class EtuPostStageDAO implements DAO<EtuPostStage> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		 try {
-				Statement s = connect.createStatement();
-				ResultSet rs = s.executeQuery("select last(id) from candidature");
+		try {
+			 Statement s = (Statement) connect.createStatement();
+				ResultSet rs = s.executeQuery("SELECT MAX(id)  As idMax FROM candidature");
 				    if(rs.next())
-				    	obj.setIdEtuPostStage(rs.getInt("id"));
+				    	obj.setIdEtuPostStage(rs.getInt("idMax"));
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

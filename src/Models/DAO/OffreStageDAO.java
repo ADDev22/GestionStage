@@ -4,10 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import Models.Entreprise;
 import Models.EtuPostStage;
 import Models.OffreStage;
-import Models.Etudiant;
 public class OffreStageDAO implements DAO<OffreStage> {
 
 	@Override
@@ -90,6 +88,15 @@ public class OffreStageDAO implements DAO<OffreStage> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		try {
+			 Statement s = (Statement) connect.createStatement();
+				ResultSet rs = s.executeQuery("SELECT MAX(id)  As idMax FROM offre_stage");
+				    if(rs.next())
+				    	obj.setIdOffreStage(rs.getInt("idMax"));
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		return obj;
 	}
 

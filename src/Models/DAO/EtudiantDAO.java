@@ -6,7 +6,6 @@ import java.sql.Statement;
 
 import Models.EtuPostStage;
 import Models.Etudiant;
-import Models.OffreStage;
 import Models.Utilisateur;
 public class EtudiantDAO implements DAO<Etudiant> {
 
@@ -29,16 +28,16 @@ public class EtudiantDAO implements DAO<Etudiant> {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}/*
+		}
 		 try {
-				Statement s = connect.createStatement();
-				ResultSet rs = s.executeQuery("select last(id) from etutdiant");
+			 Statement s = (Statement) connect.createStatement();
+				ResultSet rs = s.executeQuery("SELECT MAX(id)  As idMax FROM etudiant");
 				    if(rs.next())
-				    	obj.setIdEtudiant(rs.getInt("id"));
+				    	obj.setIdEtudiant(rs.getInt("idMax"));
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}*/
+			}
 		return obj;
 				
 }

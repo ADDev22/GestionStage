@@ -1,7 +1,6 @@
 package Models.DAO;
 
 import Models.DBConnection;
-import Models.Fonction;
 import Models.Utilisateur;
 import com.mysql.jdbc.Connection;
 
@@ -149,7 +148,7 @@ public class UtilisateurDAO extends Utilisateur implements IAuthentification, DA
     }
 
     @Override
-    public void delete(Utilisateur utilisateur)
+    public boolean delete(Utilisateur utilisateur)
     {
         Connection conn = null;
         PreparedStatement ps;
@@ -160,6 +159,7 @@ public class UtilisateurDAO extends Utilisateur implements IAuthentification, DA
             ps = conn.prepareStatement(sql);
             ps.setInt(1, utilisateur.getUitilisateurId());
             ps.execute();
+            return true;
 
         } catch (Exception e) {
             e.printStackTrace();

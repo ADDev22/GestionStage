@@ -2,7 +2,7 @@ package Models.DAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import com.mysql.jdbc.Statement;
 
 import Models.Entreprise;
 import Models.OffreStage;
@@ -30,17 +30,16 @@ public Entreprise create(Entreprise obj) {
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
-	}/*
+	}
 	 try {
-		Statement s = connect.createStatement();
-		ResultSet rs = s.executeQuery("select last(id) from entreprise");
+		Statement s = (Statement) connect.createStatement();
+		ResultSet rs = s.executeQuery("SELECT MAX(id) As idMax FROM entreprise");
 		    if(rs.next())
-		    	obj.setIdEntreprise(rs.getInt("id"));
+		    	obj.setIdEntreprise(rs.getInt("idMax"));
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-*/
 	return obj;		
  }
 
