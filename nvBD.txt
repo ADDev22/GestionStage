@@ -1,0 +1,258 @@
+-- phpMyAdmin SQL Dump
+-- version 4.6.5.2
+-- https://www.phpmyadmin.net/
+--
+-- Client :  localhost:8889
+-- Généré le :  Ven 17 Mars 2017 à 11:08
+-- Version du serveur :  5.6.35
+-- Version de PHP :  7.1.1
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Base de données :  `gestion_stage`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `administrateur`
+--
+
+CREATE TABLE `administrateur` (
+  `id` int(11) NOT NULL,
+  `nom` varchar(45) NOT NULL,
+  `prenom` varchar(45) NOT NULL,
+  `adresseNoRue` int(11) NOT NULL,
+  `adresseRue` varchar(45) NOT NULL,
+  `adresseComplement` varchar(45) DEFAULT NULL,
+  `adresseCdePostal` int(11) NOT NULL,
+  `adresseVille` varchar(45) NOT NULL,
+  `adressePays` varchar(45) NOT NULL,
+  `mail` varchar(45) NOT NULL,
+  `tel` int(11) NOT NULL,
+  `idUtilisateur` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `candidature`
+--
+
+CREATE TABLE `candidature` (
+  `id` int(11) NOT NULL,
+  `idOffre` int(11) NOT NULL,
+  `idEtudiant` int(11) NOT NULL,
+  `dateCandidature` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `droit_utilisateur`
+--
+
+CREATE TABLE `droit_utilisateur` (
+  `idDroit` int(11) NOT NULL,
+  `droit` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `entreprise`
+--
+
+CREATE TABLE `entreprise` (
+  `id` int(11) NOT NULL,
+  `raisonSociale` varchar(45) DEFAULT NULL,
+  `adresseVille` varchar(45) DEFAULT NULL,
+  `adresseRue` varchar(50) DEFAULT NULL,
+  `adresseCdePostal` int(11) DEFAULT NULL,
+  `mail` varchar(45) DEFAULT NULL,
+  `tel` int(11) DEFAULT NULL,
+  `secteurActivite` varchar(45) DEFAULT NULL,
+  `idUtilisateur` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `etudiant`
+--
+
+CREATE TABLE `etudiant` (
+  `id` int(11) NOT NULL,
+  `nom` varchar(20) DEFAULT NULL,
+  `prenom` varchar(20) DEFAULT NULL,
+  `domEtude` varchar(45) DEFAULT NULL,
+  `niveauEtude` varchar(45) DEFAULT NULL,
+  `mail` varchar(45) DEFAULT NULL,
+  `tel` int(11) DEFAULT NULL,
+  `idUtilisateur` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `offre_stage`
+--
+
+CREATE TABLE `offre_stage` (
+  `id` int(11) NOT NULL,
+  `libelle` varchar(45) DEFAULT NULL,
+  `domaine` varchar(45) DEFAULT NULL,
+  `descriptif` varchar(200) DEFAULT NULL,
+  `dateDebut` date DEFAULT NULL,
+  `duree` varchar(45) DEFAULT NULL,
+  `cheminStockage` varchar(150) DEFAULT NULL,
+  `valide` tinyint(1) DEFAULT NULL,
+  `idEntreprise` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `utilisateur`
+--
+
+CREATE TABLE `utilisateur` (
+  `id` int(11) NOT NULL,
+  `pseudo` varchar(25) DEFAULT NULL,
+  `mdp` varchar(50) DEFAULT NULL,
+  `idDroit` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Index pour les tables exportées
+--
+
+--
+-- Index pour la table `administrateur`
+--
+ALTER TABLE `administrateur`
+  ADD PRIMARY KEY (`id`,`idUtilisateur`),
+  ADD KEY `fk_administrateur_utilisateur1_idx` (`idUtilisateur`);
+
+--
+-- Index pour la table `candidature`
+--
+ALTER TABLE `candidature`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_offre_stage_has_etudiant_etudiant1_idx` (`idEtudiant`),
+  ADD KEY `fk_offre_stage_has_etudiant_offre_stage1_idx` (`idOffre`);
+
+--
+-- Index pour la table `droit_utilisateur`
+--
+ALTER TABLE `droit_utilisateur`
+  ADD PRIMARY KEY (`idDroit`);
+
+--
+-- Index pour la table `entreprise`
+--
+ALTER TABLE `entreprise`
+  ADD PRIMARY KEY (`id`,`idUtilisateur`),
+  ADD KEY `fk_entreprise_utilisateur1_idx` (`idUtilisateur`);
+
+--
+-- Index pour la table `etudiant`
+--
+ALTER TABLE `etudiant`
+  ADD PRIMARY KEY (`id`,`idUtilisateur`),
+  ADD UNIQUE KEY `etudiantNomFormation_UNIQUE` (`domEtude`),
+  ADD KEY `fk_etudiant_utilisateur1_idx` (`idUtilisateur`),
+  ADD KEY `domEtude` (`domEtude`),
+  ADD KEY `domEtude_2` (`domEtude`),
+  ADD KEY `domEtude_3` (`domEtude`);
+
+--
+-- Index pour la table `offre_stage`
+--
+ALTER TABLE `offre_stage`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idEntreprise` (`idEntreprise`),
+  ADD KEY `idEntreprise_2` (`idEntreprise`);
+
+--
+-- Index pour la table `utilisateur`
+--
+ALTER TABLE `utilisateur`
+  ADD PRIMARY KEY (`id`,`idDroit`),
+  ADD KEY `fk_utilisateur_fonction_idx` (`idDroit`);
+
+--
+-- AUTO_INCREMENT pour les tables exportées
+--
+
+--
+-- AUTO_INCREMENT pour la table `administrateur`
+--
+ALTER TABLE `administrateur`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `candidature`
+--
+ALTER TABLE `candidature`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT pour la table `droit_utilisateur`
+--
+ALTER TABLE `droit_utilisateur`
+  MODIFY `idDroit` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT pour la table `entreprise`
+--
+ALTER TABLE `entreprise`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+--
+-- AUTO_INCREMENT pour la table `etudiant`
+--
+ALTER TABLE `etudiant`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT pour la table `offre_stage`
+--
+ALTER TABLE `offre_stage`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT pour la table `utilisateur`
+--
+ALTER TABLE `utilisateur`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+--
+-- Contraintes pour les tables exportées
+--
+
+--
+-- Contraintes pour la table `administrateur`
+--
+ALTER TABLE `administrateur`
+  ADD CONSTRAINT `fk_administrateur_utilisateur1` FOREIGN KEY (`idUtilisateur`) REFERENCES `utilisateur` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Contraintes pour la table `candidature`
+--
+ALTER TABLE `candidature`
+  ADD CONSTRAINT `fk_offre_stage_has_etudiant_etudiant1` FOREIGN KEY (`idEtudiant`) REFERENCES `etudiant` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_offre_stage_has_etudiant_offre_stage1` FOREIGN KEY (`idOffre`) REFERENCES `offre_stage` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Contraintes pour la table `entreprise`
+--
+ALTER TABLE `entreprise`
+  ADD CONSTRAINT `fk_entreprise_utilisateur1` FOREIGN KEY (`idUtilisateur`) REFERENCES `utilisateur` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Contraintes pour la table `etudiant`
+--
+ALTER TABLE `etudiant`
+  ADD CONSTRAINT `fk_etudiant_utilisateur1` FOREIGN KEY (`idUtilisateur`) REFERENCES `utilisateur` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Contraintes pour la table `utilisateur`
+--
+ALTER TABLE `utilisateur`
+  ADD CONSTRAINT `fk_utilisateur_fonction` FOREIGN KEY (`idDroit`) REFERENCES `droit_utilisateur` (`idDroit`) ON DELETE NO ACTION ON UPDATE NO ACTION;
