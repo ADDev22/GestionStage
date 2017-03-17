@@ -6,6 +6,7 @@ public class Etudiant  extends Utilisateur{
 private String nom;
 private String prenom;
 private int idEtudiant;
+private String domEtude;
 private String nivEtude;
 private String tel;
 private String mail;
@@ -32,6 +33,13 @@ public String getPrenom() {
 }
 public int getIdEtudiant() {
 	return idEtudiant;
+}
+
+public String getDomEtude() {
+	return domEtude;
+}
+public void setDomEtude(String domEtude) {
+	this.domEtude = domEtude;
 }
 public String getNivEtude() {
 	return nivEtude;

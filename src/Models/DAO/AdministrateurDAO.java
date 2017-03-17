@@ -109,7 +109,7 @@ public class AdministrateurDAO extends Administrateur implements DAO<Administrat
     }
 
     @Override
-    public void delete(Administrateur admin)
+    public boolean delete(Administrateur admin)
     {
         Connection conn = null;
         PreparedStatement ps;
@@ -120,6 +120,7 @@ public class AdministrateurDAO extends Administrateur implements DAO<Administrat
             ps = conn.prepareStatement(sql);
             ps.setInt(1, admin.getAdminstrateurId());
             ps.execute();
+            return true;
 
         } catch (Exception e) {
             e.printStackTrace();

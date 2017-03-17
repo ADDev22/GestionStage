@@ -7,6 +7,7 @@ public class OffreStage {
 	private String libelleOffre;
 	private String descriptifOffre;
 	private String domaineOffre;
+	private String dateDebut;
 	private String dureeOffre;
 	private String cheminOffre;
 	private boolean isValide=false;
@@ -29,7 +30,12 @@ public class OffreStage {
 		this.entreprise = entreprise;
 		this.listPostulant = listPostulant;
 	}
-    
+	public String getDateDebut() {
+		return dateDebut;
+	}
+	public void setDateDebut(String dateDebut) {
+		this.dateDebut = dateDebut;
+	}
 	public int getIdOffreStage() {
 		return idOffreStage;
 	}

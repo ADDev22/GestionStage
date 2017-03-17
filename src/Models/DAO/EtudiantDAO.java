@@ -4,20 +4,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import Models.EtuPostStage;
 import Models.Etudiant;
+import Models.Utilisateur;
 public class EtudiantDAO implements DAO<Etudiant> {
 
 	public Etudiant create(Etudiant obj) {
 						//new UtilisateurDAO().create(obj);
 		try {
 			PreparedStatement ps = connect.prepareStatement
-					   ("INSERT INTO entreprise VALUES(?,?,?,?,?,?)");
-			            ps.setInt(1, obj.getIdEtudiant());
-			            ps.setString(2, obj.getPrenom());
-			            ps.setString(3, obj.getNom());
-			            ps.setString(4, obj.getNivEtude());
+					   ("INSERT INTO etudiant (nom,	prenom, formation, niveauEtude,	mail, tel, idUtilisateur\n" + 
+					   		")VALUES(?,?,?,?,?,?,?)");
+			            ps.setString(1, obj.getPrenom());
+			            ps.setString(2, obj.getNom());
+			            ps.setString(3, obj.getDomEtude());
+			            ps.setString(4, obj.getNivEtude());  
 			            ps.setString(5, obj.getMail());
 			            ps.setString(6, obj.getTel());
+			            ps.setInt(7, obj.getUitilisateurId());
 			            ps.executeUpdate();
 			            ps.close();
 			        
@@ -26,10 +30,10 @@ public class EtudiantDAO implements DAO<Etudiant> {
 			e.printStackTrace();
 		}
 		 try {
-				Statement s = connect.createStatement();
-				ResultSet rs = s.executeQuery("select last(id) from etutdiant");
+			 Statement s = (Statement) connect.createStatement();
+				ResultSet rs = s.executeQuery("SELECT MAX(id)  As idMax FROM etudiant");
 				    if(rs.next())
-				    	obj.setIdEtudiant(rs.getInt("id"));
+				    	obj.setIdEtudiant(rs.getInt("idMax"));
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -44,7 +48,7 @@ public Etudiant find(int id) {
 					   	("SELECT * FROM etudiant WHERE id = ?");
 			            ps.setInt(1, id);
 						ResultSet result =ps.executeQuery();
-						if(result != null)
+						if(result.next())
 						{	
 						Etudiant e = new Etudiant();
 						e.setIdEtudiant(result.getInt("id"));
@@ -53,7 +57,14 @@ public Etudiant find(int id) {
 						e.setNivEtude(result.getString("niveauEtude"));
 						e.setMail(result.getString("mail"));
 						e.setTel(result.getString("tel"));
-						ps.close();
+						e.setDomEtude(result.getString("formation"));
+				        e.setUtilisateurId(result.getInt("idUtilisateur"));
+				        ps.close();
+				        UtilisateurDAO uDAO = new UtilisateurDAO();
+				        Utilisateur u = uDAO.find(e.getUitilisateurId());
+				        e.setFonction(u.getFonction());
+				        e.setUtilisateurUserName(u.getUtilisateurUserName());
+				        e.setUtilisateurMdp(u.getUtilisateurMdp());
 						return e;
 						}
 		} catch (SQLException e) {
@@ -65,17 +76,16 @@ public Etudiant find(int id) {
 public Etudiant update(Etudiant obj) {
 	  try {
 		PreparedStatement ps = connect.prepareStatement
-					("UPDATE etudiant SET prenom = ?, nom =? , niveauEtude = ?,  mail = ?, tel = ? WHERE id = ?");
+					("UPDATE etudiant SET prenom = ?, nom =? , formation = ?, niveauEtude = ?,  mail = ?, tel = ? WHERE id = ?");
 					ps.setString(1, obj.getPrenom());
 			        ps.setString(2, obj.getNom());
-			        ps.setString(3, obj.getNivEtude());
-			        ps.setString(4, obj.getMail());
+			        ps.setString(3, obj.getDomEtude());
+			        ps.setString(4, obj.getNivEtude());
+			        ps.setString(5, obj.getMail());
 			        ps.setString(6, obj.getTel());
 			        ps.setInt(7, obj.getIdEtudiant());
 			        ps.executeUpdate();
 			        ps.close();
-					
-					ps.executeUpdate();
 	} catch (SQLException e) {
 		
 		// TODO Auto-generated catch block
@@ -83,15 +93,39 @@ public Etudiant update(Etudiant obj) {
 	}
 	return obj;
 }
-public void delete(Etudiant obj) {
+public boolean delete(Etudiant obj) {
     try {
-		PreparedStatement ps = connect.prepareStatement("DELETE FROM entreprise WHERE id = ?");
+		PreparedStatement ps = connect.prepareStatement("DELETE FROM etudiant WHERE id = ?");
 				ps.setInt(1, obj.getIdEtudiant());
 				ps.executeUpdate();
+				ps.close();
+				return true;
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	
     }
+    return false;
   }
+public  void getAllMesCandidatures(Etudiant obj){
+	try {
+		PreparedStatement ps =connect.prepareStatement("SELECT * FROM candidature WHERE idEtudiant = ?");
+		ps.setInt(1, obj.getIdEtudiant());
+		ResultSet rs = ps.executeQuery();
+		while(rs.next())
+		{   EtuPostStage of =new EtuPostStage();
+			     of.setIdEtuPostStage(rs.getInt("id"));
+			     of.setOffre(new OffreStageDAO().find(rs.getInt("idEtudiant")));
+			     of.setEtudiant(obj);
+			     of.setDatePostule(rs.getDate("dateCandidature"));
+			     obj.addStagePostule(of);	     
+		}
+		
+		
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+
+}
 }

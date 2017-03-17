@@ -2,10 +2,11 @@ package Models.DAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import com.mysql.jdbc.Statement;
 
 import Models.Entreprise;
 import Models.OffreStage;
+import Models.Utilisateur;
 
 public class EntrepriseDAO implements DAO<Entreprise> {
 public Entreprise create(Entreprise obj) {
@@ -29,17 +30,16 @@ public Entreprise create(Entreprise obj) {
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
-	}/*
+	}
 	 try {
-		Statement s = connect.createStatement();
-		ResultSet rs = s.executeQuery("select last(id) from entreprise");
+		Statement s = (Statement) connect.createStatement();
+		ResultSet rs = s.executeQuery("SELECT MAX(id) As idMax FROM entreprise");
 		    if(rs.next())
-		    	obj.setIdEntreprise(rs.getInt("id"));
+		    	obj.setIdEntreprise(rs.getInt("idMax"));
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-*/
 	return obj;		
  }
 
@@ -60,7 +60,14 @@ public Entreprise find(int id) {
 					e.setMail(result.getString("mail"));
 					e.setTel(result.getString("tel"));
 					e.setSecteurActivite(result.getString("secteurActivite"));
+					 e.setUtilisateurId(result.getInt("idUtilisateur"));
 					ps.close();
+					// On remplit les valeue des on pere ->HERITAGE
+					UtilisateurDAO uDAO = new UtilisateurDAO();
+			        Utilisateur u = uDAO.find(e.getUitilisateurId());
+			        e.setFonction(u.getFonction());
+			        e.setUtilisateurUserName(u.getUtilisateurUserName());
+			        e.setUtilisateurMdp(u.getUtilisateurMdp());
 					return e;
 					}
 	} catch (SQLException e) {
@@ -91,15 +98,18 @@ public Entreprise update(Entreprise obj) {
 	}
 	return obj;
 }
-public void delete(Entreprise obj) {
+public boolean delete(Entreprise obj) {
 	      try {
 			PreparedStatement ps = connect.prepareStatement("DELETE FROM entreprise WHERE id = ?");
 					ps.setInt(1, obj.getIdEntreprise());
 					ps.executeUpdate();
+					ps.close();
+					return true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	      return false;
 }
 public  void getAllOffreStage(Entreprise obj){
 		try {

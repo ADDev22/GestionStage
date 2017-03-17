@@ -88,7 +88,7 @@ public class FonctionDAO implements DAO<Fonction>
     }
 
     @Override
-    public void delete(Fonction fonction) {
+    public boolean delete(Fonction fonction) {
         Connection conn = null;
         PreparedStatement ps;
         String sql = "DELETE FROM fonction WHERE fonctionId = ?";
@@ -98,6 +98,7 @@ public class FonctionDAO implements DAO<Fonction>
             ps = conn.prepareStatement(sql);
             ps.setInt(1, fonction.getFonctionId());
             ps.execute();
+            return true;
 
         } catch (Exception e) {
             e.printStackTrace();

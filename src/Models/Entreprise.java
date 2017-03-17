@@ -7,7 +7,7 @@ public class Entreprise extends Utilisateur {
 	private String raisonSociale;
 	private String adresseVilleEnt;
 	private String adresseRueEnt;
-	private String adresseCodePostaleEnt;
+	private int adresseCodePostaleEnt;
 	private String mail;
 	private String tel;
 	private String secteurActivite;
@@ -17,7 +17,7 @@ public class Entreprise extends Utilisateur {
 		// TODO Auto-generated constructor stub
 	}
 	public Entreprise(int idEntreprise, String raisonSociale, String adresseVilleEnt, String adresseRueEnt,
-			String adresseCodePostaleEnt, String mail, String tel, String secteurActivite,
+			int adresseCodePostaleEnt, String mail, String tel, String secteurActivite,
 			ArrayList<OffreStage> listOfOffreSTage, Fonction fonction) {
 		super(idEntreprise, secteurActivite, secteurActivite, fonction);
 		this.idEntreprise = idEntreprise;
@@ -42,7 +42,7 @@ public class Entreprise extends Utilisateur {
 	public String getAdresseRueEnt() {
 		return adresseRueEnt;
 	}
-	public String getAdresseCodePostaleEnt() {
+	public int getAdresseCodePostaleEnt() {
 		return adresseCodePostaleEnt;
 	}
 	public String getMail() {
@@ -69,7 +69,7 @@ public class Entreprise extends Utilisateur {
 	public void setAdresseRueEnt(String adresseRueEnt) {
 		this.adresseRueEnt = adresseRueEnt;
 	}
-	public void setAdresseCodePostaleEnt(String adresseCodePostaleEnt) {
+	public void setAdresseCodePostaleEnt(int adresseCodePostaleEnt) {
 		this.adresseCodePostaleEnt = adresseCodePostaleEnt;
 	}
 	public void setMail(String mail) {
