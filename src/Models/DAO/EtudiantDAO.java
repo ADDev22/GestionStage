@@ -10,10 +10,10 @@ import Models.Utilisateur;
 public class EtudiantDAO implements DAO<Etudiant> {
 
 	public Etudiant create(Etudiant obj) {
-						//new UtilisateurDAO().create(obj);
+						new UtilisateurDAO().create(obj);
 		try {
 			PreparedStatement ps = connect.prepareStatement
-					   ("INSERT INTO etudiant (nom,	prenom, formation, niveauEtude,	mail, tel, idUtilisateur\n" + 
+					   ("INSERT INTO etudiant (nom,	prenom, domEtude, niveauEtude,	mail, tel, idUtilisateur\n" + 
 					   		")VALUES(?,?,?,?,?,?,?)");
 			            ps.setString(1, obj.getPrenom());
 			            ps.setString(2, obj.getNom());
@@ -57,7 +57,7 @@ public Etudiant find(int id) {
 						e.setNivEtude(result.getString("niveauEtude"));
 						e.setMail(result.getString("mail"));
 						e.setTel(result.getString("tel"));
-						e.setDomEtude(result.getString("formation"));
+						e.setDomEtude(result.getString("domEtude"));
 				        e.setUtilisateurId(result.getInt("idUtilisateur"));
 				        ps.close();
 				        UtilisateurDAO uDAO = new UtilisateurDAO();
@@ -76,7 +76,7 @@ public Etudiant find(int id) {
 public Etudiant update(Etudiant obj) {
 	  try {
 		PreparedStatement ps = connect.prepareStatement
-					("UPDATE etudiant SET prenom = ?, nom =? , formation = ?, niveauEtude = ?,  mail = ?, tel = ? WHERE id = ?");
+					("UPDATE etudiant SET prenom = ?, nom =? , domEtude = ?, niveauEtude = ?,  mail = ?, tel = ? WHERE id = ?");
 					ps.setString(1, obj.getPrenom());
 			        ps.setString(2, obj.getNom());
 			        ps.setString(3, obj.getDomEtude());

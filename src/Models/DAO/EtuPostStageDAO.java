@@ -21,8 +21,8 @@ public class EtuPostStageDAO implements DAO<EtuPostStage> {
 						if(result != null)
 						{	
 						EtuPostStage  etPos = new EtuPostStage();
-						idOf=result.getInt("idEtudiant");
-						idEt=result.getInt("idOffre");
+						idOf=result.getInt("idOffre");
+						idEt=result.getInt("idEtudiant");
 						etPos.setDatePostule(result.getDate("dateCandidature"));
 					    etPos.setEtudiant(new EtudiantDAO().find(idEt));
 					    etPos.setOffre(new OffreStageDAO().find(idOf));
@@ -41,7 +41,7 @@ public class EtuPostStageDAO implements DAO<EtuPostStage> {
 	public EtuPostStage create(EtuPostStage obj) {
 		try {
 			PreparedStatement ps = connect.prepareStatement
-					   ("INSERT INTO candidature()   VALUES(?,?,?)");
+					   ("INSERT INTO candidature(idOffre,idEtudiant,dateCandidature)   VALUES(?,?,?)");
 			            ps.setInt(1, obj.getEtudiant().getIdEtudiant());
 			            ps.setInt(2, obj.getOffre().getIdOffreStage());
 			            ps.setDate(3, (Date) obj.getDatePostule());

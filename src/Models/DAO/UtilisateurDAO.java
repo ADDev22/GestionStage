@@ -85,7 +85,7 @@ public class UtilisateurDAO extends Utilisateur implements IAuthentification, DA
         Connection conn = null;
         PreparedStatement ps;
         Statement s;
-        String sql = "INSERT INTO utilisateur (utilisateurUserName, utilisateurMdp, fonction_fonctionId) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO utilisateur (pseudo, mdp, idDroit) VALUES (?, ?, ?)";
 
         try {
             conn = (Connection) DBConnection.getConnection();
@@ -103,14 +103,14 @@ public class UtilisateurDAO extends Utilisateur implements IAuthentification, DA
         }
 
         //Recuperation de l'id
-        String sqlRecuperation = "SELECT MAX(utilisateurId) AS utilisateurId FROM utilisateur";
+        String sqlRecuperation = "SELECT MAX(id) AS id FROM utilisateur";
 
         try {
             conn = (Connection) DBConnection.getConnection();
             s = conn.createStatement();
             ResultSet rs = s.executeQuery(sqlRecuperation);
             if (rs.next())
-                utilisateur.setUtilisateurId(rs.getInt("utilisateurId"));
+                utilisateur.setUtilisateurId(rs.getInt("id"));
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);

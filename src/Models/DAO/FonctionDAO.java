@@ -46,7 +46,7 @@ public class FonctionDAO implements DAO<Fonction>
     public Fonction create(Fonction fonction) {
         Connection conn = null;
         PreparedStatement ps;
-        String sql = "INSERT INTO fonction (fonctionNom) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO droit_utilisateur (droit) VALUES (?)";
 
         try {
             conn = (Connection) DBConnection.getConnection();
