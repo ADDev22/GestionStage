@@ -11,15 +11,16 @@ import javax.swing.SwingConstants;
 import java.awt.FlowLayout;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JTextArea;
 
 public class EntreprisePropOffreView extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField libelele;
 	private JTextField textField_1;
 	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField dateDebut;
+	private JTextField duree;
 
 	/**
 	 * Launch the application.
@@ -64,9 +65,9 @@ public class EntreprisePropOffreView extends JFrame {
 		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		panel_2.add(lblNewLabel);
 		
-		textField = new JTextField();
-		panel_2.add(textField);
-		textField.setColumns(10);
+		libelele = new JTextField();
+		panel_2.add(libelele);
+		libelele.setColumns(10);
 		
 		JPanel panel_3 = new JPanel();
 		FlowLayout flowLayout_1 = (FlowLayout) panel_3.getLayout();
@@ -80,17 +81,17 @@ public class EntreprisePropOffreView extends JFrame {
 		panel_3.add(textField_1);
 		textField_1.setColumns(10);
 		
-		JPanel panel_4 = new JPanel();
-		FlowLayout flowLayout_2 = (FlowLayout) panel_4.getLayout();
-		flowLayout_2.setAlignment(FlowLayout.LEFT);
-		contentPane.add(panel_4);
+		JPanel domaine = new JPanel();
+		FlowLayout fl_domaine = (FlowLayout) domaine.getLayout();
+		fl_domaine.setAlignment(FlowLayout.LEFT);
+		contentPane.add(domaine);
 		
 		JLabel lblDescriptif = new JLabel("Descriptif :");
-		panel_4.add(lblDescriptif);
+		domaine.add(lblDescriptif);
 		
 		textField_2 = new JTextField();
-		panel_4.add(textField_2);
-		textField_2.setColumns(10);
+		domaine.add(textField_2);
+		textField_2.setColumns(15);
 		
 		JPanel panel_5 = new JPanel();
 		FlowLayout flowLayout_3 = (FlowLayout) panel_5.getLayout();
@@ -100,9 +101,9 @@ public class EntreprisePropOffreView extends JFrame {
 		JLabel lblDateDeDebut = new JLabel("Date de debut :");
 		panel_5.add(lblDateDeDebut);
 		
-		textField_3 = new JTextField();
-		panel_5.add(textField_3);
-		textField_3.setColumns(10);
+		dateDebut = new JTextField();
+		panel_5.add(dateDebut);
+		dateDebut.setColumns(10);
 		
 		JPanel panel_6 = new JPanel();
 		FlowLayout flowLayout_4 = (FlowLayout) panel_6.getLayout();
@@ -112,19 +113,21 @@ public class EntreprisePropOffreView extends JFrame {
 		JLabel lblNewLabel_2 = new JLabel("Durée :");
 		panel_6.add(lblNewLabel_2);
 		
-		textField_4 = new JTextField();
-		panel_6.add(textField_4);
-		textField_4.setColumns(10);
+		duree = new JTextField();
+		panel_6.add(duree);
+		duree.setColumns(10);
 		
 		JPanel panel_7 = new JPanel();
 		contentPane.add(panel_7);
 		
 		JPanel panel = new JPanel();
 		FlowLayout flowLayout_5 = (FlowLayout) panel.getLayout();
-		flowLayout_5.setAlignment(FlowLayout.RIGHT);
 		contentPane.add(panel);
 		
-		JButton btnOk = new JButton("OK");
+		JButton btnAnnuler = new JButton("Annuler");
+		panel.add(btnAnnuler);
+		
+		JButton btnOk = new JButton("Valider");
 		panel.add(btnOk);
 	}
 
