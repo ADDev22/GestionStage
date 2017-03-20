@@ -41,8 +41,8 @@ public class UtilisateurDAO extends Utilisateur implements IAuthentification, DA
 
         for (Utilisateur u : listeUtilisateur)
         {
-            if (u.getUtilisateurUserName() == userName)
-                if (u.getUtilisateurMdp() == mdp)
+            if (u.getUtilisateurUserName().equals(userName))
+                if (u.getUtilisateurMdp().equals(mdp))
                     return true;
         }
 
@@ -56,7 +56,7 @@ public class UtilisateurDAO extends Utilisateur implements IAuthentification, DA
         Connection conn = null;
         PreparedStatement ps;
         Utilisateur utilisateur = new Utilisateur();
-        String sql = "SELECT * FROM utilisateur WHERE utilisateurId = ?";
+        String sql = "SELECT * FROM utilisateur WHERE id = ?";
 
         try {
             conn = (Connection) DBConnection.getConnection();
@@ -103,7 +103,11 @@ public class UtilisateurDAO extends Utilisateur implements IAuthentification, DA
         }
 
         //Recuperation de l'id
+<<<<<<< HEAD
         String sqlRecuperation = "SELECT MAX(id) AS id FROM utilisateur";
+=======
+        String sqlRecuperation = "SELECT MAX(id) AS utilisateurId FROM utilisateur";
+>>>>>>> 71df98c717ba67cbe1a711f1ad8b5b5c7bf0f62e
 
         try {
             conn = (Connection) DBConnection.getConnection();
@@ -126,7 +130,7 @@ public class UtilisateurDAO extends Utilisateur implements IAuthentification, DA
     {
         Connection conn = null;
         PreparedStatement ps;
-        String sql = "UPDATE utilisateur SET utilisateurUserName = ?, utilisateurMdp = ?, fonction_fonctionId = ? WHERE utilisateurId = ?";
+        String sql = "UPDATE utilisateur SET pseudo = ?, mdp = ?, idDroit = ? WHERE id = ?";
 
         try {
             conn = (Connection) DBConnection.getConnection();
@@ -152,7 +156,7 @@ public class UtilisateurDAO extends Utilisateur implements IAuthentification, DA
     {
         Connection conn = null;
         PreparedStatement ps;
-        String sql = "DELETE FROM utilisateur WHERE utilisateurId = ?";
+        String sql = "DELETE FROM utilisateur WHERE id = ?";
 
         try {
             conn = (Connection) DBConnection.getConnection();
@@ -176,10 +180,10 @@ public class UtilisateurDAO extends Utilisateur implements IAuthentification, DA
     {
         Utilisateur utilisateur = new Utilisateur();
         FonctionDAO fDAO = new FonctionDAO();
-        utilisateur.setUtilisateurId(rs.getInt("utilisateurId"));
-        utilisateur.setUtilisateurUserName(rs.getString("utilisateurUserName"));
-        utilisateur.setUtilisateurMdp(rs.getString("utilisateurMdp"));
-        utilisateur.setFonction(fDAO.find(rs.getInt("fonction_fonctionId")));
+        utilisateur.setUtilisateurId(rs.getInt("id"));
+        utilisateur.setUtilisateurUserName(rs.getString("pseudo"));
+        utilisateur.setUtilisateurMdp(rs.getString("mdp"));
+        utilisateur.setFonction(fDAO.find(rs.getInt("idDroit")));
 
         return utilisateur;
     }

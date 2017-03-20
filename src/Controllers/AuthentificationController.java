@@ -1,18 +1,26 @@
 package Controllers;
 
 import Models.DAO.IAuthentification;
+import Models.DAO.UtilisateurDAO;
 import Models.Utilisateur;
 
-public class AuthentificationController {
-	IAuthentification iAuth = (IAuthentification) new Utilisateur();
+public class AuthentificationController
+{
+	//Déclaration
+
+	IAuthentification iAuth;
 	private String userName;
 	private String mdp;
-	
-	public AuthentificationController()
+
+	//Constructeur
+
+	public AuthentificationController(UtilisateurDAO uDao)
 	{
-		//
+		this.iAuth = uDao;
 	}
-	
+
+	//Setter
+
 	public void setUserName(String userName)
 	{
 		this.userName = userName;
@@ -22,9 +30,13 @@ public class AuthentificationController {
 	{
 		this.mdp = mdp;
 	}
-	
+
+	//Tentative de connexion
 	public void authentification()
 	{
-		if(iAuth.connexion(this.userName, this.mdp)){}
+		if(iAuth.connexion(this.userName, this.mdp))
+		{
+			System.out.println("Connexion réussi");
+		}
 	}
 }

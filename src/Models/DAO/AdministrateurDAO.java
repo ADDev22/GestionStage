@@ -21,7 +21,7 @@ public class AdministrateurDAO extends Administrateur implements DAO<Administrat
 
         try {
             conn = (Connection) DBConnection.getConnection();
-            ps = conn.prepareStatement("SELECT * FROM administrateur WHERE administrateurId = ?");
+            ps = conn.prepareStatement("SELECT * FROM administrateur WHERE id = ?");
             ps.setInt(1, administrateurId);
             ResultSet rs = ps.executeQuery();
 
@@ -49,7 +49,7 @@ public class AdministrateurDAO extends Administrateur implements DAO<Administrat
         //Enregistrement des informations utilisateur associés
         uDAO.create(admin);
 
-        String sql = "INSERT INTO administrateur(administrateurNom, administrateurPrenom, adresseNoRue, adresseRue, adresseComplement, adresseCdePostal, adresseVille, adressePays, administrateurMail, administrateurTel, utilisateur_utilisateurId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO administrateur(nom, prenom, adresseNoRue, adresseRue, adresseComplement, adresseCdePostal, adresseVille, adressePays, mail, tel, idUtilisateur) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try
         {
             conn = (Connection) DBConnection.getConnection();
@@ -81,7 +81,7 @@ public class AdministrateurDAO extends Administrateur implements DAO<Administrat
     {
         Connection conn = null;
         PreparedStatement ps;
-        String sql = "UPDATE administrateur SET administrateurNom = ?, administrateurPrenom = ?, adresseNoRue = ?, adresseRue = ?, adresseComplement = ?, adresseCdePostal = ?, adresseVille = ?, adressePays = ?, administrateurMail = ?, administrateurTel = ? WHERE administrateurId = ?";
+        String sql = "UPDATE administrateur SET nom = ?, prenom = ?, adresseNoRue = ?, adresseRue = ?, adresseComplement = ?, adresseCdePostal = ?, adresseVille = ?, adressePays = ?, mail = ?, tel = ? WHERE id = ?";
 
         try {
             conn = (Connection) DBConnection.getConnection();
@@ -113,7 +113,7 @@ public class AdministrateurDAO extends Administrateur implements DAO<Administrat
     {
         Connection conn = null;
         PreparedStatement ps;
-        String sql = "DELETE FROM administrateur WHERE administrateurId = ?";
+        String sql = "DELETE FROM administrateur WHERE id = ?";
 
         try {
             conn = (Connection) DBConnection.getConnection();
@@ -137,18 +137,18 @@ public class AdministrateurDAO extends Administrateur implements DAO<Administrat
     {
         Administrateur admin = new Administrateur();
         UtilisateurDAO uDAO = new UtilisateurDAO();
-        admin.setUtilisateurId(rs.getInt("administrateurId"));
-        admin.setAdministrateurNom(rs.getString("administrateurNom"));
-        admin.setAdministrateurPrenom(rs.getString("administrateurPrenom"));
+        admin.setUtilisateurId(rs.getInt("id"));
+        admin.setAdministrateurNom(rs.getString("nom"));
+        admin.setAdministrateurPrenom(rs.getString("prenom"));
         admin.setAdresseNoRue(rs.getInt("adresseNoRue"));
         admin.setAdresseRue(rs.getString("adresseRue"));
         admin.setAdresseComplement(rs.getString("adresseComplement"));
         admin.setAdresseCdePostal(rs.getInt("adresseCdePostal"));
         admin.setAdresseVille(rs.getString("adresseVille"));
         admin.setAdressePays(rs.getString("adressePays"));
-        admin.setAdministrateurMail(rs.getString("administrateurMail"));
-        admin.setAdministrateurTel(rs.getInt("administrateurTel"));
-        admin.setUtilisateur(uDAO.find(rs.getInt("utilisateur_utilisateurId")));
+        admin.setAdministrateurMail(rs.getString("mail"));
+        admin.setAdministrateurTel(rs.getInt("tel"));
+        admin.setUtilisateur(uDAO.find(rs.getInt("idUtilisateur")));
 
         return admin;
     }
