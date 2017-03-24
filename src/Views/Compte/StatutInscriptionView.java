@@ -1,6 +1,7 @@
 package Views.Compte;
 
 import Controllers.EntrepriseController;
+import Controllers.EtudiantController;
 import Models.DAO.FonctionDAO;
 import Models.Fonction;
 
@@ -50,8 +51,11 @@ public class StatutInscriptionView extends JFrame
     {
         public void actionPerformed(ActionEvent e)
         {
-            if (e.getActionCommand().equals("Etudiant"))
+            if (cbStatut.getSelectedItem().equals("Etudiant"))
             {
+                EtudiantController etudiantController = new EtudiantController();
+                InscriptionEtudiantView inscriptionEtudiantView = new InscriptionEtudiantView(etudiantController);
+                StatutInscriptionView.this.dispose();
             }
             else
             {
