@@ -9,8 +9,6 @@ public class AuthentificationController
 	//Déclaration
 
 	IAuthentification iAuth;
-	private String userName;
-	private String mdp;
 
 	//Constructeur
 
@@ -19,24 +17,14 @@ public class AuthentificationController
 		this.iAuth = uDao;
 	}
 
-	//Setter
-
-	public void setUserName(String userName)
-	{
-		this.userName = userName;
-	}
-	
-	public void setMdp(String mdp)
-	{
-		this.mdp = mdp;
-	}
-
 	//Tentative de connexion
-	public void authentification()
+	public boolean authentification(Utilisateur u)
 	{
-		if(iAuth.connexion(this.userName, this.mdp))
+		if(iAuth.connexion(u.getUtilisateurUserName(), u.getUtilisateurMdp()))
 		{
-			System.out.println("Connexion réussi");
+			return true;
 		}
+
+		return false;
 	}
 }
