@@ -1,6 +1,8 @@
 package Views.Compte;
 
 import Controllers.EntrepriseController;
+import Models.Entreprise;
+import Models.Fonction;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -27,6 +29,14 @@ public class InscriptionEntrepriseView extends JFrame
     private JButton bValider;
     private JButton bRetour;
     private JPanel pBouttons;
+    private JLabel lUserName;
+    private JTextField tfUserName;
+    private JLabel lMdp;
+    private JPasswordField pfMdp;
+    private JLabel lConfMdp;
+    private JPasswordField pfConfMdp;
+    private JLabel lSectAc;
+    private JTextField tfSectAc;
 
     //Instation de notre objet controlleur
     private EntrepriseController entController;
@@ -49,7 +59,25 @@ public class InscriptionEntrepriseView extends JFrame
     {
         public void actionPerformed(ActionEvent e)
         {
+            Entreprise entreprise = new Entreprise();
+            Fonction fonction = new Fonction();
 
+            fonction.setFonctionId(2);
+            fonction.setFonctionNom("Entreprise");
+
+            entreprise.setUtilisateurUserName(tfUserName.getText());
+            if (pfMdp.getText().equals(pfConfMdp.getText()))
+                entreprise.setUtilisateurMdp(pfMdp.getText());
+            entreprise.setFonction(fonction);
+            entreprise.setRaisonSociale(tfRaisonSociale.getText());
+            entreprise.setAdresseVilleEnt(tfVille.getText());
+            entreprise.setAdresseRueEnt(tfRue.getText());
+            entreprise.setAdresseCodePostaleEnt(Integer.valueOf(tfCdePostal.getText()));
+            entreprise.setMail(tfMail.getText());
+            entreprise.setTel(ftfTel.getText());
+            entreprise.setSecteurActivite(tfSectAc.getText());
+
+            entController.insert(entreprise);
         }
     }
 
