@@ -2,6 +2,7 @@ package Views.Compte;
 
 import Controllers.AuthentificationController;
 import Models.DAO.UtilisateurDAO;
+import Models.Utilisateur;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -17,7 +18,6 @@ public class AuthentificationView extends JFrame
     private JLabel lUserName;
     private JLabel lMdp;
     private JTextField tfUserName;
-    private JTextField tfMdp;
     private JButton bConnexion;
     private JButton bInscription;
     private JPanel container;
@@ -45,10 +45,22 @@ public class AuthentificationView extends JFrame
     {
         public void actionPerformed(ActionEvent e)
         {
-            authController.setUserName(tfUserName.getText());
-            authController.setMdp(tfMdp.getText());
+            Utilisateur utilisateur = new Utilisateur();
+            utilisateur.setUtilisateurUserName(tfUserName.getText());
+            utilisateur.setUtilisateurMdp(pfMdp.getText());
 
-            authController.authentification();
+            if (authController.authentification(utilisateur))
+            {
+                //Affichage de la boite de dialogue
+                JOptionPane jOP = new JOptionPane();
+                jOP.showMessageDialog(null, "Connexion réussie", "Information", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else
+            {
+                //Affichage de la boite de dialogue
+                JOptionPane jOP = new JOptionPane();
+                jOP.showMessageDialog(null, "Nom d'utilisateur ou mot de passe incorrecte", "Erreur", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
