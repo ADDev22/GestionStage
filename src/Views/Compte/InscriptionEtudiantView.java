@@ -1,6 +1,8 @@
 package Views.Compte;
 
 import Controllers.EtudiantController;
+import Models.Etudiant;
+import Models.Fonction;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -28,6 +30,12 @@ public class InscriptionEtudiantView extends JFrame
     private JButton bValider;
     private JButton bRetour;
     private JPanel container;
+    private JLabel lUserName;
+    private JTextField tfUserName;
+    private JLabel lMdp;
+    private JPasswordField pfMdp;
+    private JLabel lConfMdp;
+    private JPasswordField pfConfMdp;
 
     //Instanciation de notre objet contrôleur
     private EtudiantController etController;
@@ -51,7 +59,24 @@ public class InscriptionEtudiantView extends JFrame
     {
         public void actionPerformed(ActionEvent e)
         {
+            Etudiant etudiant = new Etudiant();
+            Fonction fonction = new Fonction();
 
+            fonction.setFonctionId(3);
+            fonction.setFonctionNom("Etudiant");
+
+            etudiant.setUtilisateurUserName(tfUserName.getText());
+            if (pfMdp.getText().equals(pfConfMdp.getText()))
+                etudiant.setUtilisateurMdp(pfMdp.getText());
+            etudiant.setFonction(fonction);
+            etudiant.setNom(tfNom.getText());
+            etudiant.setPrenom(tfPrenom.getText());
+            etudiant.setDomEtude(tfDomEtude.getText());
+            etudiant.setNivEtude(cbNivEtude.getSelectedItem().toString());
+            etudiant.setMail(tfMail.getText());
+            etudiant.setTel(ftfTel.getText());
+
+            etController.insert(etudiant);
         }
     }
 
