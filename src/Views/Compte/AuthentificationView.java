@@ -1,8 +1,12 @@
 package Views.Compte;
 
+import Controllers.AdministrateurController;
 import Controllers.AuthentificationController;
-import Models.DAO.UtilisateurDAO;
+import Models.DAO.AdministrateurDAO;
+import Models.DAO.OffreStageDAO;
 import Models.Utilisateur;
+import Views.Administrateur.AdministrateurAccueilView;
+import Views.Administrateur.ResultSetTableModel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -49,15 +53,9 @@ public class AuthentificationView extends JFrame
             utilisateur.setUtilisateurUserName(tfUserName.getText());
             utilisateur.setUtilisateurMdp(pfMdp.getText());
 
-            if (authController.authentification(utilisateur))
+            if(!authController.authentification(utilisateur))
             {
-                //Affichage de la boite de dialogue
-                JOptionPane jOP = new JOptionPane();
-                jOP.showMessageDialog(null, "Connexion réussie", "Information", JOptionPane.INFORMATION_MESSAGE);
-            }
-            else
-            {
-                //Affichage de la boite de dialogue
+			    //Affichage de la boite de dialogue
                 JOptionPane jOP = new JOptionPane();
                 jOP.showMessageDialog(null, "Nom d'utilisateur ou mot de passe incorrecte", "Erreur", JOptionPane.ERROR_MESSAGE);
             }
