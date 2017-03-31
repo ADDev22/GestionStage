@@ -132,6 +132,32 @@ public class AdministrateurDAO extends Administrateur implements DAO<Administrat
         //return true;
     }
 
+    @Override
+    public Administrateur findTypeUser(int utilisateurId) {
+        Connection conn = null;
+        PreparedStatement ps;
+        Administrateur admin = new Administrateur();
+
+        try {
+            conn = (Connection) DBConnection.getConnection();
+            ps = conn.prepareStatement("SELECT * FROM administrateur WHERE idUtilisateur = ?");
+            ps.setInt(1, utilisateurId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next())
+            {
+                admin = traitementLigne(rs);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            DBConnection.close(conn);
+        }
+
+        return admin;
+    }
+
     //Traitement du resultat renvoyé par une requête --> correspodance avec un objet
     private Administrateur traitementLigne(ResultSet rs) throws SQLException
     {

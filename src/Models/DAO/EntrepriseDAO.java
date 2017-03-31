@@ -2,6 +2,9 @@ package Models.DAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import Models.DBConnection;
+import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 
 import Models.Entreprise;
@@ -111,7 +114,43 @@ public boolean delete(Entreprise obj) {
 		}
 	      return false;
 }
-public  void getAllOffreStage(Entreprise obj){
+
+	@Override
+	public Entreprise findTypeUser(int utilisateurId)
+	{
+		Connection conn = null;
+		PreparedStatement ps;
+		Entreprise ent = new Entreprise();
+
+		try {
+			conn = (Connection) DBConnection.getConnection();
+			ps = conn.prepareStatement("SELECT * FROM entreprise WHERE idUtilisateur = ?");
+			ps.setInt(1, utilisateurId);
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next())
+			{
+				ent.setId(rs.getInt("id"));
+				ent.setRaisonSociale(rs.getString("raisonSociale"));
+				ent.setAdresseVilleEnt(rs.getString("adresseVille"));
+				ent.setAdresseRueEnt(rs.getString("adresseRue"));
+				ent.setAdresseCodePostaleEnt(rs.getInt("adresseCdePostal"));
+				ent.setMail(rs.getString("mail"));
+				ent.setTel(String.valueOf(rs.getInt("tel")));
+				ent.setSecteurActivite(rs.getString("secteurActivite"));
+				ent.setUtilisateurId(utilisateurId);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			DBConnection.close(conn);
+		}
+
+		return ent;
+	}
+
+	public  void getAllOffreStage(Entreprise obj){
 		try {
 			PreparedStatement ps =connect.prepareStatement("SELECT * FROM offre_stage WHERE idEntreprise = ?");
 			ps.setInt(1, obj.getIdEntreprise());
@@ -136,4 +175,23 @@ public  void getAllOffreStage(Entreprise obj){
 		}
 	
 }
+
+	//Méthode renvoyant un ResultSet pour l'affichage sous forme d'un table dans l'interface
+	public ResultSet listeEntreprises()
+	{
+		Connection conn = null;
+		String sql = "SELECT raisonSociale, secteurActivite FROM entreprise";
+		ResultSet rs;
+		try
+		{
+			conn = (Connection) DBConnection.getConnection();
+			java.sql.Statement s = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			rs = s.executeQuery(sql);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+
+		return rs;
+	}
 }

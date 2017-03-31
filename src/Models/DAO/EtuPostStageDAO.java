@@ -97,6 +97,11 @@ public class EtuPostStageDAO implements DAO<EtuPostStage> {
 			}
 		return false;
 	}
-	
+
+	@Override
+	public EtuPostStage findTypeUser(int utilisateurId) {
+		return null;
+	}
+
 
 }
