@@ -24,6 +24,7 @@ public class EtuPostStageDAO implements DAO<EtuPostStage> {
 						idOf=result.getInt("idOffre");
 						idEt=result.getInt("idEtudiant");
 						etPos.setDatePostule(result.getDate("dateCandidature"));
+						etPos.setIsAccept(result.getInt("isAccept"));
 					    etPos.setEtudiant(new EtudiantDAO().find(idEt));
 					    etPos.setOffre(new OffreStageDAO().find(idOf));
 						ps.close();
@@ -68,14 +69,15 @@ public class EtuPostStageDAO implements DAO<EtuPostStage> {
 	public EtuPostStage update(EtuPostStage obj) {
 		try {
 			PreparedStatement ps = connect.prepareStatement
-						("UPDATE candidature SET idOffre = ?, idEtudiant =? , dateCandidature = ? WHERE id = ?");
+						("UPDATE candidature SET idOffre = ?, idEtudiant =? , dateCandidature = ?, isAccept =?  WHERE id = ?");
 						ps.setInt(1, obj.getOffre().getIdOffreStage());
 				        ps.setInt(2, obj.getEtudiant().getIdEtudiant());
 				        ps.setDate(3, (Date) obj.getDatePostule());
+				        ps.setInt(4, obj.getIsAccept());
+				        ps.setInt(5, obj.getIdEtuPostStage());
 				        ps.executeUpdate();
 				        ps.close();
-						
-						ps.executeUpdate();
+	
 		} catch (SQLException e) {
 			
 			// TODO Auto-generated catch block
@@ -97,6 +99,31 @@ public class EtuPostStageDAO implements DAO<EtuPostStage> {
 			}
 		return false;
 	}
-	
+	public EtuPostStage findWithOfEt(int idOf, int idEt) {
+		try {
+			PreparedStatement ps = connect.prepareStatement
+					   	("SELECT * FROM candidature WHERE idOffre = ? && idEtudiant = ?");
+			            ps.setInt(1, idOf);
+			            ps.setInt(2, idEt);
+						ResultSet result =ps.executeQuery();
+						while(result.next())
+						{	
+						EtuPostStage  etPos = new EtuPostStage();
+						idOf=result.getInt("idOffre");
+						idEt=result.getInt("idEtudiant");
+						etPos.setDatePostule(result.getDate("dateCandidature"));
+						etPos.setIsAccept(result.getInt("isAccept"));
+					    etPos.setEtudiant(new EtudiantDAO().find(idEt));
+					    etPos.setOffre(new OffreStageDAO().find(idOf));
+						ps.close();
+						return etPos;
+						}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		   return null;
+	           
+	}
 
 }
