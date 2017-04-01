@@ -1,47 +1,52 @@
 package Views.Entreprise;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.sun.java.swing.plaf.windows.WindowsBorders.ProgressBarBorder;
+
+import Controllers.EntrepriseController;
+import Models.OffreStage;
+import Models.DAO.OffreStageDAO;
+
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.FlowLayout;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JTextArea;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JDialog;
+import java.awt.BorderLayout;
 
 public class EntreprisePropOffreView extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField libelele;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField dateDebut;
-	private JTextField duree;
+	private JTextField domaineT;
+	private JTextField dateDebutT;
+	private JTextField dureeT;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EntreprisePropOffreView frame = new EntreprisePropOffreView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
 	 */
-	public EntreprisePropOffreView() {
+	public EntreprisePropOffreView(EntrepriseController eCont) {
+		OffreStage of =new OffreStage();
+		of.setEntreprise(eCont.getE());
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -58,6 +63,7 @@ public class EntreprisePropOffreView extends JFrame {
 		
 		JPanel panel_2 = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panel_2.getLayout();
+		flowLayout.setHgap(10);
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		contentPane.add(panel_2);
 		
@@ -77,21 +83,23 @@ public class EntreprisePropOffreView extends JFrame {
 		JLabel lblNewLabel_1 = new JLabel("Domaine :");
 		panel_3.add(lblNewLabel_1);
 		
-		textField_1 = new JTextField();
-		panel_3.add(textField_1);
-		textField_1.setColumns(10);
+		domaineT = new JTextField();
+		panel_3.add(domaineT);
+		domaineT.setColumns(10);
 		
 		JPanel domaine = new JPanel();
-		FlowLayout fl_domaine = (FlowLayout) domaine.getLayout();
-		fl_domaine.setAlignment(FlowLayout.LEFT);
 		contentPane.add(domaine);
+		domaine.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 		
 		JLabel lblDescriptif = new JLabel("Descriptif :");
 		domaine.add(lblDescriptif);
 		
-		textField_2 = new JTextField();
-		domaine.add(textField_2);
-		textField_2.setColumns(15);
+		JTextArea descripT = new JTextArea();
+		descripT.setColumns(15);
+		descripT.setRows(1);
+		
+		JScrollPane scrollPane = new JScrollPane(descripT);
+		domaine.add(scrollPane);
 		
 		JPanel panel_5 = new JPanel();
 		FlowLayout flowLayout_3 = (FlowLayout) panel_5.getLayout();
@@ -101,9 +109,9 @@ public class EntreprisePropOffreView extends JFrame {
 		JLabel lblDateDeDebut = new JLabel("Date de debut :");
 		panel_5.add(lblDateDeDebut);
 		
-		dateDebut = new JTextField();
-		panel_5.add(dateDebut);
-		dateDebut.setColumns(10);
+		dateDebutT = new JTextField();
+		panel_5.add(dateDebutT);
+		dateDebutT.setColumns(10);
 		
 		JPanel panel_6 = new JPanel();
 		FlowLayout flowLayout_4 = (FlowLayout) panel_6.getLayout();
@@ -113,22 +121,66 @@ public class EntreprisePropOffreView extends JFrame {
 		JLabel lblNewLabel_2 = new JLabel("Durée :");
 		panel_6.add(lblNewLabel_2);
 		
-		duree = new JTextField();
-		panel_6.add(duree);
-		duree.setColumns(10);
+		dureeT = new JTextField();
+		panel_6.add(dureeT);
+		dureeT.setColumns(10);
 		
 		JPanel panel_7 = new JPanel();
+		FlowLayout flowLayout_2 = (FlowLayout) panel_7.getLayout();
+		flowLayout_2.setAlignment(FlowLayout.LEFT);
 		contentPane.add(panel_7);
+		
+		JLabel chemin = new JLabel("Descriptif Complet :");
+		panel_7.add(chemin);
+		JFileChooser slF;
+		EntreprisePropOffreView v =this;
+		JButton seletFichier = new JButton("Seletionner fichier");
+		seletFichier.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser slF = new JFileChooser();
+				if(slF.showOpenDialog(v)==JFileChooser.APPROVE_OPTION)
+				{
+				//of.setCheminOffre(slF.getSelectedFile());
+				}
+			}	
+		});
+		panel_7.add(seletFichier);
 		
 		JPanel panel = new JPanel();
 		FlowLayout flowLayout_5 = (FlowLayout) panel.getLayout();
 		contentPane.add(panel);
+
 		
 		JButton btnAnnuler = new JButton("Annuler");
 		panel.add(btnAnnuler);
+	    btnAnnuler.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				eCont.getEntView().setVisible(true);
+				v.setVisible(false);
+				v.dispose();
+			}
+		});
 		
 		JButton btnOk = new JButton("Valider");
+		btnOk.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				of.setLibelleOffre(libelele.getText());
+				of.setDomaineOffre(domaineT.getText());
+				of.setDescriptifOffre(descripT.getText());
+				of.setDateDebut(dateDebutT.getText());
+				of.setDureeOffre(dureeT.getText());
+		  
+				new OffreStageDAO().create(of);
+				
+				v.setVisible(true);
+				v.dispose();
+			}
+		});
 		panel.add(btnOk);
+	setVisible(true);
+	
 	}
 
 }
