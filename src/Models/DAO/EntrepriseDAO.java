@@ -12,7 +12,7 @@ public class EntrepriseDAO implements DAO<Entreprise> {
 public Entreprise create(Entreprise obj) {
 	try {
 		   // On insere d'abord Utilisateur puis on recupere last id utilisateur
-		            //new UtilisateurDAO().create(obj);
+		            new UtilisateurDAO().create(obj);
 		PreparedStatement ps = connect.prepareStatement
 				   ("INSERT INTO entreprise(raisonSociale,adresseVille,adresseRue,adresseCdePostal,mail,tel,secteurActivite,idUtilisateur) VALUES(?,?,?,?,?,?,?,?)");
 		            ps.setString(1, obj.getRaisonSociale());
@@ -22,7 +22,7 @@ public Entreprise create(Entreprise obj) {
 		            ps.setString(5, obj.getMail());
 		            ps.setString(6, obj.getTel());
 		            ps.setString(7, obj.getSecteurActivite());
-		             ps.setInt(8,3);
+		             ps.setInt(8,obj.getUitilisateurId());
 		            ps.executeUpdate();
 		            ps.close();
 		            
@@ -123,8 +123,9 @@ public  void getAllOffreStage(Entreprise obj){
 				     of.setDomaineOffre(rs.getString("domaine"));
 				     of.setLibelleOffre(rs.getString("libelle"));
 				     of.setDureeOffre(rs.getString("duree"));
-				     of.setValide(rs.getBoolean("valide"));
+				     of.setValide(rs.getInt("valide"));
 				     of.setCheminOffre(rs.getString("cheminStockage"));
+				     of.setCommentaire(rs.getString("commentaire"));
 				     of.setEntreprise(obj);
 				     obj.addOffreStage(of);	     
 			}
@@ -135,5 +136,31 @@ public  void getAllOffreStage(Entreprise obj){
 			e.printStackTrace();
 		}
 	
+}
+public  void getAllOffreStage(Entreprise obj,String domaine){
+	try {
+		PreparedStatement ps =connect.prepareStatement("SELECT * FROM offre_stage WHERE idEntreprise = ? && domaine =domaine");
+		ps.setInt(1, obj.getIdEntreprise());
+		ResultSet rs = ps.executeQuery();
+		while(rs.next())
+		{   OffreStage of =new OffreStage();
+			     of.setIdOffreStage(rs.getInt("id"));
+			     of.setDescriptifOffre(rs.getString("descriptif"));
+			     of.setDomaineOffre(rs.getString("domaine"));
+			     of.setLibelleOffre(rs.getString("libelle"));
+			     of.setDureeOffre(rs.getString("duree"));
+			     of.setValide(rs.getInt("valide"));
+			     of.setCheminOffre(rs.getString("cheminStockage"));
+			     of.setCommentaire(rs.getString("commentaire"));
+			     of.setEntreprise(obj);
+			     obj.addOffreStage(of);	     
+		}
+		
+		
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+
 }
 }
