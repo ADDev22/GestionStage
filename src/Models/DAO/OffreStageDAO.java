@@ -3,7 +3,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
+import Models.Entreprise;
 import Models.EtuPostStage;
 import Models.OffreStage;
 public class OffreStageDAO implements DAO<OffreStage> {
@@ -23,7 +25,7 @@ public class OffreStageDAO implements DAO<OffreStage> {
 							st.setDescriptifOffre(result.getString("descriptif"));
 							st.setDureeOffre(result.getString("duree"));
 							st.setCheminOffre(result.getString("cheminStockage"));
-							st.setValide(result.getBoolean("valide"));
+							st.setValide(result.getInt("valide"));
 							st.setIdOffreStage(result.getInt("id"));
 							st.setDateDebut(result.getString("dateDebut"));
 							ps.close();
@@ -47,7 +49,7 @@ public class OffreStageDAO implements DAO<OffreStage> {
 			            ps.setString(4, obj.getDateDebut());
 			            ps.setString(5, obj.getDureeOffre());
 			            ps.setString(6, obj.getCheminOffre());
-			            ps.setBoolean(7, obj.isValide());
+			            ps.setInt(7, obj.isValide());
 			            ps.setInt(8, obj.getEntreprise().getIdEntreprise());
 			            ps.executeUpdate();
 			            ps.close();
@@ -72,15 +74,18 @@ public class OffreStageDAO implements DAO<OffreStage> {
 	public OffreStage update(OffreStage obj) {
 		try {
 			PreparedStatement ps = connect.prepareStatement
-						("UPDATE offre_stage SET libelle = ?, domaine =? , descriptif = ? , dateDebut = ?,duree= ?, cheminStockage = ?, valide = ? WHERE id = ?");
+						("UPDATE offre_stage SET libelle = ?, domaine =? , descriptif = ? , dateDebut = ?,duree= ?, cheminStockage = ?, valide = ?, commentaire =? WHERE id = ?");
 						ps.setString(1, obj.getLibelleOffre());
 				        ps.setString(2, obj.getDomaineOffre());
 				        ps.setString(3, obj.getDescriptifOffre());
 				        ps.setString(4, obj.getDateDebut());
 				        ps.setString(5, obj.getDureeOffre());
 				        ps.setString(6, obj.getCheminOffre());
-				        ps.setBoolean(7, obj.isValide());
-				        ps.setInt(8, obj.getIdOffreStage());
+				        ps.setInt(7, obj.isValide());
+				        ps.setString(8, obj.getCommentaire());
+				        ps.setInt(9, obj.getIdOffreStage());
+				
+				        
 				        ps.executeUpdate();
 				        ps.close();
 		} catch (SQLException e) {
@@ -125,6 +130,7 @@ public class OffreStageDAO implements DAO<OffreStage> {
 				     of.setEtudiant(new EtudiantDAO().find(rs.getInt("idEtudiant")));
 				     of.setOffre(obj);
 				     of.setDatePostule(rs.getDate("dateCandidature"));
+				     of.setIsAccept(rs.getInt("isAccept"));
 				     obj.addPostulant(of);	     
 			}
 			
@@ -134,6 +140,61 @@ public class OffreStageDAO implements DAO<OffreStage> {
 			e.printStackTrace();
 		}
 	
+}
+	public  ArrayList<OffreStage> getAllOffreStage(){
+		try {
+			ArrayList<OffreStage> listOf = new ArrayList<OffreStage>();
+			PreparedStatement ps =connect.prepareStatement("SELECT * FROM offre_stage");
+			ResultSet rs = ps.executeQuery();
+			while(rs.next())
+			{   OffreStage of =new OffreStage();
+				     of.setIdOffreStage(rs.getInt("id"));
+				     of.setDescriptifOffre(rs.getString("descriptif"));
+				     of.setDomaineOffre(rs.getString("domaine"));
+				     of.setLibelleOffre(rs.getString("libelle"));
+				     of.setDureeOffre(rs.getString("duree"));
+				     of.setValide(rs.getInt("valide"));
+				     of.setCheminOffre(rs.getString("cheminStockage"));
+				     of.setCommentaire(rs.getString("commentaire"));
+				     of.setEntreprise(new EntrepriseDAO().find(rs.getInt("idEntreprise")));     
+				     listOf.add(of);
+			}
+			return listOf;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	
+}
+public  ArrayList<OffreStage> getAllOffreStage(String domaine){
+	try {
+		ArrayList<OffreStage> listOf = new ArrayList<OffreStage>();
+		PreparedStatement ps =connect.prepareStatement("SELECT * FROM offre_stage WHERE domaine =domaine");
+		ResultSet rs = ps.executeQuery();
+		while(rs.next())
+		{   OffreStage of =new OffreStage();
+			     of.setIdOffreStage(rs.getInt("id"));
+			     of.setDescriptifOffre(rs.getString("descriptif"));
+			     of.setDomaineOffre(rs.getString("domaine"));
+			     of.setLibelleOffre(rs.getString("libelle"));
+			     of.setDureeOffre(rs.getString("duree"));
+			     of.setValide(rs.getInt("valide"));
+			     of.setCheminOffre(rs.getString("cheminStockage"));
+			     of.setCommentaire(rs.getString("commentaire"));
+			     of.setEntreprise(new EntrepriseDAO().find(rs.getInt("idEntreprise")));     
+			     listOf.add(of);
+			         
+		}
+		return listOf;
+		
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return null;
+
 }
 }
 
