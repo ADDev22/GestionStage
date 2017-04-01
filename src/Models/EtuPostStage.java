@@ -7,6 +7,13 @@ public class EtuPostStage {
 	private Etudiant etudiant;
 	private OffreStage offre;
 	Date datePostule;
+	private int isAccept;
+	public int getIsAccept() {
+		return isAccept;
+	}
+	public void setIsAccept(int isAccept) {
+		this.isAccept = isAccept;
+	}
 	public EtuPostStage() {
 		super();
 		// TODO Auto-generated constructor stub

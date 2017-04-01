@@ -10,6 +10,7 @@ private String domEtude;
 private String nivEtude;
 private String tel;
 private String mail;
+private String cv;
 private ArrayList<EtuPostStage> listStagePostule = new ArrayList<EtuPostStage>();
 public Etudiant(int idType, int idEtudiant, String pseudo, String mdp, String nom, String prenom, String nivEtude,
 		String tel, String mail) {
@@ -81,5 +82,11 @@ public void addStagePostule(EtuPostStage stagePostule){
 // Obtenir un offre qu'on a postulé
 public EtuPostStage getPostulant(int indice){
 return this.listStagePostule.get(indice);
+}
+public String getCv() {
+	return cv;
+}
+public void setCv(String cv) {
+	this.cv = cv;
 }
 }

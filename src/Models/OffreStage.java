@@ -10,14 +10,15 @@ public class OffreStage {
 	private String dateDebut;
 	private String dureeOffre;
 	private String cheminOffre;
-	private boolean isValide=false;
+	private int isValide=0; //0 1 2
 	private Entreprise entreprise;
+	private String commentaire;
 	private ArrayList<EtuPostStage> listPostulant = new ArrayList<EtuPostStage>();
 	public OffreStage() {
 		super();
 	}
     public OffreStage(int idOffreStage, String libelleOffre, String descriptifOffre, String domaineOffre,
-			String dureeOffre, String cheminOffre, boolean isValide, Entreprise entreprise,
+			String dureeOffre, String cheminOffre, int isValide, Entreprise entreprise,
 			ArrayList<EtuPostStage> listPostulant) {
 		super();
 		this.idOffreStage = idOffreStage;
@@ -30,11 +31,24 @@ public class OffreStage {
 		this.entreprise = entreprise;
 		this.listPostulant = listPostulant;
 	}
+	public int getIsValide() {
+		return isValide;
+	}
+	public void setIsValide(int isValide) {
+		this.isValide = isValide;
+	}
 	public String getDateDebut() {
 		return dateDebut;
 	}
 	public void setDateDebut(String dateDebut) {
 		this.dateDebut = dateDebut;
+	}
+	
+	public String getCommentaire() {
+		return commentaire;
+	}
+	public void setCommentaire(String commentaire) {
+		this.commentaire = commentaire;
 	}
 	public int getIdOffreStage() {
 		return idOffreStage;
@@ -54,7 +68,7 @@ public class OffreStage {
 	public String getCheminOffre() {
 		return cheminOffre;
 	}
-	public boolean isValide() {
+	public int isValide() {
 		return isValide;
 	}
 	public Entreprise getEntreprise() {
@@ -81,7 +95,7 @@ public class OffreStage {
 	public void setCheminOffre(String cheminOffre) {
 		this.cheminOffre = cheminOffre;
 	}
-	public void setValide(boolean isValide) {
+	public void setValide(int isValide) {
 		this.isValide = isValide;
 	}
 	public void setEntreprise(Entreprise entreprise) {
