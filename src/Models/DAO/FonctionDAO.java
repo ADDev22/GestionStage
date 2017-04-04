@@ -141,4 +141,9 @@ public class FonctionDAO implements DAO<Fonction>
             DBConnection.close(conn);
         }
     }
+
+    @Override
+    public Fonction findTypeUser(int utilisateurId) {
+        return null;
+    }
 }

@@ -78,6 +78,34 @@ public class UtilisateurDAO extends Utilisateur implements IAuthentification, DA
         return utilisateur;
     }
 
+    @Override
+    public Utilisateur find(String userName)
+    {
+        Connection conn = null;
+        PreparedStatement ps;
+        Utilisateur utilisateur = new Utilisateur();
+        String sql = "SELECT * FROM utilisateur WHERE pseudo = ?";
+
+        try {
+            conn = (Connection) DBConnection.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, userName);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next())
+            {
+                utilisateur = traitementLigne(rs);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            DBConnection.close(conn);
+        }
+
+        return utilisateur;
+    }
+
     //Methode insertion utilisateur
     @Override
     public Utilisateur create(Utilisateur utilisateur)
@@ -104,7 +132,10 @@ public class UtilisateurDAO extends Utilisateur implements IAuthentification, DA
 
         //Recuperation de l'id
         String sqlRecuperation = "SELECT MAX(id) AS id FROM utilisateur";
+<<<<<<< HEAD
 
+=======
+>>>>>>> 61d0e3918d7f6748ab4c7dc9efdc6bf7b118de8e
 
         try {
             conn = (Connection) DBConnection.getConnection();
@@ -170,6 +201,11 @@ public class UtilisateurDAO extends Utilisateur implements IAuthentification, DA
         }
 
         //return true;
+    }
+
+    @Override
+    public Utilisateur findTypeUser(int utilisateurId) {
+        return null;
     }
 
     //Traitement du resultat renvoyé par une requ�te --> correspodance avec un objet

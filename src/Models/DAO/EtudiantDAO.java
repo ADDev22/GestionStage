@@ -3,10 +3,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
+import Models.DBConnection;
 import Models.EtuPostStage;
 import Models.Etudiant;
 import Models.Utilisateur;
+import com.mysql.jdbc.Connection;
+
 public class EtudiantDAO implements DAO<Etudiant> {
 
 	public Etudiant create(Etudiant obj) {
@@ -40,9 +45,9 @@ public class EtudiantDAO implements DAO<Etudiant> {
 			}
 		return obj;
 				
-}
+	}
 
-public Etudiant find(int id) {
+	public Etudiant find(int id) {
 	  try {
 			PreparedStatement ps = connect.prepareStatement
 					   	("SELECT * FROM etudiant WHERE id = ?");
@@ -72,8 +77,8 @@ public Etudiant find(int id) {
 			e.printStackTrace();
 		}
 		   return null;
-}
-public Etudiant update(Etudiant obj) {
+	}
+	public Etudiant update(Etudiant obj) {
 	  try {
 		PreparedStatement ps = connect.prepareStatement
 					("UPDATE etudiant SET prenom = ?, nom =? , domEtude = ?, niveauEtude = ?,  mail = ?, tel = ? WHERE id = ?");
@@ -92,8 +97,8 @@ public Etudiant update(Etudiant obj) {
 		e.printStackTrace();
 	}
 	return obj;
-}
-public boolean delete(Etudiant obj) {
+	}
+	public boolean delete(Etudiant obj) {
     try {
 		PreparedStatement ps = connect.prepareStatement("DELETE FROM etudiant WHERE id = ?");
 				ps.setInt(1, obj.getIdEtudiant());
@@ -106,8 +111,42 @@ public boolean delete(Etudiant obj) {
 	
     }
     return false;
-  }
-public  void getAllMesCandidatures(Etudiant obj){
+  	}
+
+	@Override
+	public Etudiant findTypeUser(int utilisateurId) {
+		Connection conn = null;
+		PreparedStatement ps;
+		Etudiant et = new Etudiant();
+
+		try {
+			conn = (Connection) DBConnection.getConnection();
+			ps = conn.prepareStatement("SELECT * FROM etudiant WHERE idUtilisateur = ?");
+			ps.setInt(1, utilisateurId);
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next())
+			{
+				et.setId(rs.getInt("id"));
+				et.setNom(rs.getString("nom"));
+				et.setPrenom(rs.getString("prenom"));
+				et.setDomEtude(rs.getString("domEtude"));
+				et.setNivEtude(rs.getString("niveauEtude"));
+				et.setMail(rs.getString("mail"));
+				et.setTel(String.valueOf(rs.getInt("tel")));
+				et.setUtilisateurId(utilisateurId);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			DBConnection.close(conn);
+		}
+
+		return et;
+	}
+
+	public  void getAllMesCandidatures(Etudiant obj){
 	try {
 		PreparedStatement ps =connect.prepareStatement("SELECT * FROM candidature WHERE idEtudiant = ?");
 		ps.setInt(1, obj.getIdEtudiant());
@@ -127,5 +166,24 @@ public  void getAllMesCandidatures(Etudiant obj){
 		e.printStackTrace();
 	}
 
-}
+	}
+
+	//Méthode renvoyant un ResultSet pour l'affichage sous forme d'un table dans l'interface
+	public ResultSet listeEtudiants()
+	{
+		Connection conn = null;
+		String sql = "SELECT id, nom, prenom FROM etudiant";
+		ResultSet rs;
+		try
+		{
+			conn = (Connection) DBConnection.getConnection();
+			Statement s = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			rs = s.executeQuery(sql);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+
+		return rs;
+	}
 }

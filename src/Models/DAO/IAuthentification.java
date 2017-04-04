@@ -1,5 +1,9 @@
 package Models.DAO;
 
-public interface IAuthentification {
+import Models.Utilisateur;
+
+public interface IAuthentification
+{
 	public Boolean connexion(String userName, String mdp);
+	public Utilisateur find(String userName);
 }

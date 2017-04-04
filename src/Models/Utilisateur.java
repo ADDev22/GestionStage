@@ -3,7 +3,12 @@ package Models;
 public class Utilisateur
 {
 	//Déclaration
-	
+
+	/*Variables qui vont servir de session*/
+	private static int id;
+	private static String nom;
+	private static int droit;
+
 	protected int utilisateurId;
 	protected String utilisateurUserName;
 	protected String utilisateurMdp;
@@ -25,6 +30,12 @@ public class Utilisateur
 	}
 		
 	//Getter
+
+	public int getId() { return this.id; }
+
+	public String getNom() { return this.nom; }
+
+	public int getDroit() { return this.droit; }
 		
 	public int getUitilisateurId()
 	{
@@ -47,6 +58,12 @@ public class Utilisateur
 	}
 		
 	//Setter
+
+	public void setId(int id) { this.id = id; }
+
+	public void setNom(String nom) { this.nom = nom; }
+
+	public void setDroit(int droit) { this.droit = droit; }
 		
 	public void setUtilisateurId(int utilisateurId)
 	{

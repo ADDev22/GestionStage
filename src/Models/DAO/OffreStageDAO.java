@@ -5,9 +5,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+<<<<<<< HEAD
 import Models.Entreprise;
+=======
+import Models.DBConnection;
+>>>>>>> 61d0e3918d7f6748ab4c7dc9efdc6bf7b118de8e
 import Models.EtuPostStage;
 import Models.OffreStage;
+import com.mysql.jdbc.Connection;
+
 public class OffreStageDAO implements DAO<OffreStage> {
 
 	@Override
@@ -119,6 +125,12 @@ public class OffreStageDAO implements DAO<OffreStage> {
 		}
 		return false;
 	}
+
+	@Override
+	public OffreStage findTypeUser(int utilisateurId) {
+		return null;
+	}
+
 	public  void getAllPostulans(OffreStage obj){
 		try {
 			PreparedStatement ps =connect.prepareStatement("SELECT * FROM candidature WHERE idOffre = ?");
@@ -140,6 +152,7 @@ public class OffreStageDAO implements DAO<OffreStage> {
 			e.printStackTrace();
 		}
 	
+<<<<<<< HEAD
 }
 	public  ArrayList<OffreStage> getAllOffreStage(){
 		try {
@@ -196,5 +209,27 @@ public  ArrayList<OffreStage> getAllOffreStage(String domaine){
 	return null;
 
 }
+=======
+	}
+
+	//Méthode renvoyant un ResultSet pour l'affichage sous forme d'un table dans l'interface
+	public ResultSet listeOffres()
+	{
+		Connection conn = null;
+		String sql = "SELECT libelle, domaine, dateDebut FROM offre_stage";
+		ResultSet rs;
+		try
+		{
+			conn = (Connection) DBConnection.getConnection();
+			Statement s = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			rs = s.executeQuery(sql);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+
+		return rs;
+	}
+>>>>>>> 61d0e3918d7f6748ab4c7dc9efdc6bf7b118de8e
 }
 

@@ -99,6 +99,7 @@ public class EtuPostStageDAO implements DAO<EtuPostStage> {
 			}
 		return false;
 	}
+<<<<<<< HEAD
 	public EtuPostStage findWithOfEt(int idOf, int idEt) {
 		try {
 			PreparedStatement ps = connect.prepareStatement
@@ -125,5 +126,13 @@ public class EtuPostStageDAO implements DAO<EtuPostStage> {
 		   return null;
 	           
 	}
+=======
+
+	@Override
+	public EtuPostStage findTypeUser(int utilisateurId) {
+		return null;
+	}
+
+>>>>>>> 61d0e3918d7f6748ab4c7dc9efdc6bf7b118de8e
 
 }

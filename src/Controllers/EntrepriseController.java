@@ -1,5 +1,6 @@
 package Controllers;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -116,6 +117,20 @@ public class EntrepriseController {
 		}
 	}
 	public void suppEt(int row) // -> L'entrepise pour l'enlever dans le Modele ou BD lorsqu'un recrute ou Decline
+=======
+import Models.DAO.DAO;
+import Models.DAO.EntrepriseDAO;
+import Models.Entreprise;
+
+import javax.swing.*;
+
+public class EntrepriseController {
+	  
+	//Déclaration
+	DAO<Entreprise> DAO = new EntrepriseDAO();
+
+	public void deposeOffre()
+>>>>>>> 61d0e3918d7f6748ab4c7dc9efdc6bf7b118de8e
 	{
 		this.eTModel.removeRow(row);
 		//new EtuPostStageDAO().delete(eTModel.getListOf().get(row));
@@ -151,4 +166,13 @@ public class EntrepriseController {
 	}
 	
 
+	//Ajout d'une entreprise
+	public void insert(Entreprise e)
+	{
+		DAO.create(e);
+
+		//Affichage de la boite de dialogue
+		JOptionPane jOP = new JOptionPane();
+		jOP.showMessageDialog(null, "Enregistrement réussie", "Information", JOptionPane.INFORMATION_MESSAGE);
+	}
 }
