@@ -1,15 +1,17 @@
 package Controllers;
 
-<<<<<<< HEAD
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import Models.Entreprise;
 import Models.EtuPostStage;
 import Models.Etudiant;
 import Models.EtudiantModel;
 import Models.OffreEtuModel;
 import Models.OffreModel;
 import Models.OffreStage;
+import Models.DAO.EntrepriseDAO;
 import Models.DAO.EtuPostStageDAO;
 import Models.DAO.OffreStageDAO;
 import Views.Etudiant.EtudiantView;
@@ -84,36 +86,12 @@ public void recherche(String domaine)
 {
 	ofModel.loadOffre(new OffreStageDAO().getAllOffreStage(domaine));
 	}
-=======
-import Models.DAO.DAO;
-import Models.DAO.EtudiantDAO;
-import Models.Etudiant;
-
-import javax.swing.*;
-
-/**
- * Created by Allam on 24/03/2017.
- */
-public class EtudiantController
+public static  void insert(Entreprise e)
 {
-    //Déclaration
+	new EntrepriseDAO().create(e);
 
-    DAO<Etudiant> DAO = new EtudiantDAO();
-
-    /*//Constructeur
-
-    public EtudiantController(EtudiantDAO eDAO)
-    {
-        this.DAO = eDAO;
-    }*/
-
-    public void insert(Etudiant e)
-    {
-        DAO.create(e);
-
-        //Affichage de la boite de dialogue
-        JOptionPane jOP = new JOptionPane();
-        jOP.showMessageDialog(null, "Enregistrement réussie", "Information", JOptionPane.INFORMATION_MESSAGE);
-    }
->>>>>>> 61d0e3918d7f6748ab4c7dc9efdc6bf7b118de8e
+	//Affichage de la boite de dialogue
+	JOptionPane jOP = new JOptionPane();
+	jOP.showMessageDialog(null, "Enregistrement réussie", "Information", JOptionPane.INFORMATION_MESSAGE);
+}
 }

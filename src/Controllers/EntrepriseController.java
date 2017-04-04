@@ -1,6 +1,5 @@
 package Controllers;
 
-<<<<<<< HEAD
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -24,6 +23,14 @@ public class EntrepriseController {
 	private EtudiantModel eTModel;
 	private EntrepriseView entView;
 	private EntrepriseRecrtView etView;
+	public EntrepriseView getEntView() {
+		return entView;
+	}
+
+	public void setEntView(EntrepriseView entView) {
+		this.entView = entView;
+	}
+
 	public EntrepriseRecrtView getEtView() {
 		return etView;
 	}
@@ -117,38 +124,7 @@ public class EntrepriseController {
 		}
 	}
 	public void suppEt(int row) // -> L'entrepise pour l'enlever dans le Modele ou BD lorsqu'un recrute ou Decline
-=======
-import Models.DAO.DAO;
-import Models.DAO.EntrepriseDAO;
-import Models.Entreprise;
-
-import javax.swing.*;
-
-public class EntrepriseController {
-	  
-	//Déclaration
-	DAO<Entreprise> DAO = new EntrepriseDAO();
-
-	public void deposeOffre()
->>>>>>> 61d0e3918d7f6748ab4c7dc9efdc6bf7b118de8e
-	{
-		this.eTModel.removeRow(row);
-		//new EtuPostStageDAO().delete(eTModel.getListOf().get(row));
-	}
-	public EntrepriseView getEntView() {
-		return entView;
-	}
-
-	public void setEntView(EntrepriseView entView) {
-		this.entView = entView;
-	}
-
-	public void editer(int rowOf)
-	{
-		OffreStage of = this.ofModel.getListOf().get(rowOf);
-		of.setValide(0);
-		new OffreStageDAO().update(of);		
-	}
+	{}
 	public void recruter()
 	{	
 		ArrayList<Etudiant> listEt = new ArrayList<Etudiant>();
@@ -164,12 +140,9 @@ public class EntrepriseController {
 		new EntrepriseRecrtView(this).setVisible(true);
 		this.getEntView().setVisible(false);
 	}
-	
-
-	//Ajout d'une entreprise
-	public void insert(Entreprise e)
+	public static  void insert(Entreprise e)
 	{
-		DAO.create(e);
+		new EntrepriseDAO().create(e);
 
 		//Affichage de la boite de dialogue
 		JOptionPane jOP = new JOptionPane();
