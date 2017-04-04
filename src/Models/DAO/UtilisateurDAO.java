@@ -132,10 +132,6 @@ public class UtilisateurDAO extends Utilisateur implements IAuthentification, DA
 
         //Recuperation de l'id
         String sqlRecuperation = "SELECT MAX(id) AS id FROM utilisateur";
-<<<<<<< HEAD
-
-=======
->>>>>>> 61d0e3918d7f6748ab4c7dc9efdc6bf7b118de8e
 
         try {
             conn = (Connection) DBConnection.getConnection();

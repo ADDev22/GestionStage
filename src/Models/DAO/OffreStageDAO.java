@@ -5,11 +5,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-<<<<<<< HEAD
 import Models.Entreprise;
-=======
 import Models.DBConnection;
->>>>>>> 61d0e3918d7f6748ab4c7dc9efdc6bf7b118de8e
 import Models.EtuPostStage;
 import Models.OffreStage;
 import com.mysql.jdbc.Connection;
@@ -152,7 +149,7 @@ public class OffreStageDAO implements DAO<OffreStage> {
 			e.printStackTrace();
 		}
 	
-<<<<<<< HEAD
+
 }
 	public  ArrayList<OffreStage> getAllOffreStage(){
 		try {
@@ -209,8 +206,6 @@ public  ArrayList<OffreStage> getAllOffreStage(String domaine){
 	return null;
 
 }
-=======
-	}
 
 	//Méthode renvoyant un ResultSet pour l'affichage sous forme d'un table dans l'interface
 	public ResultSet listeOffres()
@@ -230,6 +225,5 @@ public  ArrayList<OffreStage> getAllOffreStage(String domaine){
 
 		return rs;
 	}
->>>>>>> 61d0e3918d7f6748ab4c7dc9efdc6bf7b118de8e
 }
 

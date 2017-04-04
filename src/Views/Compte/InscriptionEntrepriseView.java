@@ -77,7 +77,7 @@ public class InscriptionEntrepriseView extends JFrame
             entreprise.setTel(ftfTel.getText());
             entreprise.setSecteurActivite(tfSectAc.getText());
 
-            entController.insert(entreprise);
+            EntrepriseController.insert(entreprise);
         }
     }
 

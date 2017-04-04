@@ -176,7 +176,7 @@ public boolean delete(Entreprise obj) {
 		}
 	
 }
-<<<<<<< HEAD
+
 public  void getAllOffreStage(Entreprise obj,String domaine){
 	try {
 		PreparedStatement ps =connect.prepareStatement("SELECT * FROM offre_stage WHERE idEntreprise = ? && domaine =domaine");
@@ -203,7 +203,7 @@ public  void getAllOffreStage(Entreprise obj,String domaine){
 	}
 
 }
-=======
+
 
 	//Méthode renvoyant un ResultSet pour l'affichage sous forme d'un table dans l'interface
 	public ResultSet listeEntreprises()
@@ -223,5 +223,4 @@ public  void getAllOffreStage(Entreprise obj,String domaine){
 
 		return rs;
 	}
->>>>>>> 61d0e3918d7f6748ab4c7dc9efdc6bf7b118de8e
 }

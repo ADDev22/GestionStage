@@ -173,7 +173,7 @@ public class EntrepriseInscpView extends JFrame {
 				ent.setRaisonSociale(raisonSociale.getText());
 				ent.setAdresseVilleEnt(ville.getText());
 				ent.setAdresseRueEnt(rue.getText());
-				ent.setAdresseCodePostaleEnt(codePostale.getText());
+				//ent.setAdresseCodePostaleEnt(codePostale.getText());
 				ent.setMail(mail.getText());
 				ent.setTel(tel.getText());
 				ent.setSecteurActivite(secteur.getText());

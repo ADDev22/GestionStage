@@ -59,9 +59,9 @@ public class StatutInscriptionView extends JFrame
             }
             else
             {
-                EntrepriseController entrepriseController = new EntrepriseController();
-                InscriptionEntrepriseView inscriptionEntrepriseView = new InscriptionEntrepriseView(entrepriseController);
-                StatutInscriptionView.this.dispose();
+              //  EntrepriseController entrepriseController = new EntrepriseController();
+                //InscriptionEntrepriseView inscriptionEntrepriseView = new InscriptionEntrepriseView(entrepriseController);
+               // StatutInscriptionView.this.dispose();
             }
         }
     }
