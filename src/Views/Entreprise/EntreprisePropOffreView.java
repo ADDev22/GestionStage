@@ -171,6 +171,7 @@ public class EntreprisePropOffreView extends JFrame {
 				of.setDescriptifOffre(descripT.getText());
 				of.setDateDebut(dateDebutT.getText());
 				of.setDureeOffre(dureeT.getText());
+				of.setEntreprise(eCont.getE());
 		  
 				new OffreStageDAO().create(of);
 				

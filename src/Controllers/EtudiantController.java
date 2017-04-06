@@ -14,13 +14,13 @@ import Models.OffreModel;
 import Models.OffreStage;
 import Models.DAO.EntrepriseDAO;
 import Models.DAO.EtuPostStageDAO;
+import Models.DAO.EtudiantDAO;
 import Models.DAO.OffreStageDAO;
 import Views.Etudiant.EtudiantView;
 
 public class EtudiantController {
 private Etudiant et;
 private EtudiantView etView;
-private EtudiantModel etModel;
 private OffreEtuModel ofModel;
 
 public Etudiant getEt() {
@@ -37,21 +37,13 @@ public void setEtView(EtudiantView etView) {
 }
 public EtudiantController()
 {
-	
-	this.etModel = new EtudiantModel();
 	this.ofModel = new OffreEtuModel();
 	this.ofModel.loadOffre(new OffreStageDAO().getAllOffreStage());
 	this.etView =new EtudiantView(this);
 	
-	}
-public EtudiantModel getEtModel() {
-	return etModel;
 }
 public OffreEtuModel getOfModel() {
 	return ofModel;
-}
-public void setEtModel(EtudiantModel etModel) {
-	this.etModel = etModel;
 }
 public void setOfModel(OffreEtuModel ofModel) {
 	this.ofModel = ofModel;

@@ -9,8 +9,9 @@ public class OffreEtuModel extends AbstractTableModel {
 	     private String[] nomC = {"ENTREPISE","LIBELE","DATE DEBUT", "DUREE"};
 	     private ArrayList<String[]>  rows = new  ArrayList<String[]>();
 	     private ArrayList<OffreStage> listOf = new ArrayList<OffreStage>();
-	   
-
+	     
+	     public OffreEtuModel() {
+		}
 		@Override
 		public int getRowCount(){
 			return rows.size();
@@ -41,10 +42,14 @@ public class OffreEtuModel extends AbstractTableModel {
 		public void loadOffre(ArrayList<OffreStage> ofs)
 		{
 			rows = new  ArrayList<String[]>();
+			if(ofs ==null) {}
+			else
+			{
 			for(OffreStage of: ofs)
 			{
-				rows.add(new String[] {of.getEntreprise().getRaisonSociale(),  of.getLibelleOffre(), of.getDateDebut(),of.getDureeOffre()});
+                rows.add(new String[] {of.getEntreprise().getRaisonSociale(),  of.getLibelleOffre(), of.getDateDebut(),of.getDureeOffre()});
 		        listOf.add(of);	     	
+			}
 			}
 			fireTableChanged(null);
 		}

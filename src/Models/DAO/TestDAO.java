@@ -9,6 +9,8 @@ import Models.Fonction;
 import Models.OffreStage;
 import Views.Entreprise.EntrepriseInscView;
 import Views.Entreprise.EntrepriseView;
+import Views.Etudiant.EtudiantView;
+import sun.net.NetworkClient;
 
 public class TestDAO {
 
@@ -45,7 +47,7 @@ public class TestDAO {
 	                   //of.setDateDebut("020817"); of.setDescriptifOffre("PHP");of.setEntreprise(e1);of.setLibelleOffre("Dev");
 	                   //of.setDescriptifOffre("Dev en language en R");of.setDureeOffre("30 mois");
 	                   //ofDAO.create(of);  //Work !!!
-	                   new EntrepriseInscView();
+	                 //  new EntrepriseInscView();
                   // of.setDescriptifOffre("Blabla");of.setIdOffreStage(1);ofDAO.update(of); Work !!!
 	                  // System.out.println(ofDAO.find(1).getDateDebut()); Work !!!
 	                   //of.setIdOffreStage(1); ofDAO.delete(of); Work !!!
@@ -56,7 +58,10 @@ public class TestDAO {
 	                  //ofEtD.create(ofEt);
                    
 	                  //new EntrepriseInscView();
-	               //   new EntrepriseAccView().setVisible(true);
+		              EntrepriseController e = new EntrepriseController(e1);
+		              EtudiantController et = new EtudiantController();
+		              //new EtudiantView(et);
+	                  //new EntrepriseView(e).setVisible(true);
 		  //new EntrepriseView().setVisible(true);;
 	                  
 	                  
