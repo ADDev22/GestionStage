@@ -1,5 +1,6 @@
 package Models.DAO;
 
+import Controllers.AuthentificationController;
 import Controllers.EntrepriseController;
 import Controllers.EtudiantController;
 import Models.Entreprise;
@@ -7,6 +8,7 @@ import Models.EtuPostStage;
 import Models.Etudiant;
 import Models.Fonction;
 import Models.OffreStage;
+import Views.Compte.AuthentificationView;
 import Views.Entreprise.EntrepriseInscView;
 import Views.Entreprise.EntrepriseView;
 import Views.Etudiant.EtudiantView;
@@ -22,8 +24,8 @@ public class TestDAO {
 		e1.setUtilisateurUserName("Sanva");e1.setUtilisateurMdp("root");e1.setFonction(f1);
 		
 	 // Test EntrepriseDAO
-		  EntrepriseDAO e1DAO = new EntrepriseDAO();
-		        e1DAO.create(e1);  //Work !!!
+		 // EntrepriseDAO e1DAO = new EntrepriseDAO();
+		        //e1DAO.create(e1);  //Work !!!
 		    ///       System.out.println(e1.getIdEntreprise());
 		          //  Entreprise e1f= e1DAO.find(2); Work !!!  System.out.println(e1f.getRaisonSociale());
 		        // e1.setIdEntreprise(27);
@@ -58,11 +60,14 @@ public class TestDAO {
 	                  //ofEtD.create(ofEt);
                    
 	                  //new EntrepriseInscView();
-		              EntrepriseController e = new EntrepriseController(e1);
-		              EtudiantController et = new EtudiantController();
+		             // EntrepriseController e = new EntrepriseController(e1);
+		            //  EtudiantController et = new EtudiantController();
 		              //new EtudiantView(et);
 	                  //new EntrepriseView(e).setVisible(true);
 		  //new EntrepriseView().setVisible(true);;
+		     UtilisateurDAO uDAO = new UtilisateurDAO();
+		     AuthentificationController auC = new AuthentificationController(uDAO);
+		       AuthentificationView aVi = new AuthentificationView(auC);
 	                  
 	                  
 	}	                
