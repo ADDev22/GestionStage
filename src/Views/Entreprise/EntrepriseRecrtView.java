@@ -81,7 +81,7 @@ public class EntrepriseRecrtView extends JFrame {
 		lblRfrence.setHorizontalAlignment(SwingConstants.TRAILING);
 		panel.add(lblRfrence);
 		
-		JLabel id = new JLabel("");
+		final JLabel id = new JLabel("");
 		panel.add(id);
 		
 		JPanel panel_1 = new JPanel();
@@ -93,7 +93,7 @@ public class EntrepriseRecrtView extends JFrame {
 		JLabel lbl = new JLabel("Nom:");
 		panel_1.add(lbl);
 		
-		JLabel lbNom = new JLabel("");
+		final JLabel lbNom = new JLabel("");
 		panel_1.add(lbNom);
 		
 		JPanel panel_2 = new JPanel();
@@ -105,7 +105,7 @@ public class EntrepriseRecrtView extends JFrame {
 		JLabel lblNewLabel = new JLabel("Prenom:");
 		panel_2.add(lblNewLabel);
 		
-		JLabel lbPren = new JLabel("");
+		final JLabel lbPren = new JLabel("");
 		panel_2.add(lbPren);
 		
 		JPanel panel_4 = new JPanel();
@@ -128,7 +128,7 @@ public class EntrepriseRecrtView extends JFrame {
 		JLabel lblNewLabel_4 = new JLabel("Niveau:");
 		panel_3.add(lblNewLabel_4);
 		
-		JLabel lbNiv = new JLabel("");
+		final JLabel lbNiv = new JLabel("");
 		panel_3.add(lbNiv);
 		
 		JPanel panel_5 = new JPanel();
@@ -140,7 +140,7 @@ public class EntrepriseRecrtView extends JFrame {
 		JLabel lblNewLabel_6 = new JLabel("Mail:");
 		panel_5.add(lblNewLabel_6);
 		
-		JLabel lbMail = new JLabel("");
+		final JLabel lbMail = new JLabel("");
 		panel_5.add(lbMail);
 		
 		JPanel panel_6 = new JPanel();
@@ -152,7 +152,7 @@ public class EntrepriseRecrtView extends JFrame {
 		JLabel lblNewLabel_8 = new JLabel("Tel:");
 		panel_6.add(lblNewLabel_8);
 		
-		JLabel lbTel = new JLabel("");
+		final JLabel lbTel = new JLabel("");
 		panel_6.add(lbTel);
 		
 		JPanel panel_7 = new JPanel();
@@ -167,10 +167,10 @@ public class EntrepriseRecrtView extends JFrame {
 		JPanel panelRech = new JPanel();
 		contentPane.add(panelRech, BorderLayout.NORTH);
 		
-		JLabel lblDomaine = new JLabel("Niveau :");
+		final JLabel lblDomaine = new JLabel("Niveau :");
 		panelRech.add(lblDomaine);
 		
-		JComboBox<String> comboBox = new JComboBox<String>();
+		final JComboBox<String> comboBox = new JComboBox<String>();
 		         comboBox.addItem("BAC+1");
 		         comboBox.addItem("BAC+2");
 		         comboBox.addItem("BAC+3");

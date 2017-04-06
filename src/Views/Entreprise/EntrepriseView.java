@@ -56,7 +56,7 @@ public class EntrepriseView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public EntrepriseView(EntrepriseController eCont) {
+	public EntrepriseView(final EntrepriseController eCont) {
 		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		this.eCont = eCont;
 		eCont.setEntView(this);
@@ -87,7 +87,7 @@ public class EntrepriseView extends JFrame {
 		lblRfrence.setHorizontalAlignment(SwingConstants.TRAILING);
 		panel.add(lblRfrence);
 		
-		JLabel id = new JLabel("id");
+		final JLabel id = new JLabel("id");
 		panel.add(id);
 		
 		JPanel panel_1 = new JPanel();
@@ -99,7 +99,7 @@ public class EntrepriseView extends JFrame {
 		JLabel lblLibel = new JLabel("Libelé:");
 		panel_1.add(lblLibel);
 		
-		JLabel libele = new JLabel("libele");
+		final JLabel libele = new JLabel("libele");
 		panel_1.add(libele);
 		
 		JPanel panel_2 = new JPanel();
@@ -111,7 +111,7 @@ public class EntrepriseView extends JFrame {
 		JLabel lblNewLabel = new JLabel("Domaine:");
 		panel_2.add(lblNewLabel);
 		
-		JLabel domaine = new JLabel("");
+		final JLabel domaine = new JLabel("");
 		panel_2.add(domaine);
 		
 		JPanel panel_4 = new JPanel();
@@ -134,7 +134,7 @@ public class EntrepriseView extends JFrame {
 		JLabel lblNewLabel_4 = new JLabel("Date de debut:");
 		panel_3.add(lblNewLabel_4);
 		
-		JLabel dateDebut = new JLabel("");
+		final JLabel dateDebut = new JLabel("");
 		panel_3.add(dateDebut);
 		
 		JPanel panel_5 = new JPanel();
@@ -146,7 +146,7 @@ public class EntrepriseView extends JFrame {
 		JLabel lblNewLabel_6 = new JLabel("Durée:");
 		panel_5.add(lblNewLabel_6);
 		
-		JLabel duree = new JLabel("");
+		final JLabel duree = new JLabel("");
 		panel_5.add(duree);
 		
 		JPanel panel_6 = new JPanel();
@@ -158,7 +158,7 @@ public class EntrepriseView extends JFrame {
 		JLabel lblNewLabel_8 = new JLabel("Status:");
 		panel_6.add(lblNewLabel_8);
 		
-		JLabel isValide = new JLabel("");
+		final JLabel isValide = new JLabel("");
 		panel_6.add(isValide);
 		
 		JPanel panel_7 = new JPanel();
@@ -181,7 +181,7 @@ public class EntrepriseView extends JFrame {
 		JLabel lblDomaine = new JLabel("Domaine :");
 		panelRech.add(lblDomaine);
 		
-		JComboBox<String> comboBox = new JComboBox<String>();
+		final JComboBox<String> comboBox = new JComboBox<String>();
 		  comboBox.addItem("INFORMATIQUE");
 		  comboBox.addItem("ECONOMIE");
 		  comboBox.addItem("GESTION");
@@ -205,7 +205,7 @@ public class EntrepriseView extends JFrame {
 		contentPane.add(panelAct, BorderLayout.EAST);
 		panelAct.setLayout(new GridLayout(4, 1, 0, 0));
 		
-		JButton btnEditer = new JButton("EDITER");
+		final JButton btnEditer = new JButton("EDITER");
 		panelAct.add(btnEditer);
 		
 		JButton btnSupp = new JButton("SUPPRIMER");
@@ -232,7 +232,7 @@ public class EntrepriseView extends JFrame {
 			}
 		});
 		
-		JButton btnRecrt = new JButton("RECRUTER");
+		final JButton btnRecrt = new JButton("RECRUTER");
 		btnRecrt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//String status =(String)eCont.getOfModel().getValueAt(table.getSelectedRow(),2);

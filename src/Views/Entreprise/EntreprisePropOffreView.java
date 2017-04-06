@@ -43,8 +43,8 @@ public class EntreprisePropOffreView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public EntreprisePropOffreView(EntrepriseController eCont) {
-		OffreStage of =new OffreStage();
+	public EntreprisePropOffreView(final EntrepriseController eCont) {
+		final OffreStage of =new OffreStage();
 		of.setEntreprise(eCont.getE());
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -94,7 +94,7 @@ public class EntreprisePropOffreView extends JFrame {
 		JLabel lblDescriptif = new JLabel("Descriptif :");
 		domaine.add(lblDescriptif);
 		
-		JTextArea descripT = new JTextArea();
+		final JTextArea descripT = new JTextArea();
 		descripT.setColumns(15);
 		descripT.setRows(1);
 		
@@ -133,7 +133,7 @@ public class EntreprisePropOffreView extends JFrame {
 		JLabel chemin = new JLabel("Descriptif Complet :");
 		panel_7.add(chemin);
 		JFileChooser slF;
-		EntreprisePropOffreView v =this;
+		final EntreprisePropOffreView v =this;
 		JButton seletFichier = new JButton("Seletionner fichier");
 		seletFichier.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
