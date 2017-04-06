@@ -4,6 +4,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import Models.DAO.EtudiantDAO;
 import Models.Entreprise;
 import Models.EtuPostStage;
 import Models.Etudiant;
@@ -86,9 +87,9 @@ public void recherche(String domaine)
 {
 	ofModel.loadOffre(new OffreStageDAO().getAllOffreStage(domaine));
 	}
-public static  void insert(Entreprise e)
+public static  void insert(Etudiant e)
 {
-	new EntrepriseDAO().create(e);
+	new EtudiantDAO().create(e);
 
 	//Affichage de la boite de dialogue
 	JOptionPane jOP = new JOptionPane();
