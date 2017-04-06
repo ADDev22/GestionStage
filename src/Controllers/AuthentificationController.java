@@ -7,6 +7,9 @@ import Models.Etudiant;
 import Models.Utilisateur;
 import Views.Administrateur.AdministrateurAccueilView;
 import Views.Administrateur.ResultSetTableModel;
+import Views.Profil.ProfilEntrepriseView;
+import Views.Profil.ProfilEtudiantView;
+import Views.Profil.ProfilView;
 
 import javax.swing.*;
 
@@ -35,7 +38,13 @@ public class AuthentificationController
 			{
 				Administrateur admin = new Administrateur();
 				DAO<Administrateur> aDAO = new AdministrateurDAO();
-				admin = aDAO.findTypeUser(utilisateur.getUitilisateurId());
+				admin = (Administrateur) aDAO.findTypeUser(utilisateur.getUitilisateurId());
+
+				//Attribution des variables statiques qui vont servir de session
+				utilisateur.setId(admin.getUtilisateur().getUitilisateurId());
+				utilisateur.setIdU(admin.getAdminstrateurId());
+				utilisateur.setNom(admin.getAdministrateurNom() + " " + admin.getAdministrateurPrenom());
+				utilisateur.setDroit(admin.getUtilisateur().getFonction().getFonctionId());
 
 				//Affichage de la boite de dialogue
 				JOptionPane jOP = new JOptionPane();
@@ -50,13 +59,37 @@ public class AuthentificationController
 			{
 				Entreprise ent = new Entreprise();
 				DAO<Entreprise> eDAO = new EntrepriseDAO();
-				ent = eDAO.findTypeUser(utilisateur.getUitilisateurId());
+				ent = (Entreprise) eDAO.findTypeUser(utilisateur.getUitilisateurId());
+
+				//Attribution des variables statiques qui vont servir de session
+				utilisateur.setId(ent.getUitilisateurId());
+				utilisateur.setIdU(ent.getIdEntreprise());
+				utilisateur.setNom(ent.getRaisonSociale());
+				utilisateur.setDroit(2);
+
+				//Affichage de la boite de dialogue
+				JOptionPane jOP = new JOptionPane();
+				jOP.showMessageDialog(null, "Connexion réussie : " +ent.getRaisonSociale(), "Information", JOptionPane.INFORMATION_MESSAGE);
+
+				ProfilView profilView = new ProfilView(new ProfilEntrepriseView(ent).getpProfilEntreprise());
 			}
 			else
 			{
 				Etudiant et = new Etudiant();
 				DAO<Etudiant> eDAO = new EtudiantDAO();
-				et = eDAO.findTypeUser(utilisateur.getUitilisateurId());
+				et = (Etudiant) eDAO.findTypeUser(utilisateur.getUitilisateurId());
+
+				//Attribution des variables statiques qui vont servir de session
+				utilisateur.setId(et.getUitilisateurId());
+				utilisateur.setIdU(et.getIdEtudiant());
+				utilisateur.setNom(et.getNom() + " " + et.getPrenom());
+				utilisateur.setDroit(3);
+
+				//Affichage de la boite de dialogue
+				JOptionPane jOP = new JOptionPane();
+				jOP.showMessageDialog(null, "Connexion réussie : " + et.getNom() + " " + et.getPrenom(), "Information", JOptionPane.INFORMATION_MESSAGE);
+
+				ProfilView profilView = new ProfilView(new ProfilEtudiantView(et).getpProfilEtudiant());
 			}
 			return true;
 		}
