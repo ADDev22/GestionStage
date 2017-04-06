@@ -6,6 +6,7 @@ public class Utilisateur
 
 	/*Variables qui vont servir de session*/
 	private static int id;
+	private static int idU;
 	private static String nom;
 	private static int droit;
 
@@ -32,6 +33,8 @@ public class Utilisateur
 	//Getter
 
 	public int getId() { return this.id; }
+
+	public int getIdU() { return this.idU; }
 
 	public String getNom() { return this.nom; }
 
@@ -60,6 +63,8 @@ public class Utilisateur
 	//Setter
 
 	public void setId(int id) { this.id = id; }
+
+	public void setIdU(int idU) { this.idU = idU; }
 
 	public void setNom(String nom) { this.nom = nom; }
 
