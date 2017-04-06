@@ -195,13 +195,35 @@ public class UtilisateurDAO extends Utilisateur implements IAuthentification, DA
         } finally {
             DBConnection.close(conn);
         }
-
-        //return true;
     }
 
     @Override
     public Utilisateur findTypeUser(int utilisateurId) {
         return null;
+    }
+
+    //Méthode pour le changement d'un mot de passe
+    public boolean changementLoginMdp(String login, String mdp)
+    {
+        Connection conn = null;
+        PreparedStatement ps;
+        String sql = "UPDATE utilisateur SET pseudo = ?, mdp = ? WHERE id = ?";
+
+        try {
+            conn = (Connection) DBConnection.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, login);
+            ps.setString(2, mdp);
+            ps.setInt(3, new Utilisateur().getId());
+            ps.execute();
+            return true;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            DBConnection.close(conn);
+        }
     }
 
     //Traitement du resultat renvoyé par une requ�te --> correspodance avec un objet
