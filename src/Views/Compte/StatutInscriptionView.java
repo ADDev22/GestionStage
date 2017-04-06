@@ -53,15 +53,15 @@ public class StatutInscriptionView extends JFrame
         {
             if (cbStatut.getSelectedItem().equals("Etudiant"))
             {
-                EtudiantController etudiantController = new EtudiantController();
-                InscriptionEtudiantView inscriptionEtudiantView = new InscriptionEtudiantView(etudiantController);
+                //EtudiantController etudiantController = new EtudiantController();
+                InscriptionEtudiantView inscriptionEtudiantView = new InscriptionEtudiantView();
                 StatutInscriptionView.this.dispose();
             }
             else
             {
-              //  EntrepriseController entrepriseController = new EntrepriseController();
-                //InscriptionEntrepriseView inscriptionEntrepriseView = new InscriptionEntrepriseView(entrepriseController);
-               // StatutInscriptionView.this.dispose();
+                //EntrepriseController entrepriseController = new EntrepriseController();
+                InscriptionEntrepriseView inscriptionEntrepriseView = new InscriptionEntrepriseView();
+                StatutInscriptionView.this.dispose();
             }
         }
     }

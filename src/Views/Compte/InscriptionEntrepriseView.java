@@ -39,11 +39,12 @@ public class InscriptionEntrepriseView extends JFrame
     private JTextField tfSectAc;
 
     //Instation de notre objet controlleur
-    private EntrepriseController entController;
+    //private EntrepriseController entController;
 
-    public InscriptionEntrepriseView(EntrepriseController entrepriseController)
+    public InscriptionEntrepriseView()
     {
-        this.entController = entrepriseController;
+        //this.entController = entrepriseController;
+
         this.setTitle("Gestion Stage");
         this.setSize(500, 500);
         this.setContentPane(container);

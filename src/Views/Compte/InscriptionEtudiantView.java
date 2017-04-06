@@ -38,11 +38,11 @@ public class InscriptionEtudiantView extends JFrame
     private JPasswordField pfConfMdp;
 
     //Instanciation de notre objet contrôleur
-    private EtudiantController etController;
+    //private EtudiantController etController;
 
-    public InscriptionEtudiantView(EtudiantController etudiantController)
+    public InscriptionEtudiantView()
     {
-        this.etController = etudiantController;
+        //this.etController = etudiantController;
 
         this.setTitle("Gestion Stage");
         this.setSize(500, 500);
@@ -76,7 +76,7 @@ public class InscriptionEtudiantView extends JFrame
             etudiant.setMail(tfMail.getText());
             etudiant.setTel(ftfTel.getText());
 
-            etController.insert(etudiant);
+            EtudiantController.insert(etudiant);
         }
     }
 
