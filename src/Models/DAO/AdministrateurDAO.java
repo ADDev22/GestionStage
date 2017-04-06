@@ -96,6 +96,7 @@ public class AdministrateurDAO extends Administrateur implements DAO<Administrat
             ps.setString(8, admin.getAdressePays());
             ps.setString(9, admin.getAdministrateurMail());
             ps.setInt(10, admin.getAdministrateurTel());
+            ps.setInt(11, admin.getAdminstrateurId());
             ps.execute();
 
         } catch (Exception e) {
@@ -163,7 +164,7 @@ public class AdministrateurDAO extends Administrateur implements DAO<Administrat
     {
         Administrateur admin = new Administrateur();
         UtilisateurDAO uDAO = new UtilisateurDAO();
-        admin.setUtilisateurId(rs.getInt("id"));
+        admin.setAdministrateurId(rs.getInt("id"));
         admin.setAdministrateurNom(rs.getString("nom"));
         admin.setAdministrateurPrenom(rs.getString("prenom"));
         admin.setAdresseNoRue(rs.getInt("adresseNoRue"));

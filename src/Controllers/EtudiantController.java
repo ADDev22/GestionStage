@@ -4,6 +4,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import Models.DAO.EtudiantDAO;
 import Models.Entreprise;
 import Models.EtuPostStage;
 import Models.Etudiant;

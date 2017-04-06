@@ -1,10 +1,15 @@
 package Views.Administrateur;
 
 import Controllers.AdministrateurController;
-import Models.DAO.AdministrateurDAO;
-import Models.DAO.EntrepriseDAO;
-import Models.DAO.EtudiantDAO;
-import Models.DAO.OffreStageDAO;
+import Models.Administrateur;
+import Models.DAO.*;
+import Models.Entreprise;
+import Models.Etudiant;
+import Models.Utilisateur;
+import Views.Profil.ProfilAdministrateurView;
+import Views.Profil.ProfilEntrepriseView;
+import Views.Profil.ProfilEtudiantView;
+import Views.Profil.ProfilView;
 
 import javax.swing.*;
 import javax.swing.table.TableModel;
@@ -26,6 +31,11 @@ public class AdministrateurAccueilView extends JFrame
     private JPanel pContenu;
     private JTable tContenu;
     private JPanel pDetails;
+    private JMenuBar menuBar = new JMenuBar();
+    private JMenu menu = new JMenu("Fichier");
+    private JMenuItem sousMenu1 = new JMenuItem("Profil");
+    private JMenuItem sousMenu2 = new JMenuItem("Déconnexion");
+
 
     //Instanciation de notre objet contrôleur
     private AdministrateurController adminController;
@@ -42,6 +52,16 @@ public class AdministrateurAccueilView extends JFrame
         bListeOffres.addActionListener(new BListeOffresListener());
         bListeEntreprises.addActionListener(new BListeEntreprisesListener());
         bListeEtudiants.addActionListener(new BListeEtudiantsListener());
+        sousMenu1.addActionListener(new SousMenu1ActionListener());
+        sousMenu2.addActionListener(new SousMenu2ActionListener());
+
+        //Menu
+        menuBar.add(menu);
+        //Ajout des sous menus
+        menu.add(sousMenu1);
+        menu.add(sousMenu2);
+        //Définition à l'intérieur du panel
+        this.setJMenuBar(menuBar);
 
         //Traitement du tabeleau
         tContenu = new JTable(model);
@@ -85,6 +105,42 @@ public class AdministrateurAccueilView extends JFrame
             ResultSetTableModel etudiantRS = new ResultSetTableModel(new EtudiantDAO().listeEtudiants());
             AdministrateurAccueilView administrateurAccueilView = new AdministrateurAccueilView(administrateurController, etudiantRS);
             AdministrateurAccueilView.this.dispose();
+        }
+    }
+
+    class SousMenu1ActionListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            Utilisateur u = new Utilisateur();
+            if (u.getDroit() == 1)
+            {
+                Administrateur admin = new AdministrateurDAO().find(u.getIdU());
+                ProfilView profilView = new ProfilView(new ProfilAdministrateurView(admin).getpProfilAdministrateur());
+                AdministrateurAccueilView.this.dispose();
+            }
+            else if (u.getDroit() == 2)
+            {
+                Entreprise ent = new EntrepriseDAO().find(u.getIdU());
+                ProfilView profilView = new ProfilView(new ProfilEntrepriseView(ent).getpProfilEntreprise());
+                AdministrateurAccueilView.this.dispose();
+            }
+            else
+            {
+                Etudiant et = new EtudiantDAO().find(u.getIdU());
+                ProfilView profilView = new ProfilView(new ProfilEtudiantView(et).getpProfilEtudiant());
+                AdministrateurAccueilView.this.dispose();
+            }
+        }
+    }
+
+    class SousMenu2ActionListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+
         }
     }
 }
