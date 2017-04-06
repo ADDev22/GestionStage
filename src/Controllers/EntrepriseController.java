@@ -75,6 +75,7 @@ public class EntrepriseController {
   
 	public void rechercheOf(String domaine)
 	{   
+		ofModel.removeRowAll();
 		if(domaine=="")
 		{
 		  new EntrepriseDAO().getAllOffreStage(e);
@@ -87,6 +88,7 @@ public class EntrepriseController {
 	}
 	public void rechercheEt(String domaine)
 	{   
+		
 		if(domaine=="")
 		{
 		  new EntrepriseDAO().getAllOffreStage(e);
