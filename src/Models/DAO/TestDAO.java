@@ -60,14 +60,12 @@ public class TestDAO {
 	                  //ofEtD.create(ofEt);
                    
 	                  //new EntrepriseInscView();
-		             // EntrepriseController e = new EntrepriseController(e1);
-		            //  EtudiantController et = new EtudiantController();
+		              EntrepriseController e = new EntrepriseController(new EntrepriseDAO().find(3));
+		              //EtudiantController et = new EtudiantController();
 		              //new EtudiantView(et);
 	                  //new EntrepriseView(e).setVisible(true);
 		  //new EntrepriseView().setVisible(true);;
-		     UtilisateurDAO uDAO = new UtilisateurDAO();
-		     AuthentificationController auC = new AuthentificationController(uDAO);
-		       AuthentificationView aVi = new AuthentificationView(auC);
+		    
 	                  
 	                  
 	}	                
