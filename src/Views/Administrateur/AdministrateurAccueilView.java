@@ -1,11 +1,8 @@
 package Views.Administrateur;
 
 import Controllers.AdministrateurController;
-import Models.Administrateur;
+import Models.*;
 import Models.DAO.*;
-import Models.Entreprise;
-import Models.Etudiant;
-import Models.Utilisateur;
 import Views.Profil.ProfilAdministrateurView;
 import Views.Profil.ProfilEntrepriseView;
 import Views.Profil.ProfilEtudiantView;
@@ -16,6 +13,8 @@ import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 /**
  * Created by Allam on 26/03/2017.
@@ -67,6 +66,46 @@ public class AdministrateurAccueilView extends JFrame
         tContenu = new JTable(model);
         tContenu.setLayout(new BorderLayout());
         pContenu.add(new JScrollPane(tContenu), BorderLayout.CENTER);
+
+        tContenu.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                String valeurId = String.valueOf(tContenu.getModel().getValueAt(tContenu.getSelectedRow(), tContenu.getSelectedColumn()));
+                OffreStage os = new OffreStageDAO().find(Integer.valueOf(valeurId));
+                DetailsOffreView detailsOffreView = new DetailsOffreView(os);
+                pDetails = detailsOffreView.getpDetailsOffre();
+
+                AdministrateurAccueilView.this.getContentPane().removeAll();
+
+                AdministrateurAccueilView.this.pDetails.updateUI();
+                AdministrateurAccueilView.this.pDetails.revalidate();
+                AdministrateurAccueilView.this.getContentPane().revalidate();
+                //AdministrateurAccueilView.this.setContentPane(container);
+                AdministrateurAccueilView.this.getContentPane().repaint();
+                AdministrateurAccueilView.this.setVisible(true);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
 
         this.pack();
         this.setVisible(true);
