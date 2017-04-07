@@ -68,9 +68,9 @@ public class OffreModel extends AbstractTableModel {
 	 }
 	public void removeRowAll()
 	{
-		for(int i=0; i< rows.size()-1; i++)
-			removeRow(i);
-		fireTableRowsDeleted(0, rows.size()-1);
+		rows.clear();
+		listOf.clear();
+		fireTableChanged(null);
 	}
   
 }

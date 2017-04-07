@@ -1,7 +1,6 @@
 package Models.DAO;
 
-import Controllers.AuthentificationController;
-import Controllers.EntrepriseController;
+import Controllers.EntrepriseController; 
 import Controllers.EtudiantController;
 import Models.Entreprise;
 import Models.EtuPostStage;
@@ -12,17 +11,16 @@ import Views.Compte.AuthentificationView;
 import Views.Entreprise.EntrepriseInscView;
 import Views.Entreprise.EntrepriseView;
 import Views.Etudiant.EtudiantView;
-import sun.net.NetworkClient;
 
 public class TestDAO {
 
 	public static void main(String[] args) {		// TODO Auto-generated method stub
 	Fonction f1 =new Fonction(); f1.setFonctionId(2); f1.setFonctionNom("Entreprise");
-		Entreprise e1 = new  Entreprise(); e1.setRaisonSociale("ORANGE");
+		Entreprise e1 = new  Entreprise(); e1.setRaisonSociale("ORANGE"); e1.setIdEntreprise(3);
 		e1.setMail("org@mail.com");e1.setAdresseCodePostaleEnt(75000);e1.setAdresseRueEnt("322");e1.setTel("06545444");e1.setAdresseVilleEnt("PARIS");
 		e1.setSecteurActivite("INFO");
 		e1.setUtilisateurUserName("Sanva");e1.setUtilisateurMdp("root");e1.setFonction(f1);
-		
+		EntrepriseController e = new EntrepriseController(e1);
 	 // Test EntrepriseDAO
 		 // EntrepriseDAO e1DAO = new EntrepriseDAO();
 		        //e1DAO.create(e1);  //Work !!!
@@ -60,16 +58,14 @@ public class TestDAO {
 	                  //ofEtD.create(ofEt);
                    
 	                  //new EntrepriseInscView();
-		             // EntrepriseController e = new EntrepriseController(e1);
-		            //  EtudiantController et = new EtudiantController();
+		            
+		             //EtudiantController et = new EtudiantController();
 		              //new EtudiantView(et);
 	                  //new EntrepriseView(e).setVisible(true);
 		  //new EntrepriseView().setVisible(true);;
-		     UtilisateurDAO uDAO = new UtilisateurDAO();
-		     AuthentificationController auC = new AuthentificationController(uDAO);
-		       AuthentificationView aVi = new AuthentificationView(auC);
-	                  
-	                  
+		     //UtilisateurDAO uDAO = new UtilisateurDAO();
+		     //AuthentificationController auC = new AuthentificationController(uDAO);
+		       //AuthentificationView aVi = new AuthentificationView(auC);
 	}	                
 
 }
