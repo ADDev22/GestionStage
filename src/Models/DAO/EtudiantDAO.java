@@ -127,7 +127,7 @@ public class EtudiantDAO implements DAO<Etudiant> {
 
 			if (rs.next())
 			{
-				et.setId(rs.getInt("id"));
+				et.setIdEtudiant(rs.getInt("id"));
 				et.setNom(rs.getString("nom"));
 				et.setPrenom(rs.getString("prenom"));
 				et.setDomEtude(rs.getString("domEtude"));

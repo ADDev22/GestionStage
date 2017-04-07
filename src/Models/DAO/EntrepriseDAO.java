@@ -130,7 +130,7 @@ public boolean delete(Entreprise obj) {
 
 			if (rs.next())
 			{
-				ent.setId(rs.getInt("id"));
+				ent.setIdEntreprise(rs.getInt("id"));
 				ent.setRaisonSociale(rs.getString("raisonSociale"));
 				ent.setAdresseVilleEnt(rs.getString("adresseVille"));
 				ent.setAdresseRueEnt(rs.getString("adresseRue"));

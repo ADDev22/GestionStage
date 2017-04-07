@@ -69,7 +69,11 @@ public class AuthentificationController
 
 				//Affichage de la boite de dialogue
 				JOptionPane jOP = new JOptionPane();
-				jOP.showMessageDialog(null, "Connexion réussie : " +ent.getRaisonSociale(), "Information", JOptionPane.INFORMATION_MESSAGE);
+				jOP.showMessageDialog(null, "Connexion réussie : " +ent.getIdEntreprise(), "Information", JOptionPane.INFORMATION_MESSAGE);
+
+				//Affichage de la boite de dialogue
+				JOptionPane OP = new JOptionPane();
+				OP.showMessageDialog(null, "Connexion réussie : " +ent.getRaisonSociale(), "Information", JOptionPane.INFORMATION_MESSAGE);
 
 				//ProfilView profilView = new ProfilView(new ProfilEntrepriseView(ent).getpProfilEntreprise());
 				EntrepriseController entrepriseController = new EntrepriseController(ent);

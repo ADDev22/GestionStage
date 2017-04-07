@@ -211,7 +211,7 @@ public  ArrayList<OffreStage> getAllOffreStage(String domaine){
 	public ResultSet listeOffres()
 	{
 		Connection conn = null;
-		String sql = "SELECT libelle, domaine, dateDebut FROM offre_stage";
+		String sql = "SELECT id, libelle, domaine, dateDebut FROM offre_stage";
 		ResultSet rs;
 		try
 		{
