@@ -178,6 +178,33 @@ public class OffreStageDAO implements DAO<OffreStage> {
 		return null;
 	
 }
+public  ArrayList<OffreStage> getAllOffreStagePourEt(){
+	try {
+		ArrayList<OffreStage> listOf = new ArrayList<OffreStage>();
+		PreparedStatement ps =connect.prepareStatement("SELECT * FROM offre_stage WHERE valide = 1");
+		ResultSet rs = ps.executeQuery();
+		while(rs.next())
+		{   OffreStage of =new OffreStage();
+			     of.setIdOffreStage(rs.getInt("id"));
+			     of.setDescriptifOffre(rs.getString("descriptif"));
+			     of.setDomaineOffre(rs.getString("domaine"));
+			     of.setLibelleOffre(rs.getString("libelle"));
+			     of.setDureeOffre(rs.getString("duree"));
+			     of.setValide(rs.getInt("valide"));
+			     of.setCheminOffre(rs.getString("cheminStockage"));
+			     of.setCommentaire(rs.getString("commentaire"));
+			     of.setEntreprise(new EntrepriseDAO().find(rs.getInt("idEntreprise")));     
+			     listOf.add(of);
+		}
+		return listOf;
+		
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return null;
+
+}
 public  ArrayList<OffreStage> getAllOffreStage(String domaine){
 	try {
 		ArrayList<OffreStage> listOf = new ArrayList<OffreStage>();
