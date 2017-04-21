@@ -35,8 +35,8 @@ public void setEt(Etudiant et) {
 public void setEtView(EtudiantView etView) {
 	this.etView = etView;
 }
-public EtudiantController()
-{
+public EtudiantController(Etudiant e)
+{   this.et=e;
 	this.ofModel = new OffreEtuModel();
 	this.ofModel.loadOffre(new OffreStageDAO().getAllOffreStage());
 	this.etView =new EtudiantView(this);
