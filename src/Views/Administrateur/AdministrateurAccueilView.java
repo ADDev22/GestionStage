@@ -49,7 +49,8 @@ public class AdministrateurAccueilView extends JFrame
     private JButton bValider;
     private JButton bAnnuler;
     private JButton bModifier;
-    private JLabel lFiltrer;
+    private JComboBox cbFiltre;
+    private JButton bFiltrer;
     private JMenuBar menuBar = new JMenuBar();
     private JMenu menu = new JMenu("Fichier");
     private JMenuItem sousMenu1 = new JMenuItem("Profil");
@@ -70,6 +71,7 @@ public class AdministrateurAccueilView extends JFrame
 
         pDetailsOffre.setVisible(false);
 
+        bFiltrer.addActionListener(new BFiltrerListener());
         bListeOffres.addActionListener(new BListeOffresListener());
         bListeEntreprises.addActionListener(new BListeEntreprisesListener());
         bListeEtudiants.addActionListener(new BListeEtudiantsListener());
@@ -151,6 +153,29 @@ public class AdministrateurAccueilView extends JFrame
 
         this.pack();
         this.setVisible(true);
+    }
+
+    class BFiltrerListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            AdministrateurDAO administrateurDAO = new AdministrateurDAO();
+            AdministrateurController administrateurController = new AdministrateurController(administrateurDAO);
+
+            int isValide;
+            String motCle = cbFiltre.getSelectedItem().toString();
+            if (motCle.equals("En Attente"))
+                isValide = 0;
+            else if (motCle.equals("Validée"))
+                isValide = 1;
+            else
+                isValide = 2;
+
+            ResultSetTableModel offresRS = new ResultSetTableModel(new OffreStageDAO().listeOffres(isValide));
+            AdministrateurAccueilView administrateurAccueilView = new AdministrateurAccueilView(administrateurController, offresRS);
+            AdministrateurAccueilView.this.dispose();
+        }
     }
 
     class BListeOffresListener implements ActionListener
