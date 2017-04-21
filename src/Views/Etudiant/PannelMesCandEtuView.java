@@ -14,9 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PannelMesCandEtuView extends JPanel {
-   private CandModel candModel = new CandModel();
-   
-   EtudiantController et;
+    EtudiantController et;
 
 	public EtudiantController getEt() {
 		return et;
@@ -42,7 +40,7 @@ public class PannelMesCandEtuView extends JPanel {
 		JPanel panLisCand = new JPanel();
 		add(panLisCand, BorderLayout.CENTER);
 		
-	    JTable table = new JTable(candModel);
+	    JTable table = new JTable(et.getEtCand());
 		JScrollPane scrollPane = new JScrollPane(table);
 		panLisCand.add(scrollPane);
 		
