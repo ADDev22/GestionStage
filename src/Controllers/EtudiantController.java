@@ -28,12 +28,6 @@ private CandModel etCand;
 public Etudiant getEt() {
 	return et;
 }
-public CandModel getEtCand() {
-	return etCand;
-}
-public void setEtCand(CandModel etCand) {
-	this.etCand = etCand;
-}
 public EtudiantView getEtView() {
 	return etView;
 }
@@ -43,12 +37,19 @@ public void setEt(Etudiant et) {
 public void setEtView(EtudiantView etView) {
 	this.etView = etView;
 }
+public CandModel getEtCand() {
+	return etCand;
+}
+public void setEtCand(CandModel etCand) {
+	this.etCand = etCand;
+}
 public EtudiantController(Etudiant e)
 {   this.et=e;
     this.etCand = new CandModel();
+    new EtudiantDAO().getAllMesCandidatures(et); // ->recup lis de mes cand
     this.etCand.loadCand(et.getListStagePostule());
 	this.ofModel = new OffreEtuModel();
-	this.ofModel.loadOffre(new OffreStageDAO().getAllOffreStage());
+	this.ofModel.loadOffre(new OffreStageDAO().getAllOffreStagePourEt());
 	this.etView =new EtudiantView(this);
 	
 }
