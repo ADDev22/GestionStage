@@ -43,8 +43,8 @@ public class EtuPostStageDAO implements DAO<EtuPostStage> {
 		try {
 			PreparedStatement ps = connect.prepareStatement
 					   ("INSERT INTO candidature(idOffre,idEtudiant,dateCandidature)   VALUES(?,?,?)");
-			            ps.setInt(1, obj.getEtudiant().getIdEtudiant());
-			            ps.setInt(2, obj.getOffre().getIdOffreStage());
+			            ps.setInt(1, obj.getOffre().getIdOffreStage());
+			            ps.setInt(2, obj.getEtudiant().getIdEtudiant());
 			            ps.setDate(3, (Date) obj.getDatePostule());
 			            ps.executeUpdate();
 			            ps.close();
