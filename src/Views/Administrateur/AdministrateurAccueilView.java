@@ -30,6 +30,26 @@ public class AdministrateurAccueilView extends JFrame
     private JPanel pContenu;
     private JTable tContenu;
     private JPanel pDetails;
+    private JPanel pDetailsOffre;
+    private JLabel lId;
+    private JTextField tfId;
+    private JLabel lLibelle;
+    private JTextField tfLibelle;
+    private JLabel lDomaine;
+    private JTextField tfDomaine;
+    private JLabel lDescriptif;
+    private JTextArea taDescriptif;
+    private JLabel lDateDebut;
+    private JTextField tfDateDebut;
+    private JLabel lDuree;
+    private JTextField tfDuree;
+    private JLabel lValide;
+    private JComboBox cbValide;
+    private JPanel pBouttonsValidation;
+    private JButton bValider;
+    private JButton bAnnuler;
+    private JButton bModifier;
+    private JLabel lFiltrer;
     private JMenuBar menuBar = new JMenuBar();
     private JMenu menu = new JMenu("Fichier");
     private JMenuItem sousMenu1 = new JMenuItem("Profil");
@@ -48,11 +68,17 @@ public class AdministrateurAccueilView extends JFrame
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
 
+        pDetailsOffre.setVisible(false);
+
         bListeOffres.addActionListener(new BListeOffresListener());
         bListeEntreprises.addActionListener(new BListeEntreprisesListener());
         bListeEtudiants.addActionListener(new BListeEtudiantsListener());
         sousMenu1.addActionListener(new SousMenu1ActionListener());
         sousMenu2.addActionListener(new SousMenu2ActionListener());
+
+        bValider.addActionListener(new BValiderListener());
+        bAnnuler.addActionListener(new BAnnulerListener());
+        bModifier.addActionListener(new BModifierListener());
 
         //Menu
         menuBar.add(menu);
@@ -71,9 +97,25 @@ public class AdministrateurAccueilView extends JFrame
             @Override
             public void mouseClicked(MouseEvent e)
             {
+                pDetailsOffre.setVisible(true);
                 String valeurId = String.valueOf(tContenu.getModel().getValueAt(tContenu.getSelectedRow(), tContenu.getSelectedColumn()));
                 OffreStage os = new OffreStageDAO().find(Integer.valueOf(valeurId));
-                DetailsOffreView detailsOffreView = new DetailsOffreView(os);
+
+                tfId.setText(String.valueOf(os.getIdOffreStage()));
+                tfLibelle.setText(os.getLibelleOffre());
+                tfDomaine.setText(os.getDomaineOffre());
+                taDescriptif.setText(os.getDescriptifOffre());
+                tfDateDebut.setText(os.getDateDebut());
+                tfDuree.setText(os.getDureeOffre());
+                int validite = os.getIsValide();
+                if (validite == 0)
+                    cbValide.setSelectedItem("En Attente");
+                else if (validite == 1)
+                    cbValide.setSelectedItem("Acceptée");
+                else
+                    cbValide.setSelectedItem("Declinée");
+
+                /*DetailsOffreView detailsOffreView = new DetailsOffreView(os);
                 pDetails = detailsOffreView.getpDetailsOffre();
 
                 AdministrateurAccueilView.this.getContentPane().removeAll();
@@ -83,7 +125,7 @@ public class AdministrateurAccueilView extends JFrame
                 AdministrateurAccueilView.this.getContentPane().revalidate();
                 //AdministrateurAccueilView.this.setContentPane(container);
                 AdministrateurAccueilView.this.getContentPane().repaint();
-                AdministrateurAccueilView.this.setVisible(true);
+                AdministrateurAccueilView.this.setVisible(true);*/
             }
 
             @Override
@@ -180,6 +222,58 @@ public class AdministrateurAccueilView extends JFrame
         public void actionPerformed(ActionEvent e)
         {
 
+        }
+    }
+
+    class BValiderListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            OffreStage os = new OffreStage();
+            OffreStageDAO osDAO = new OffreStageDAO();
+
+            os.setIdOffreStage(Integer.valueOf(tfId.getText()));
+            os.setLibelleOffre(tfLibelle.getText());
+            os.setDomaineOffre(tfDomaine.getText());
+            os.setDescriptifOffre(taDescriptif.getText());
+            os.setDateDebut(tfDateDebut.getText());
+            os.setDureeOffre(tfDuree.getText());
+            if (cbValide.getSelectedItem().toString().equals("En Attente"))
+                os.setIsValide(0);
+            else if (cbValide.getSelectedItem().toString().equals("Validée"))
+                os.setIsValide(1);
+            else
+                os.setIsValide(2);
+
+            osDAO.update(os);
+
+            cbValide.setEnabled(false);
+            bValider.setEnabled(false);
+            bAnnuler.setEnabled(false);
+        }
+    }
+
+    class BAnnulerListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            cbValide.setEnabled(false);
+            bValider.setEnabled(false);
+            bAnnuler.setEnabled(false);
+        }
+    }
+
+    class BModifierListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            bValider.setEnabled(true);
+            bAnnuler.setEnabled(true);
+            cbValide.setEditable(false);
+            cbValide.setEnabled(true);
         }
     }
 }
