@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import Models.DAO.EtudiantDAO;
+import Models.CandModel;
 import Models.Entreprise;
 import Models.EtuPostStage;
 import Models.Etudiant;
@@ -22,6 +23,7 @@ public class EtudiantController {
 private Etudiant et;
 private EtudiantView etView;
 private OffreEtuModel ofModel;
+private CandModel etCand;
 
 public Etudiant getEt() {
 	return et;
@@ -37,6 +39,8 @@ public void setEtView(EtudiantView etView) {
 }
 public EtudiantController(Etudiant e)
 {   this.et=e;
+    this.etCand = new CandModel();
+    this.etCand.loadCand(e.getListStagePostule());
 	this.ofModel = new OffreEtuModel();
 	this.ofModel.loadOffre(new OffreStageDAO().getAllOffreStage());
 	this.etView =new EtudiantView(this);
