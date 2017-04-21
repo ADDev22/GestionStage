@@ -76,7 +76,7 @@ public class EntrepriseController {
 	public void rechercheOf(String domaine)
 	{   
 		ofModel.removeRowAll();
-		if(domaine=="")
+		if(domaine=="AUTRES")
 		{
 		  new EntrepriseDAO().getAllOffreStage(e);
 		}
@@ -116,14 +116,13 @@ public class EntrepriseController {
 	}
 	public void suppOf(int row)
 	{
-		this.ofModel.removeRow(row);
-		new OffreStageDAO().delete(ofModel.getListOf().get(row));
-		this.ofModel.getListOf().remove(row);
-		new OffreStageDAO().delete(offreSelec);
 		if(JOptionPane.showConfirmDialog(null, "L'offre sera supprimé definitivement dans notre base de donnée Voulez vous supprimer ?")==JOptionPane.YES_OPTION)
 		{
-			new OffreStageDAO().delete(offreSelec);	
+			new OffreStageDAO().delete(offreSelec);
+			this.ofModel.removeRow(row);
+			this.ofModel.getListOf().remove(row);
 		}
+		
 	}
 	public void suppEt(int row) // -> L'entrepise pour l'enlever dans le Modele ou BD lorsqu'un recrute ou Decline
 	{}

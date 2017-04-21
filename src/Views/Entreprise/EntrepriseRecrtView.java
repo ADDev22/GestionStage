@@ -320,6 +320,9 @@ public class EntrepriseRecrtView extends JFrame {
 			}
 		} );
 	
+		setSize(1090,595);
+		setResizable(false);
+		setVisible(true); 
 	}
 
 }
