@@ -154,7 +154,7 @@ public class EtudiantDAO implements DAO<Etudiant> {
 		while(rs.next())
 		{   EtuPostStage of =new EtuPostStage();
 			     of.setIdEtuPostStage(rs.getInt("id"));
-			     of.setOffre(new OffreStageDAO().find(rs.getInt("idEtudiant")));
+			     of.setOffre(new OffreStageDAO().find(rs.getInt("idOffre")));
 			     of.setEtudiant(obj);
 			     of.setDatePostule(rs.getDate("dateCandidature"));
 			     obj.addStagePostule(of);	     
