@@ -225,5 +225,26 @@ public  ArrayList<OffreStage> getAllOffreStage(String domaine){
 
 		return rs;
 	}
+
+	//Méthode renvoyant un ResultSet pour l'affichage sous forme d'un table dans l'interface avec un filtre
+	public ResultSet listeOffres(int isValide)
+	{
+		Connection conn = null;
+		PreparedStatement ps;
+		String sql = "SELECT id, libelle, domaine, dateDebut FROM offre_stage WHERE isValide = ?";
+		ResultSet rs;
+		try
+		{
+			conn = (Connection) DBConnection.getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, isValide);
+			rs = ps.executeQuery(sql);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+
+		return rs;
+	}
 }
 
