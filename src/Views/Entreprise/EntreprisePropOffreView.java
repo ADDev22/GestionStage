@@ -27,12 +27,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JDialog;
 import java.awt.BorderLayout;
+import javax.swing.JComboBox;
 
 public class EntreprisePropOffreView extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField libelele;
-	private JTextField domaineT;
 	private JTextField dateDebutT;
 	private JTextField dureeT;
 
@@ -83,9 +83,17 @@ public class EntreprisePropOffreView extends JFrame {
 		JLabel lblNewLabel_1 = new JLabel("Domaine :");
 		panel_3.add(lblNewLabel_1);
 		
-		domaineT = new JTextField();
-		panel_3.add(domaineT);
-		domaineT.setColumns(10);
+		JComboBox<String> comboBox = new JComboBox<String>(); 
+		  comboBox.addItem("INFORMATIQUE");
+		  comboBox.addItem("ECONOMIE");
+		  comboBox.addItem("GESTION");
+		  comboBox.addItem("DROIT");
+		  comboBox.addItem("FINANCE");
+		  comboBox.addItem("AERONAUTIQUE");
+		  comboBox.addItem("ELECTRONIQUE");
+		  comboBox.addItem("AUTRES");
+		
+		panel_3.add(comboBox);
 		
 		JPanel domaine = new JPanel();
 		contentPane.add(domaine);
@@ -96,7 +104,7 @@ public class EntreprisePropOffreView extends JFrame {
 		
 		final JTextArea descripT = new JTextArea();
 		descripT.setColumns(15);
-		descripT.setRows(1);
+		descripT.setRows(6);
 		
 		JScrollPane scrollPane = new JScrollPane(descripT);
 		domaine.add(scrollPane);
@@ -167,7 +175,7 @@ public class EntreprisePropOffreView extends JFrame {
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				of.setLibelleOffre(libelele.getText());
-				of.setDomaineOffre(domaineT.getText());
+				of.setDomaineOffre(comboBox.getSelectedItem().toString());
 				of.setDescriptifOffre(descripT.getText());
 				of.setDateDebut(dateDebutT.getText());
 				of.setDureeOffre(dureeT.getText());
@@ -180,7 +188,9 @@ public class EntreprisePropOffreView extends JFrame {
 			}
 		});
 		panel.add(btnOk);
-	setVisible(true);
+		setSize(1090,595);
+		setResizable(false);
+		setVisible(true); 
 	
 	}
 

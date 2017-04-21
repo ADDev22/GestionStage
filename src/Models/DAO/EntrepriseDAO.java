@@ -152,6 +152,7 @@ public boolean delete(Entreprise obj) {
 
 	public  void getAllOffreStage(Entreprise obj){
 		try {
+			obj.getListOfOffreSTage().clear();
 			PreparedStatement ps =connect.prepareStatement("SELECT * FROM offre_stage WHERE idEntreprise = ?");
 			ps.setInt(1, obj.getIdEntreprise());
 			ResultSet rs = ps.executeQuery();
@@ -179,8 +180,10 @@ public boolean delete(Entreprise obj) {
 
 public  void getAllOffreStage(Entreprise obj,String domaine){
 	try {
-		PreparedStatement ps =connect.prepareStatement("SELECT * FROM offre_stage WHERE idEntreprise = ? && domaine =domaine");
+		obj.getListOfOffreSTage().clear(); // Pcq on pas la liste au niveau du modele si on ne le vide la contiendra les anciens
+		PreparedStatement ps =connect.prepareStatement("SELECT * FROM offre_stage WHERE idEntreprise = ? && domaine = ?");
 		ps.setInt(1, obj.getIdEntreprise());
+		ps.setString(2, domaine);
 		ResultSet rs = ps.executeQuery();
 		while(rs.next())
 		{   OffreStage of =new OffreStage();

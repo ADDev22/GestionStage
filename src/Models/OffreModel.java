@@ -43,6 +43,7 @@ public class OffreModel extends AbstractTableModel {
 	{
 		String status="";
 		rows = new  ArrayList<String[]>();
+		fireTableChanged(null);
 		for(OffreStage of: ofs)
 		{
 			switch(of.getIsValide())
@@ -58,7 +59,7 @@ public class OffreModel extends AbstractTableModel {
 				break;
 			}
 			rows.add(new String[] {of.getLibelleOffre(),of.getDateDebut(),status});
-	        listOf.add(of);	     	
+	        listOf.add(of);	 
 		}
 		fireTableChanged(null);
 	}
@@ -68,7 +69,7 @@ public class OffreModel extends AbstractTableModel {
 	 }
 	public void removeRowAll()
 	{
-		rows.clear();
+		rows.removeAll(rows);
 		listOf.clear();
 		fireTableChanged(null);
 	}

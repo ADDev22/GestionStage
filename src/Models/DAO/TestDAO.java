@@ -20,7 +20,7 @@ public class TestDAO {
 		e1.setMail("org@mail.com");e1.setAdresseCodePostaleEnt(75000);e1.setAdresseRueEnt("322");e1.setTel("06545444");e1.setAdresseVilleEnt("PARIS");
 		e1.setSecteurActivite("INFO");
 		e1.setUtilisateurUserName("Sanva");e1.setUtilisateurMdp("root");e1.setFonction(f1);
-		EntrepriseController e = new EntrepriseController(e1);
+       EntrepriseController e = new EntrepriseController(e1);
 	 // Test EntrepriseDAO
 		 // EntrepriseDAO e1DAO = new EntrepriseDAO();
 		        //e1DAO.create(e1);  //Work !!!

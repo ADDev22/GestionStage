@@ -197,6 +197,8 @@ public class EntrepriseView extends JFrame {
 		btnRecherche.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				eCont.rechercheOf((String)comboBox.getSelectedItem());
+				eCont.getOfModel().fireTableChanged(null);
+			    
 			}
 		});
 		panelRech.add(btnRecherche);
@@ -267,13 +269,14 @@ public class EntrepriseView extends JFrame {
 			id.setText(String.valueOf(of.getIdOffreStage()));
 			libele.setText(of.getLibelleOffre());
 			domaine.setText(of.getDomaineOffre());
+			descriptif.setText(of.getDescriptifOffre());
 		    dateDebut.setText(of.getDateDebut());
 		    duree.setText(of.getDureeOffre());
 		    isValide.setText(String.valueOf(of.isValide()));
-		    if(of.isValide()==0 & of.isValide()==2)
+		    if(of.isValide()==0 | of.isValide()==2)
 		    {
-		    	btnRecrt.setVisible(false);
-		    	btnEditer.setVisible(false);
+		    	btnRecrt.setEnabled(false);
+		    	btnEditer.setEnabled(false);
 		    }
 		    }
 		});
@@ -296,7 +299,9 @@ public class EntrepriseView extends JFrame {
 				//new EntrepriseRecrtView(eCont).setVisible(true);;
 				
 			}
-		});
+		}); 
+		setSize(1090,595);
+		setResizable(false);
 		setVisible(true); 
 	}
 	
