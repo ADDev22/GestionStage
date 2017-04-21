@@ -231,14 +231,14 @@ public  ArrayList<OffreStage> getAllOffreStage(String domaine){
 	{
 		Connection conn = null;
 		PreparedStatement ps;
-		String sql = "SELECT id, libelle, domaine, dateDebut FROM offre_stage WHERE isValide = ?";
+		String sql = "SELECT id, libelle, domaine, dateDebut FROM offre_stage WHERE valide = ?";
 		ResultSet rs;
 		try
 		{
 			conn = (Connection) DBConnection.getConnection();
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, isValide);
-			rs = ps.executeQuery(sql);
+			rs = ps.executeQuery();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
