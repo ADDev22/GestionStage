@@ -68,10 +68,6 @@ public class AuthentificationController
 				utilisateur.setDroit(2);
 
 				//Affichage de la boite de dialogue
-				JOptionPane jOP = new JOptionPane();
-				jOP.showMessageDialog(null, "Connexion réussie : " +ent.getIdEntreprise(), "Information", JOptionPane.INFORMATION_MESSAGE);
-
-				//Affichage de la boite de dialogue
 				JOptionPane OP = new JOptionPane();
 				OP.showMessageDialog(null, "Connexion réussie : " +ent.getRaisonSociale(), "Information", JOptionPane.INFORMATION_MESSAGE);
 
@@ -94,7 +90,8 @@ public class AuthentificationController
 				JOptionPane jOP = new JOptionPane();
 				jOP.showMessageDialog(null, "Connexion réussie : " + et.getNom() + " " + et.getPrenom(), "Information", JOptionPane.INFORMATION_MESSAGE);
 
-				ProfilView profilView = new ProfilView(new ProfilEtudiantView(et).getpProfilEtudiant());
+				//ProfilView profilView = new ProfilView(new ProfilEtudiantView(et).getpProfilEtudiant());
+				EtudiantController etudiantController = new EtudiantController(et);
 			}
 			return true;
 		}
