@@ -103,7 +103,8 @@ public class EntrepriseController {
 	}
 	public void deconnexion()
 	{
-		
+	  etView.dispose();
+	  
 	}
 	public void ajouter()
 	{
