@@ -307,10 +307,7 @@ public class EntrepriseView extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Rediriger vers fen Connex
-				//eCont.getEntView().setVisible(false);
-				//new EntrepriseRecrtView(eCont).setVisible(true);;
-				
+				eCont.deconnexion();
 			}
 		}); 
 		setSize(1090,595);
