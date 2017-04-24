@@ -74,6 +74,14 @@ public class PannelOffreEtuView extends JPanel {
 		panel.add(lblDomaine);
 		
 		final JComboBox <String>comboBox = new JComboBox<String>();
+		 comboBox.addItem("INFORMATIQUE");
+		  comboBox.addItem("ECONOMIE");
+		  comboBox.addItem("GESTION");
+		  comboBox.addItem("DROIT");
+		  comboBox.addItem("FINANCE");
+		  comboBox.addItem("AERONAUTIQUE");
+		  comboBox.addItem("ELECTRONIQUE");
+		  comboBox.addItem("AUTRES");
 		        comboBox.setSelectedItem("INFORMATIQUE");
 		panel.add(comboBox);
 		
@@ -102,6 +110,7 @@ public class PannelOffreEtuView extends JPanel {
 		JPanel panDesc = new JPanel();
 		panelEst.add(panDesc);
 		final JLabel desc = new JLabel();
+		desc.setText("Description de l'offre");
 		panDesc.setLayout(new GridLayout(1, 1, 0, 0));
 		JScrollPane scrollPane_1 = new JScrollPane(desc);
 		panDesc.add(scrollPane_1);

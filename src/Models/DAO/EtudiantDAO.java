@@ -64,6 +64,7 @@ public class EtudiantDAO implements DAO<Etudiant> {
 						e.setTel(result.getString("tel"));
 						e.setDomEtude(result.getString("domEtude"));
 				        e.setUtilisateurId(result.getInt("idUtilisateur"));
+				        e.setCv(result.getString("cv"));
 				        ps.close();
 				        UtilisateurDAO uDAO = new UtilisateurDAO();
 				        Utilisateur u = uDAO.find(e.getUitilisateurId());
@@ -81,14 +82,15 @@ public class EtudiantDAO implements DAO<Etudiant> {
 	public Etudiant update(Etudiant obj) {
 	  try {
 		PreparedStatement ps = connect.prepareStatement
-					("UPDATE etudiant SET prenom = ?, nom =? , domEtude = ?, niveauEtude = ?,  mail = ?, tel = ? WHERE id = ?");
+					("UPDATE etudiant SET prenom = ?, nom =? , domEtude = ?, niveauEtude = ?,  mail = ?, tel = ?, cv = ? WHERE id = ?");
 					ps.setString(1, obj.getPrenom());
 			        ps.setString(2, obj.getNom());
 			        ps.setString(3, obj.getDomEtude());
 			        ps.setString(4, obj.getNivEtude());
 			        ps.setString(5, obj.getMail());
 			        ps.setString(6, obj.getTel());
-			        ps.setInt(7, obj.getIdEtudiant());
+			        ps.setString(7, obj.getCv());
+			        ps.setInt(8, obj.getIdEtudiant());
 			        ps.executeUpdate();
 			        ps.close();
 	} catch (SQLException e) {
@@ -151,12 +153,13 @@ public class EtudiantDAO implements DAO<Etudiant> {
 		PreparedStatement ps =connect.prepareStatement("SELECT * FROM candidature WHERE idEtudiant = ?");
 		ps.setInt(1, obj.getIdEtudiant());
 		ResultSet rs = ps.executeQuery();
+		obj.getListStagePostule().clear();
 		while(rs.next())
 		{   EtuPostStage of =new EtuPostStage();
 			     of.setIdEtuPostStage(rs.getInt("id"));
 			     of.setOffre(new OffreStageDAO().find(rs.getInt("idOffre")));
 			     of.setEtudiant(obj);
-			     of.setDatePostule(rs.getDate("dateCandidature"));
+			     of.setDatePostule(rs.getString("dateCandidature"));
 			     obj.addStagePostule(of);	     
 		}
 		

@@ -14,6 +14,7 @@ import Models.DAO.EntrepriseDAO;
 import Models.DAO.EtuPostStageDAO;
 import Models.DAO.EtudiantDAO;
 import Models.DAO.OffreStageDAO;
+import Views.Entreprise.EntrepriseModifOffre;
 import Views.Entreprise.EntreprisePropOffreView;
 import Views.Entreprise.EntrepriseRecrtView;
 import Views.Entreprise.EntrepriseView;
@@ -140,6 +141,11 @@ public class EntrepriseController {
 		eTModel.loadEtud(listEt);
 		new EntrepriseRecrtView(this).setVisible(true);
 		this.getEntView().setVisible(false);
+	}
+	public void modifierOffre()
+	{
+		new EntrepriseModifOffre(this);
+		
 	}
 	public static  void insert(Entreprise e)
 	{

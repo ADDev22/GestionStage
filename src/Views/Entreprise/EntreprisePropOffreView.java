@@ -11,6 +11,7 @@ import com.sun.java.swing.plaf.windows.WindowsBorders.ProgressBarBorder;
 
 import Controllers.EntrepriseController;
 import Models.OffreStage;
+import Models.DAO.EtudiantDAO;
 import Models.DAO.OffreStageDAO;
 
 import java.awt.GridLayout;
@@ -46,7 +47,7 @@ public class EntreprisePropOffreView extends JFrame {
 	public EntreprisePropOffreView(final EntrepriseController eCont) {
 		final OffreStage of =new OffreStage();
 		of.setEntreprise(eCont.getE());
-		
+		JFrame f =this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -140,16 +141,15 @@ public class EntreprisePropOffreView extends JFrame {
 		
 		JLabel chemin = new JLabel("Descriptif Complet :");
 		panel_7.add(chemin);
-		JFileChooser slF;
 		final EntreprisePropOffreView v =this;
 		JButton seletFichier = new JButton("Seletionner fichier");
 		seletFichier.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFileChooser slF = new JFileChooser();
-				if(slF.showOpenDialog(v)==JFileChooser.APPROVE_OPTION)
-				{
-				//of.setCheminOffre(slF.getSelectedFile());
-				}
+			
+				JFileChooser choix = new JFileChooser();
+				int retour=choix.showOpenDialog(f);
+				if(retour==JFileChooser.APPROVE_OPTION);
+				   of.setCheminOffre(choix.getSelectedFile().getAbsolutePath());				
 			}	
 		});
 		panel_7.add(seletFichier);
