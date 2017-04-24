@@ -53,7 +53,7 @@ public EtudiantController(Etudiant e)
     new EtudiantDAO().getAllMesCandidatures(et); // ->recup lis de mes cand
     this.etCand.loadCand(et.getListStagePostule());
 	this.ofModel = new OffreEtuModel();
-	this.ofModel.loadOffre(new OffreStageDAO().getAllOffreStagePourEt());
+	this.ofModel.loadOffre(new OffreStageDAO().getAllOffreStagePourEt("A"));
 	this.etView =new EtudiantView(this);
 	
 }
@@ -114,7 +114,7 @@ public void visualiser(OffreStage of)
 }
 public void recherche(String domaine)
 {
-	ofModel.loadOffre(new OffreStageDAO().getAllOffreStage(domaine));
+	ofModel.loadOffre(new OffreStageDAO().getAllOffreStagePourEt(domaine));
 	}
 public static  void insert(Etudiant e)
 {

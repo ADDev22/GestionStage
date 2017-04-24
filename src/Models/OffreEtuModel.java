@@ -40,8 +40,10 @@ public class OffreEtuModel extends AbstractTableModel {
 			      return rows.get(rowIndex)[columnIndex];
 		}
 		public void loadOffre(ArrayList<OffreStage> ofs)
-		{
+		{   
+			listOf.clear();
 			rows = new  ArrayList<String[]>();
+			
 			if(ofs ==null) {}
 			else
 			{

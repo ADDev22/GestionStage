@@ -7,11 +7,11 @@ import java.sql.SQLException;
 
 public class DBConnection {
 	private static DBConnection instance;
-    private String url="jdbc:mysql://a2server:3306/";
+    private String url="jdbc:mysql://localhost:8889/";
     private String dbName = "gestion_stage";
     private String driver = "com.mysql.jdbc.Driver";
-    private String login="a2lam";
-    private String pass="Ad001234";
+    private String login="BDPrStage";
+    private String pass="";
 
     private DBConnection(){
 

@@ -40,7 +40,7 @@ public class OffreModel extends AbstractTableModel {
 		      return rows.get(rowIndex)[columnIndex];
 	}
 	public void loadOffre(ArrayList<OffreStage> ofs)
-	{
+	{   
 		String status="";
 		rows = new  ArrayList<String[]>();
 		fireTableChanged(null);

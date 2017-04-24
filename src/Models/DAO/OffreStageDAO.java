@@ -180,10 +180,11 @@ public class OffreStageDAO implements DAO<OffreStage> {
 		return null;
 	
 }
-public  ArrayList<OffreStage> getAllOffreStagePourEt(){
+public  ArrayList<OffreStage> getAllOffreStagePourEt(String domaine){
 	try {
 		ArrayList<OffreStage> listOf = new ArrayList<OffreStage>();
-		PreparedStatement ps =connect.prepareStatement("SELECT * FROM offre_stage WHERE valide = 1");
+		PreparedStatement ps =connect.prepareStatement("SELECT * FROM offre_stage WHERE valide = 1 AND domaine = ?");
+		ps.setString(1, domaine);
 		ResultSet rs = ps.executeQuery();
 		while(rs.next())
 		{   OffreStage of =new OffreStage();
