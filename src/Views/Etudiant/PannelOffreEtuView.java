@@ -157,6 +157,14 @@ public class PannelOffreEtuView extends JPanel {
 		
 		JButton btnDecon = new JButton("Deconnexion");
 		panelSud.add(btnDecon);
+		btnDecon.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+		      
+				
+			}
+		});
 		
 		// Evt
 		table.addMouseListener(new MouseAdapter() {
