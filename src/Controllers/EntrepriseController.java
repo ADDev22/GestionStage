@@ -105,7 +105,7 @@ public class EntrepriseController {
 	}
 	public void deconnexion()
 	{
-	  etView.dispose();
+	  entView.dispose();
 	   /*Fentre Authentification*/
       UtilisateurDAO uDAO = new UtilisateurDAO();
       AuthentificationController authController = new AuthentificationController(uDAO);

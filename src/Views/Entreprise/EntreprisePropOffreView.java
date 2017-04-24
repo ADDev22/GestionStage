@@ -47,13 +47,8 @@ public class EntreprisePropOffreView extends JFrame {
 	public EntreprisePropOffreView(final EntrepriseController eCont) {
 		final OffreStage of =new OffreStage();
 		of.setEntreprise(eCont.getE());
-<<<<<<< HEAD
 		final JFrame f =this;
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-=======
-		JFrame f =this;
 		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
->>>>>>> f573feab440e539e91120a8464f1c16141109db8
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
