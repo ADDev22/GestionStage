@@ -20,7 +20,9 @@ import Models.DAO.EntrepriseDAO;
 import Models.DAO.EtuPostStageDAO;
 import Models.DAO.EtudiantDAO;
 import Models.DAO.OffreStageDAO;
+import Models.DAO.UtilisateurDAO;
 import Views.LecteurPDF;
+import Views.Compte.AuthentificationView;
 import Views.Etudiant.EtudiantView;
 
 public class EtudiantController {
@@ -115,6 +117,13 @@ public void visualiser(OffreStage of)
 public void recherche(String domaine)
 {
 	ofModel.loadOffre(new OffreStageDAO().getAllOffreStagePourEt(domaine));
+	}
+public void deconnexion()
+{  etView.dispose();
+/*Fentre Authentification*/
+UtilisateurDAO uDAO = new UtilisateurDAO();
+AuthentificationController authController = new AuthentificationController(uDAO);
+AuthentificationView authentificationView = new AuthentificationView(authController);
 	}
 public static  void insert(Etudiant e)
 {

@@ -58,6 +58,7 @@ public class EntrepriseView extends JFrame {
 	 */
 	public EntrepriseView(final EntrepriseController eCont) {
 		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		this.setTitle("ACCUEIL");
 		this.eCont = eCont;
 		eCont.setEntView(this);
 		
@@ -286,11 +287,13 @@ public class EntrepriseView extends JFrame {
 		    dateDebut.setText(of.getDateDebut());
 		    duree.setText(of.getDureeOffre());
 		    isValide.setText(String.valueOf(of.isValide()));
-		    if(of.isValide()==0 | of.isValide()==2)
+		    if(of.isValide()==1)
+            btnRecrt.setEnabled(true);
+		    else
 		    {
 		    	btnRecrt.setEnabled(false);
-		    	//btnEditer.setEnabled(false);
 		    }
+		    
 		    }
 		});
 		JScrollPane  js = new JScrollPane(table);

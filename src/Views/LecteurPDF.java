@@ -21,7 +21,7 @@ public class LecteurPDF extends JFrame {
 	        viewer.activate();
 	        setSize(1024,768);
 	        setLocationRelativeTo(null);
-	        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	        setVisible(true);
 	        getContentPane().add(p);
 	    }

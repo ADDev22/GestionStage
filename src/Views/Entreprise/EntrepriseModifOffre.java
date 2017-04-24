@@ -49,6 +49,7 @@ package Views.Entreprise;
 			final OffreStage of =new OffreStage();
 			of.setEntreprise(eCont.getE());
 			JFrame f =this;
+			this.setTitle("MODIFICATION OFFRE");
 			this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 			setBounds(100, 100, 450, 300);
 			contentPane = new JPanel();
