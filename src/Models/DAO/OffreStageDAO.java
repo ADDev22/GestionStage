@@ -31,6 +31,7 @@ public class OffreStageDAO implements DAO<OffreStage> {
 							st.setValide(result.getInt("valide"));
 							st.setIdOffreStage(result.getInt("id"));
 							st.setDateDebut(result.getString("dateDebut"));
+							st.setEntreprise(new EntrepriseDAO().find(result.getInt("idEntreprise")));;
 							ps.close();
 							return st; // Peut etre on doit recuperer la liste des postulant , je ne prefere car lourd.
 							}
@@ -77,7 +78,7 @@ public class OffreStageDAO implements DAO<OffreStage> {
 	public OffreStage update(OffreStage obj) {
 		try {
 			PreparedStatement ps = connect.prepareStatement
-						("UPDATE offre_stage SET libelle = ?, domaine =? , descriptif = ? , dateDebut = ?,duree= ?, cheminStockage = ?, valide = ?, commentaire =? WHERE id = ?");
+						("UPDATE offre_stage SET libelle = ?, domaine =? , descriptif = ? , dateDebut = ?,duree= ?, cheminStockage = ?, valide = ?, commentaire =?, idEntreprise = ? WHERE id = ?");
 						ps.setString(1, obj.getLibelleOffre());
 				        ps.setString(2, obj.getDomaineOffre());
 				        ps.setString(3, obj.getDescriptifOffre());
@@ -86,7 +87,8 @@ public class OffreStageDAO implements DAO<OffreStage> {
 				        ps.setString(6, obj.getCheminOffre());
 				        ps.setInt(7, obj.isValide());
 				        ps.setString(8, obj.getCommentaire());
-				        ps.setInt(9, obj.getIdOffreStage());
+				        ps.setInt(9, obj.getEntreprise().getIdEntreprise());
+				        ps.setInt(10, obj.getIdOffreStage());
 				
 				        
 				        ps.executeUpdate();
@@ -138,7 +140,7 @@ public class OffreStageDAO implements DAO<OffreStage> {
 				     of.setIdEtuPostStage(rs.getInt("id"));
 				     of.setEtudiant(new EtudiantDAO().find(rs.getInt("idEtudiant")));
 				     of.setOffre(obj);
-				     of.setDatePostule(rs.getDate("dateCandidature"));
+				     of.setDatePostule(rs.getString("dateCandidature"));
 				     of.setIsAccept(rs.getInt("isAccept"));
 				     obj.addPostulant(of);	     
 			}

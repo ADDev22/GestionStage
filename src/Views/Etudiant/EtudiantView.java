@@ -50,7 +50,9 @@ public class EtudiantView extends JFrame {
 		 onglets.addTab("Offres", ongletOf);
 		 onglets.add("Mes Candidatures", ongletCand);
 		 getContentPane().add(onglets);
-		 this.setVisible(true);
+			setSize(1090,595);
+			setResizable(false);
+			setVisible(true); 
 	}
 
 }

@@ -23,7 +23,7 @@ public class EtuPostStageDAO implements DAO<EtuPostStage> {
 						EtuPostStage  etPos = new EtuPostStage();
 						idOf=result.getInt("idOffre");
 						idEt=result.getInt("idEtudiant");
-						etPos.setDatePostule(result.getDate("dateCandidature"));
+						etPos.setDatePostule(result.getString("dateCandidature"));
 						etPos.setIsAccept(result.getInt("isAccept"));
 					    etPos.setEtudiant(new EtudiantDAO().find(idEt));
 					    etPos.setOffre(new OffreStageDAO().find(idOf));
@@ -45,7 +45,7 @@ public class EtuPostStageDAO implements DAO<EtuPostStage> {
 					   ("INSERT INTO candidature(idOffre,idEtudiant,dateCandidature)   VALUES(?,?,?)");
 			            ps.setInt(1, obj.getOffre().getIdOffreStage());
 			            ps.setInt(2, obj.getEtudiant().getIdEtudiant());
-			            ps.setDate(3, (Date) obj.getDatePostule());
+			            ps.setString(3, obj.getDatePostule());
 			            ps.executeUpdate();
 			            ps.close();
 			        
@@ -72,7 +72,7 @@ public class EtuPostStageDAO implements DAO<EtuPostStage> {
 						("UPDATE candidature SET idOffre = ?, idEtudiant =? , dateCandidature = ?, isAccept =?  WHERE id = ?");
 						ps.setInt(1, obj.getOffre().getIdOffreStage());
 				        ps.setInt(2, obj.getEtudiant().getIdEtudiant());
-				        ps.setDate(3, (Date) obj.getDatePostule());
+				        ps.setString(3, obj.getDatePostule());
 				        ps.setInt(4, obj.getIsAccept());
 				        ps.setInt(5, obj.getIdEtuPostStage());
 				        ps.executeUpdate();
@@ -112,7 +112,7 @@ public class EtuPostStageDAO implements DAO<EtuPostStage> {
 						EtuPostStage  etPos = new EtuPostStage();
 						idOf=result.getInt("idOffre");
 						idEt=result.getInt("idEtudiant");
-						etPos.setDatePostule(result.getDate("dateCandidature"));
+						etPos.setDatePostule(result.getString("dateCandidature"));
 						etPos.setIsAccept(result.getInt("isAccept"));
 					    etPos.setEtudiant(new EtudiantDAO().find(idEt));
 					    etPos.setOffre(new OffreStageDAO().find(idOf));

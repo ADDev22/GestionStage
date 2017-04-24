@@ -41,7 +41,11 @@ public class CandModel extends AbstractTableModel{
 		      return rows.get(rowIndex)[columnIndex];
 	}
 	public void loadCand(ArrayList<EtuPostStage> cands)
-	{   
+	{     listCand.clear();
+		if(cands.isEmpty())
+	     {}
+	     else
+	     { 	 
 		String status="";
 		rows = new  ArrayList<String[]>();
 		for(EtuPostStage cand: cands)
@@ -62,6 +66,7 @@ public class CandModel extends AbstractTableModel{
 					cand.getOffre().getDomaineOffre(), String.valueOf(cand.getDatePostule()),status});
 	        listCand.add(cand);	     	
 		}
+	     }
 		fireTableChanged(null);
 	}
 	public void removeRow(int rowIndex) {

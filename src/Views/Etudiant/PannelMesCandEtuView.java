@@ -8,6 +8,8 @@ import javax.swing.JTable;
 
 import Controllers.EtudiantController;
 import Models.CandModel;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -48,7 +50,7 @@ public class PannelMesCandEtuView extends JPanel {
 		add(panel_1, BorderLayout.SOUTH);
 		panel_1.setLayout(new GridLayout(1, 2, 0, 0));
 		
-		JButton btnCV = new JButton("Mettre mon CV");
+		JButton btnCV = new JButton("Mettre mon CV", new ImageIcon("cv.jpeg"));
 		panel_1.add(btnCV);
 		btnCV.addActionListener(new ActionListener() {
 			

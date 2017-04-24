@@ -6,7 +6,7 @@ public class EtuPostStage {
 	private int idEtuPostStage;
 	private Etudiant etudiant;
 	private OffreStage offre;
-	Date datePostule;
+	private String datePostule;
 	private int isAccept;
 	public int getIsAccept() {
 		return isAccept;
@@ -18,7 +18,7 @@ public class EtuPostStage {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public EtuPostStage(int idEtuPostStage, Etudiant etudiant, OffreStage offre, Date datePostule) {
+	public EtuPostStage(int idEtuPostStage, Etudiant etudiant, OffreStage offre, String datePostule) {
 		super();
 		this.idEtuPostStage = idEtuPostStage;
 		this.etudiant = etudiant;
@@ -34,7 +34,7 @@ public class EtuPostStage {
 	public OffreStage getOffre() {
 		return offre;
 	}
-	public Date getDatePostule() {
+	public String getDatePostule() {
 		return datePostule;
 	}
 	public void setIdEtuPostStage(int idEtuPostStage) {
@@ -46,7 +46,7 @@ public class EtuPostStage {
 	public void setOffre(OffreStage offre) {
 		this.offre = offre;
 	}
-	public void setDatePostule(Date datePostule) {
+	public void setDatePostule(String datePostule) {
 		this.datePostule = datePostule;
 	}
 	

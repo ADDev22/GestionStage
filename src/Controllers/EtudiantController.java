@@ -1,5 +1,8 @@
 package Controllers;
 
+import java.util.Date;
+import java.text.SimpleDateFormat;
+
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -17,6 +20,7 @@ import Models.DAO.EntrepriseDAO;
 import Models.DAO.EtuPostStageDAO;
 import Models.DAO.EtudiantDAO;
 import Models.DAO.OffreStageDAO;
+import Views.LecteurPDF;
 import Views.Etudiant.EtudiantView;
 
 public class EtudiantController {
@@ -61,11 +65,24 @@ public void setOfModel(OffreEtuModel ofModel) {
 }
 public void postuler(OffreStage of)
 { 
+	for(EtuPostStage pos : etCand.getListCand())
+	{
+      if(pos.getOffre().getIdOffreStage()==of.getIdOffreStage())
+      {
+    		JOptionPane.showMessageDialog(null, "Vous avez deja postulé pour cette offre", "Information", JOptionPane.INFORMATION_MESSAGE);
+    		return;
+      }
+	}
 	EtuPostStage cand = new EtuPostStage();
 	cand.setEtudiant(et);
 	cand.setOffre(of);
-	//cand.setDatePostule(datePostule);
+	Date aujourdhui = new Date();
+	SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
+	cand.setDatePostule(formater.format(aujourdhui).toString());
 	new EtuPostStageDAO().create(cand);
+      new EtudiantDAO().getAllMesCandidatures(et); // ->recup lis de mes cand
+   this.etCand.loadCand(et.getListStagePostule());
+	JOptionPane.showMessageDialog(null, "Votre candidature a été prise en compte","INFORMATIONS", JOptionPane.INFORMATION_MESSAGE);
 }
 
 public void mettreCV()
@@ -77,14 +94,23 @@ public void mettreCV()
 	   // nom du fichier  choisi 
 	  // 
 	   // chemin absolu du fichier choisi
-	   et.setCv(choix.getSelectedFile().getName());
+	   et.setCv(choix.getSelectedFile().getAbsolutePath());
+	   new EtudiantDAO().update(et);
 	}
 	else {
 		} ;// pas de fichier choisi}
 	}
 public void visualiser(OffreStage of)
 {
-	
+	if(of.getCheminOffre()=="")
+		JOptionPane.showMessageDialog(null, "Pas de descriptif complet ", "Information", JOptionPane.INFORMATION_MESSAGE);
+		
+	try {
+		new LecteurPDF(of.getCheminOffre());
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 }
 public void recherche(String domaine)
 {
@@ -95,7 +121,7 @@ public static  void insert(Etudiant e)
 	new EtudiantDAO().create(e);
 
 	//Affichage de la boite de dialogue
-	JOptionPane jOP = new JOptionPane();
-	jOP.showMessageDialog(null, "Enregistrement réussie", "Information", JOptionPane.INFORMATION_MESSAGE);
+
+	JOptionPane.showMessageDialog(null, "Enregistrement réussie", "Information", JOptionPane.INFORMATION_MESSAGE);
 }
 }

@@ -209,6 +209,19 @@ public class EntrepriseView extends JFrame {
 		
 		final JButton btnEditer = new JButton("EDITER");
 		panelAct.add(btnEditer);
+		btnEditer.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(table.getSelectedRow() == -1)
+				{
+					JOptionPane.showMessageDialog(eCont.getEntView(), "Veuillez selectioner une offre");
+				}
+				else
+				eCont.modifierOffre();
+				
+			}
+		});
 		
 		JButton btnSupp = new JButton("SUPPRIMER");
 		btnSupp.addActionListener(new ActionListener() {
@@ -276,7 +289,7 @@ public class EntrepriseView extends JFrame {
 		    if(of.isValide()==0 | of.isValide()==2)
 		    {
 		    	btnRecrt.setEnabled(false);
-		    	btnEditer.setEnabled(false);
+		    	//btnEditer.setEnabled(false);
 		    }
 		    }
 		});
