@@ -27,10 +27,10 @@ public class OffreStageDAO implements DAO<OffreStage> {
 							st.setDomaineOffre(result.getString("domaine"));
 							st.setDescriptifOffre(result.getString("descriptif"));
 							st.setDureeOffre(result.getString("duree"));
+							st.setDateDebut(result.getString("dateDebut"));
 							st.setCheminOffre(result.getString("cheminStockage"));
 							st.setValide(result.getInt("valide"));
 							st.setIdOffreStage(result.getInt("id"));
-							st.setDateDebut(result.getString("dateDebut"));
 							st.setEntreprise(new EntrepriseDAO().find(result.getInt("idEntreprise")));;
 							ps.close();
 							return st; // Peut etre on doit recuperer la liste des postulant , je ne prefere car lourd.
@@ -166,6 +166,7 @@ public class OffreStageDAO implements DAO<OffreStage> {
 				     of.setLibelleOffre(rs.getString("libelle"));
 				     of.setDureeOffre(rs.getString("duree"));
 				     of.setValide(rs.getInt("valide"));
+				     of.setDateDebut(rs.getString("dateDebut"));
 				     of.setCheminOffre(rs.getString("cheminStockage"));
 				     of.setCommentaire(rs.getString("commentaire"));
 				     of.setEntreprise(new EntrepriseDAO().find(rs.getInt("idEntreprise")));     
@@ -194,6 +195,7 @@ public  ArrayList<OffreStage> getAllOffreStagePourEt(String domaine){
 			     of.setLibelleOffre(rs.getString("libelle"));
 			     of.setDureeOffre(rs.getString("duree"));
 			     of.setValide(rs.getInt("valide"));
+			     of.setDateDebut(rs.getString("dateDebut"));
 			     of.setCheminOffre(rs.getString("cheminStockage"));
 			     of.setCommentaire(rs.getString("commentaire"));
 			     of.setEntreprise(new EntrepriseDAO().find(rs.getInt("idEntreprise")));     
@@ -220,6 +222,7 @@ public  ArrayList<OffreStage> getAllOffreStage(String domaine){
 			     of.setDomaineOffre(rs.getString("domaine"));
 			     of.setLibelleOffre(rs.getString("libelle"));
 			     of.setDureeOffre(rs.getString("duree"));
+			     of.setDateDebut(rs.getString("dateDebut"));
 			     of.setValide(rs.getInt("valide"));
 			     of.setCheminOffre(rs.getString("cheminStockage"));
 			     of.setCommentaire(rs.getString("commentaire"));
