@@ -162,7 +162,7 @@ public class PannelOffreEtuView extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 		      
-				
+				etuCont.deconnexion();
 			}
 		});
 		
@@ -170,7 +170,6 @@ public class PannelOffreEtuView extends JPanel {
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
 				super.mouseClicked(e);
 				ofSelect =ofModel.getListOf().get(table.getSelectedRow());
 			desc.setText(ofSelect.getDescriptifOffre());

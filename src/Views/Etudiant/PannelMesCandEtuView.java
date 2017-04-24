@@ -63,6 +63,13 @@ public class PannelMesCandEtuView extends JPanel {
 		});
 		
 		JButton btnDeconnexion = new JButton("Deconnexion");
+		btnDeconnexion.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				etCon.deconnexion();
+			}
+		});
 		panel_1.add(btnDeconnexion);
 
 	}
