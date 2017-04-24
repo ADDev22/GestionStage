@@ -47,7 +47,7 @@ public class EntreprisePropOffreView extends JFrame {
 	public EntreprisePropOffreView(final EntrepriseController eCont) {
 		final OffreStage of =new OffreStage();
 		of.setEntreprise(eCont.getE());
-		JFrame f =this;
+		final JFrame f =this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -84,7 +84,7 @@ public class EntreprisePropOffreView extends JFrame {
 		JLabel lblNewLabel_1 = new JLabel("Domaine :");
 		panel_3.add(lblNewLabel_1);
 		
-		JComboBox<String> comboBox = new JComboBox<String>(); 
+		final JComboBox<String> comboBox = new JComboBox<String>();
 		  comboBox.addItem("INFORMATIQUE");
 		  comboBox.addItem("ECONOMIE");
 		  comboBox.addItem("GESTION");

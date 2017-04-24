@@ -122,7 +122,7 @@ public class EntrepriseView extends JFrame {
 		JLabel desc = new JLabel("Descriptif:");
 		panel_4.add(desc);
 		
-		JLabel descriptif = new JLabel("");
+		final JLabel descriptif = new JLabel("");
 		panel_4.add(descriptif);
 		
 		JPanel panel_3 = new JPanel();

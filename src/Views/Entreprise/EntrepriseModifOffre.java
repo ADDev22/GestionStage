@@ -48,8 +48,8 @@ package Views.Entreprise;
 		public EntrepriseModifOffre(final EntrepriseController eCont) {
 			final OffreStage of =new OffreStage();
 			of.setEntreprise(eCont.getE());
-			JFrame f =this;
-			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			final JFrame f =this;
+			setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			setBounds(100, 100, 450, 300);
 			contentPane = new JPanel();
 			contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -85,7 +85,7 @@ package Views.Entreprise;
 			JLabel lblNewLabel_1 = new JLabel("Domaine :");
 			panel_3.add(lblNewLabel_1);
 			
-			JComboBox<String> comboBox = new JComboBox<String>(); 
+			final JComboBox<String> comboBox = new JComboBox<String>();
 			  comboBox.addItem("INFORMATIQUE");
 			  comboBox.addItem("ECONOMIE");
 			  comboBox.addItem("GESTION");
