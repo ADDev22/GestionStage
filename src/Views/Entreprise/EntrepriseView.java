@@ -123,7 +123,7 @@ public class EntrepriseView extends JFrame {
 		JLabel desc = new JLabel("Descriptif:");
 		panel_4.add(desc);
 		
-		JLabel descriptif = new JLabel("");
+		final JLabel descriptif = new JLabel("");
 		panel_4.add(descriptif);
 		
 		JPanel panel_3 = new JPanel();
@@ -330,6 +330,12 @@ public class EntrepriseView extends JFrame {
 		}); 
 		setSize(1090,595);
 		setResizable(false);
+<<<<<<< HEAD
 		setVisible(true); 	
         }
+=======
+		setVisible(true); 
+	}
+	
+>>>>>>> 22b2ac3434cb8c932cccaef16803d1fcb5bf7f25
 }

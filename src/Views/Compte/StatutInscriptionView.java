@@ -1,8 +1,10 @@
 package Views.Compte;
 
+import Controllers.AuthentificationController;
 import Controllers.EntrepriseController;
 import Controllers.EtudiantController;
 import Models.DAO.FonctionDAO;
+import Models.DAO.UtilisateurDAO;
 import Models.Fonction;
 
 import javax.swing.*;
@@ -70,6 +72,11 @@ public class StatutInscriptionView extends JFrame
     {
         public void actionPerformed(ActionEvent e)
         {
+            /*Fentre Authentification*/
+            UtilisateurDAO uDAO = new UtilisateurDAO();
+            AuthentificationController authController = new AuthentificationController(uDAO);
+            AuthentificationView authentificationView = new AuthentificationView(authController);
+            StatutInscriptionView.this.dispose();
         }
     }
 }

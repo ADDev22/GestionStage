@@ -50,6 +50,7 @@ public class EntreprisePropOffreView extends JFrame {
 		final OffreStage of =new OffreStage();
 		of.setEntreprise(eCont.getE());
 		JFrame f =this;
+		f = this;
 		this.setTitle("AJOUT OFFRE");
 		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -87,7 +88,7 @@ public class EntreprisePropOffreView extends JFrame {
 		JLabel lblNewLabel_1 = new JLabel("Domaine :");
 		panel_3.add(lblNewLabel_1);
 		
-		JComboBox<String> comboBox = new JComboBox<String>(); 
+		final JComboBox<String> comboBox = new JComboBox<String>();
 		  comboBox.addItem("INFORMATIQUE");
 		  comboBox.addItem("ECONOMIE");
 		  comboBox.addItem("GESTION");
@@ -149,11 +150,12 @@ public class EntreprisePropOffreView extends JFrame {
 		panel_7.add(chemin);
 		final EntreprisePropOffreView v =this;
 		JButton seletFichier = new JButton("Seletionner fichier");
+		final JFrame finalF = f;
 		seletFichier.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			
 				JFileChooser choix = new JFileChooser();
-				int retour=choix.showOpenDialog(f);
+				int retour=choix.showOpenDialog(finalF);
 				if(retour==JFileChooser.APPROVE_OPTION);
 				   of.setCheminOffre(choix.getSelectedFile().getAbsolutePath());				
 			}	

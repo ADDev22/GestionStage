@@ -53,6 +53,7 @@ import java.awt.event.ActionEvent;
 			final OffreStage of =eCont.getOffreSelec();
 			//of.setEntreprise(eCont.getE());
 			JFrame f =this;
+			f = this;
 			this.setTitle("MODIFICATION OFFRE");
 			this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 			setBounds(100, 100, 450, 300);
@@ -90,7 +91,7 @@ import java.awt.event.ActionEvent;
 			JLabel lblNewLabel_1 = new JLabel("Domaine :");
 			panel_3.add(lblNewLabel_1);
 			
-			JComboBox<String> comboBox = new JComboBox<String>(); 
+			final JComboBox<String> comboBox = new JComboBox<String>();
 			  comboBox.addItem("INFORMATIQUE");
 			  comboBox.addItem("ECONOMIE");
 			  comboBox.addItem("GESTION");
@@ -154,11 +155,12 @@ import java.awt.event.ActionEvent;
 			panel_7.add(chemin);
 			final EntrepriseModifOffre v =this;
 			JButton seletFichier = new JButton("Seletionner fichier");
+			final JFrame finalF = f;
 			seletFichier.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 				
 					JFileChooser choix = new JFileChooser();
-					int retour=choix.showOpenDialog(f);
+					int retour=choix.showOpenDialog(finalF);
 					if(retour==JFileChooser.APPROVE_OPTION);
 					   of.setCheminOffre(choix.getSelectedFile().getAbsolutePath());				
 				}	

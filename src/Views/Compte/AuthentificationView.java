@@ -59,6 +59,8 @@ public class AuthentificationView extends JFrame
                 JOptionPane jOP = new JOptionPane();
                 jOP.showMessageDialog(null, "Nom d'utilisateur ou mot de passe incorrecte", "Erreur", JOptionPane.ERROR_MESSAGE);
             }
+            else
+                AuthentificationView.this.dispose();
         }
     }
 
