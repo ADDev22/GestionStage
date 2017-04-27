@@ -27,6 +27,7 @@ import javax.swing.JTextArea;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import javax.swing.JDialog;
 import java.awt.BorderLayout;
@@ -185,7 +186,7 @@ public class EntreprisePropOffreView extends JFrame {
 				of.setLibelleOffre(libelele.getText());
 				of.setDomaineOffre(comboBox.getSelectedItem().toString());
 				of.setDescriptifOffre(descripT.getText());
-				of.setDateDebut(dateChooser.getDateFormatString());
+				of.setDateDebut( new SimpleDateFormat("dd-MM-yyyy").format(dateChooser.getDate()));
 				of.setDureeOffre(dureeT.getText());
 				of.setEntreprise(eCont.getE());
 		  

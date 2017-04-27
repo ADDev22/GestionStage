@@ -330,12 +330,9 @@ public class EntrepriseView extends JFrame {
 		}); 
 		setSize(1090,595);
 		setResizable(false);
-<<<<<<< HEAD
 		setVisible(true); 	
         }
-=======
 		setVisible(true); 
 	}
-	
->>>>>>> 22b2ac3434cb8c932cccaef16803d1fcb5bf7f25
+
 }

@@ -116,6 +116,7 @@ public class EtuPostStageDAO implements DAO<EtuPostStage> {
 						etPos.setIsAccept(result.getInt("isAccept"));
 					    etPos.setEtudiant(new EtudiantDAO().find(idEt));
 					    etPos.setOffre(new OffreStageDAO().find(idOf));
+					    etPos.setIdEtuPostStage(result.getInt("id"));
 						ps.close();
 						return etPos;
 						}
