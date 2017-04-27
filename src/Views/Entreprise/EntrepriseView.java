@@ -171,6 +171,17 @@ public class EntrepriseView extends JFrame {
 		JLabel lblNewLabel_1 = new JLabel("Details Complet:");
 		panel_7.add(lblNewLabel_1);
 		
+		JButton btnVisLM = new JButton("Visualiser");
+		panel_7.add(btnVisLM);
+		btnVisLM.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				eCont.voirCV(eCont.getOffreSelec().getCheminOffre());
+				
+			}
+		});
+		
 		JPanel panel_8 = new JPanel();
 		FlowLayout flowLayout_8 = (FlowLayout) panel_8.getLayout();
 		flowLayout_8.setAlignment(FlowLayout.LEFT);
