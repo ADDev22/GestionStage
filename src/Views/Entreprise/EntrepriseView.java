@@ -267,14 +267,6 @@ public class EntrepriseView extends JFrame {
 			{
 				JOptionPane.showMessageDialog(eCont.getEntView(), "Veuillez selectioner un offre");
 			}
-		 /*  else  if( status == "Attente")
-					{
-				JOptionPane.showMessageDialog(eCont.getEntView(), "Cette Offre n'a pas été encore validé par l'Administrateur");
-					}
-			else if(status == "REFUSER")
-			{
-		JOptionPane.showMessageDialog(eCont.getEntView(), "Cette offre n'a pas était validé. Il sera supprimé dans 2 jours");
-			}*/
 			else
 				eCont.recruter();
 			}
@@ -296,17 +288,29 @@ public class EntrepriseView extends JFrame {
 			domaine.setText(of.getDomaineOffre());
 			descriptif.setText(of.getDescriptifOffre());
 		    dateDebut.setText(of.getDateDebut());
+		   // System.out.println(of.getDateDebut());
 		    duree.setText(of.getDureeOffre());
-		    isValide.setText(String.valueOf(of.isValide()));
+		    String status;
+		    switch(of.getIsValide())
+			{
+			case 0:
+				status ="Attente";
+				break;
+			case 1:
+				status ="Validé";
+				break;
+			default :
+				status ="Rejette";
+				break;
+			}	
+		    isValide.setText(status);
 		    if(of.isValide()==1)
             btnRecrt.setEnabled(true);
 		    else
 		    {
 		    	btnRecrt.setEnabled(false);
 		    }
-		    
-		    }
-		});
+		}});
 		JScrollPane  js = new JScrollPane(table);
 		//contentPane.add(js, BorderLayout.CENTER);
 		panelListOf.add(js);
@@ -326,7 +330,6 @@ public class EntrepriseView extends JFrame {
 		}); 
 		setSize(1090,595);
 		setResizable(false);
-		setVisible(true); 
-	}
-	
+		setVisible(true); 	
+        }
 }

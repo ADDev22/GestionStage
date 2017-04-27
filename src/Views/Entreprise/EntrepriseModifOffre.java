@@ -9,13 +9,16 @@ package Views.Entreprise;
 	import javax.swing.border.EmptyBorder;
 
 	import com.sun.java.swing.plaf.windows.WindowsBorders.ProgressBarBorder;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Text;
+import com.toedter.calendar.JDateChooser;
 
-	import Controllers.EntrepriseController;
+import Controllers.EntrepriseController;
 	import Models.OffreStage;
 	import Models.DAO.EtudiantDAO;
 	import Models.DAO.OffreStageDAO;
+import javafx.scene.control.TextField;
 
-	import java.awt.GridLayout;
+import java.awt.GridLayout;
 	import javax.swing.JLabel;
 	import javax.swing.SwingConstants;
 	import java.awt.FlowLayout;
@@ -26,7 +29,8 @@ package Views.Entreprise;
 	import javax.swing.JScrollBar;
 	import javax.swing.JScrollPane;
 	import java.awt.event.ActionListener;
-	import java.awt.event.ActionEvent;
+import java.text.SimpleDateFormat;
+import java.awt.event.ActionEvent;
 	import javax.swing.JDialog;
 	import java.awt.BorderLayout;
 	import javax.swing.JComboBox;
@@ -46,8 +50,8 @@ package Views.Entreprise;
 		 * Create the frame.
 		 */
 		public EntrepriseModifOffre(final EntrepriseController eCont) {
-			final OffreStage of =new OffreStage();
-			of.setEntreprise(eCont.getE());
+			final OffreStage of =eCont.getOffreSelec();
+			//of.setEntreprise(eCont.getE());
 			JFrame f =this;
 			this.setTitle("MODIFICATION OFFRE");
 			this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -119,10 +123,15 @@ package Views.Entreprise;
 			
 			JLabel lblDateDeDebut = new JLabel("Date de debut :");
 			panel_5.add(lblDateDeDebut);
+
+			JDateChooser dateChooser = new JDateChooser();
+			dateChooser.getCalendarButton().addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+			panel_5.add(dateChooser);
 			
-			dateDebutT = new JTextField(eCont.getOffreSelec().getDateDebut());
-			panel_5.add(dateDebutT);
-			dateDebutT.setColumns(10);
+		
 			
 			JPanel panel_6 = new JPanel();
 			FlowLayout flowLayout_4 = (FlowLayout) panel_6.getLayout();
@@ -179,7 +188,7 @@ package Views.Entreprise;
 					of.setLibelleOffre(libelele.getText());
 					of.setDomaineOffre(comboBox.getSelectedItem().toString());
 					of.setDescriptifOffre(descripT.getText());
-					of.setDateDebut(dateDebutT.getText());
+					of.setDateDebut( new SimpleDateFormat("dd-MM-yyyy").format(dateChooser.getDate()));
 					of.setDureeOffre(dureeT.getText());
 					of.setEntreprise(eCont.getE());
 					of.setIsValide(0);

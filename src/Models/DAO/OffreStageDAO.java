@@ -213,7 +213,7 @@ public  ArrayList<OffreStage> getAllOffreStagePourEt(String domaine){
 public  ArrayList<OffreStage> getAllOffreStage(String domaine){
 	try {
 		ArrayList<OffreStage> listOf = new ArrayList<OffreStage>();
-		PreparedStatement ps =connect.prepareStatement("SELECT * FROM offre_stage WHERE domaine =domaine");
+		PreparedStatement ps =connect.prepareStatement("SELECT * FROM offre_stage WHERE domaine = domaine");
 		ResultSet rs = ps.executeQuery();
 		while(rs.next())
 		{   OffreStage of =new OffreStage();

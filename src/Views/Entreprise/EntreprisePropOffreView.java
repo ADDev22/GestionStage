@@ -31,12 +31,12 @@ import java.awt.event.ActionEvent;
 import javax.swing.JDialog;
 import java.awt.BorderLayout;
 import javax.swing.JComboBox;
+import com.toedter.calendar.JDateChooser;
 
 public class EntreprisePropOffreView extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField libelele;
-	private JTextField dateDebutT;
 	private JTextField dureeT;
 
 	/**
@@ -121,9 +121,12 @@ public class EntreprisePropOffreView extends JFrame {
 		JLabel lblDateDeDebut = new JLabel("Date de debut :");
 		panel_5.add(lblDateDeDebut);
 		
-		dateDebutT = new JTextField();
-		panel_5.add(dateDebutT);
-		dateDebutT.setColumns(10);
+		JDateChooser dateChooser = new JDateChooser();
+		dateChooser.getCalendarButton().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		panel_5.add(dateChooser);
 		
 		JPanel panel_6 = new JPanel();
 		FlowLayout flowLayout_4 = (FlowLayout) panel_6.getLayout();
@@ -180,7 +183,7 @@ public class EntreprisePropOffreView extends JFrame {
 				of.setLibelleOffre(libelele.getText());
 				of.setDomaineOffre(comboBox.getSelectedItem().toString());
 				of.setDescriptifOffre(descripT.getText());
-				of.setDateDebut(dateDebutT.getText());
+				of.setDateDebut(dateChooser.getDateFormatString());
 				of.setDureeOffre(dureeT.getText());
 				of.setEntreprise(eCont.getE());
 		  
