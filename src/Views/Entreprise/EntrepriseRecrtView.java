@@ -214,7 +214,7 @@ public class EntrepriseRecrtView extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(table.getSelectedRow()==-1)
 				{
-					JOptionPane.showMessageDialog(eCont.getEntView(), "Selectionner un etudiant");
+					JOptionPane.showMessageDialog(null, "Veuillez selectionnez un candidat", "Information", JOptionPane.INFORMATION_MESSAGE);
 				}
 				else
 				{
@@ -222,7 +222,9 @@ public class EntrepriseRecrtView extends JFrame {
 	           can.setIsAccept(1);             
 	new EtuPostStageDAO().update(can);			   
 	eCont.suppEt(table.getSelectedRow());
+	JOptionPane.showMessageDialog(null, "Recrutement prise en compte", "Information", JOptionPane.INFORMATION_MESSAGE);
 				}
+				
 			}
 		});
 		panelAct.add(btnRecruter);
@@ -235,7 +237,7 @@ public class EntrepriseRecrtView extends JFrame {
 			public void actionPerformed(ActionEvent e) { // refuser l'offre
 				if(table.getSelectedRow()==-1)
 				{
-					//Apeel de pop pup
+					JOptionPane.showMessageDialog(null, "Veuillez selectionnez un candidat", "Information", JOptionPane.INFORMATION_MESSAGE);
 				}
 				else
 				{
@@ -244,6 +246,7 @@ public class EntrepriseRecrtView extends JFrame {
 		           can.setIsAccept(2);             
 		       new EtuPostStageDAO().update(can);	
 					eCont.suppEt(table.getSelectedRow());
+					JOptionPane.showMessageDialog(null, "Declinaison prise en compte", "Information", JOptionPane.INFORMATION_MESSAGE);				
 			    }
 				
 			}
@@ -258,7 +261,7 @@ public class EntrepriseRecrtView extends JFrame {
 				// TODO Auto-generated method stub
 				if(table.getSelectedRow()==-1)
 				{
-					//Apeel de pop pup
+					JOptionPane.showMessageDialog(null, "Veuillez selectionnez un candidat", "Information", JOptionPane.INFORMATION_MESSAGE);
 				}	
 				else
 				{
@@ -298,6 +301,14 @@ public class EntrepriseRecrtView extends JFrame {
 		
 		JButton btnDeconnexion = new JButton("Deconnexion");
 		panelDec.add(btnDeconnexion);
+		btnDeconnexion.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+           eCont.deconnexion();
+				
+			}
+		});
 		
 		JButton btnRetour = new JButton("Retour");
 		btnRetour.addActionListener(new ActionListener() {

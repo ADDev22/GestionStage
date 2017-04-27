@@ -88,7 +88,7 @@ public class EntrepriseView extends JFrame {
 		lblRfrence.setHorizontalAlignment(SwingConstants.TRAILING);
 		panel.add(lblRfrence);
 		
-		final JLabel id = new JLabel("id");
+		final JLabel id = new JLabel();
 		panel.add(id);
 		
 		JPanel panel_1 = new JPanel();
@@ -100,7 +100,7 @@ public class EntrepriseView extends JFrame {
 		JLabel lblLibel = new JLabel("Libelé:");
 		panel_1.add(lblLibel);
 		
-		final JLabel libele = new JLabel("libele");
+		final JLabel libele = new JLabel("");
 		panel_1.add(libele);
 		
 		JPanel panel_2 = new JPanel();
@@ -231,7 +231,7 @@ public class EntrepriseView extends JFrame {
 				}
 				else
 				eCont.modifierOffre();
-				
+ 				
 			}
 		});
 		
@@ -331,8 +331,5 @@ public class EntrepriseView extends JFrame {
 		setSize(1090,595);
 		setResizable(false);
 		setVisible(true); 	
-        }
-		setVisible(true); 
+        } 
 	}
-
-}
