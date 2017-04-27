@@ -159,6 +159,25 @@ public class AdministrateurDAO extends Administrateur implements DAO<Administrat
         return admin;
     }
 
+    //Méthode renvoyant un ResultSet pour l'affichage sous forme d'un table dans l'interface
+    public ResultSet listeAdmins()
+    {
+        Connection conn = null;
+        String sql = "SELECT id, nom, prenom FROM administrateur";
+        ResultSet rs;
+        try
+        {
+            conn = (Connection) DBConnection.getConnection();
+            java.sql.Statement s = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = s.executeQuery(sql);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+
+        return rs;
+    }
+
     //Traitement du resultat renvoyé par une requête --> correspodance avec un objet
     private Administrateur traitementLigne(ResultSet rs) throws SQLException
     {

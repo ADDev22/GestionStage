@@ -160,6 +160,7 @@ public class EtudiantDAO implements DAO<Etudiant> {
 			     of.setOffre(new OffreStageDAO().find(rs.getInt("idOffre")));
 			     of.setEtudiant(obj);
 			     of.setDatePostule(rs.getString("dateCandidature"));
+			     of.setIsAccept(rs.getInt("isAccept"));
 			     obj.addStagePostule(of);	     
 		}
 		

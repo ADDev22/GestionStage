@@ -212,7 +212,7 @@ public  void getAllOffreStage(Entreprise obj,String domaine){
 	public ResultSet listeEntreprises()
 	{
 		Connection conn = null;
-		String sql = "SELECT raisonSociale, secteurActivite FROM entreprise";
+		String sql = "SELECT id, raisonSociale, secteurActivite FROM entreprise";
 		ResultSet rs;
 		try
 		{
