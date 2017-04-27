@@ -53,6 +53,27 @@ public class AdministrateurAccueilView extends JFrame
     private JButton bModifier;
     private JComboBox cbFiltre;
     private JButton bFiltrer;
+    private JButton bListeAdmin;
+    private JPanel pDetailsAdmin;
+    private JLabel lAnnonceAdmin;
+    private JLabel lNomAdmin;
+    private JTextField tfNomAdmin;
+    private JLabel lPrenomAdmin;
+    private JTextField tfPrenomAdmin;
+    private JLabel lAdresseAdmin;
+    private JPanel pAdresse1;
+    private JTextField tfNoRueAdmin;
+    private JTextField tfRueAdmin;
+    private JTextField tfComplementAdmin;
+    private JPanel pAdresse2;
+    private JTextField tfCdePostalAdmin;
+    private JTextField tfPaysAdmin;
+    private JLabel lMailAdmin;
+    private JTextField tfMailAdmin;
+    private JLabel lTelAdmin;
+    private JTextField tfTelAdmin;
+    private JButton bSupprimerAdmin;
+    private JTextField tfVilleAdmin;
     private JMenuBar menuBar = new JMenuBar();
     private JMenu menu = new JMenu("Fichier");
     private JMenuItem sousMenu1 = new JMenuItem("Profil");
@@ -72,17 +93,23 @@ public class AdministrateurAccueilView extends JFrame
         this.setLocationRelativeTo(null);
 
         pDetailsOffre.setVisible(false);
+        pDetailsAdmin.setVisible(false);
 
         bFiltrer.addActionListener(new BFiltrerListener());
         bListeOffres.addActionListener(new BListeOffresListener());
+        bListeAdmin.addActionListener(new BListeAdminsListener());
         bListeEntreprises.addActionListener(new BListeEntreprisesListener());
         bListeEtudiants.addActionListener(new BListeEtudiantsListener());
         sousMenu1.addActionListener(new SousMenu1ActionListener());
         sousMenu2.addActionListener(new SousMenu2ActionListener());
 
+        //Bouttons des détails de l'offre
         bValider.addActionListener(new BValiderListener());
         bAnnuler.addActionListener(new BAnnulerListener());
         bModifier.addActionListener(new BModifierListener());
+
+        //Bouttons des détails de l'administrateur
+        bSupprimerAdmin.addActionListener(new BSupprimerAdminListener());
 
         //Menu
         menuBar.add(menu);
@@ -101,23 +128,25 @@ public class AdministrateurAccueilView extends JFrame
             @Override
             public void mouseClicked(MouseEvent e)
             {
-                pDetailsOffre.setVisible(true);
-                String valeurId = String.valueOf(tContenu.getModel().getValueAt(tContenu.getSelectedRow(), tContenu.getSelectedColumn()));
-                OffreStage os = new OffreStageDAO().find(Integer.valueOf(valeurId));
+                if (String.valueOf(tContenu.getColumnName(1)).equals("libelle"))
+                {
+                    pDetailsOffre.setVisible(true);
+                    String valeurId = String.valueOf(tContenu.getModel().getValueAt(tContenu.getSelectedRow(), 0)); //tContenu.getSelectedColumn()
+                    OffreStage os = new OffreStageDAO().find(Integer.valueOf(valeurId));
 
-                tfId.setText(String.valueOf(os.getIdOffreStage()));
-                tfLibelle.setText(os.getLibelleOffre());
-                tfDomaine.setText(os.getDomaineOffre());
-                taDescriptif.setText(os.getDescriptifOffre());
-                tfDateDebut.setText(os.getDateDebut());
-                tfDuree.setText(os.getDureeOffre());
-                int validite = os.getIsValide();
-                if (validite == 0)
-                    cbValide.setSelectedItem("En Attente");
-                else if (validite == 1)
-                    cbValide.setSelectedItem("Acceptée");
-                else
-                    cbValide.setSelectedItem("Declinée");
+                    tfId.setText(String.valueOf(os.getIdOffreStage()));
+                    tfLibelle.setText(os.getLibelleOffre());
+                    tfDomaine.setText(os.getDomaineOffre());
+                    taDescriptif.setText(os.getDescriptifOffre());
+                    tfDateDebut.setText(os.getDateDebut());
+                    tfDuree.setText(os.getDureeOffre());
+                    int validite = os.getIsValide();
+                    if (validite == 0)
+                        cbValide.setSelectedItem("En Attente");
+                    else if (validite == 1)
+                        cbValide.setSelectedItem("Acceptée");
+                    else
+                        cbValide.setSelectedItem("Declinée");
 
                 /*DetailsOffreView detailsOffreView = new DetailsOffreView(os);
                 pDetails = detailsOffreView.getpDetailsOffre();
@@ -130,6 +159,36 @@ public class AdministrateurAccueilView extends JFrame
                 //AdministrateurAccueilView.this.setContentPane(container);
                 AdministrateurAccueilView.this.getContentPane().repaint();
                 AdministrateurAccueilView.this.setVisible(true);*/
+                }
+                else if (String.valueOf(tContenu.getColumnName(1)).equals("nom"))
+                {
+                    pDetailsAdmin.setVisible(true);
+                    String valeurId = String.valueOf(tContenu.getModel().getValueAt(tContenu.getSelectedRow(), 0)); //tContenu.getSelectedColumn()
+                    Administrateur a = new AdministrateurDAO().find(Integer.valueOf(valeurId));
+
+                    tfNomAdmin.setText(a.getAdministrateurNom());
+                    tfPrenomAdmin.setText(a.getAdministrateurPrenom());
+                    tfNoRueAdmin.setText(String.valueOf(a.getAdresseNoRue()));
+                    tfRueAdmin.setText(a.getAdresseRue());
+                    tfComplementAdmin.setText(a.getAdresseComplement());
+                    tfCdePostalAdmin.setText(String.valueOf(a.getAdresseCdePostal()));
+                    tfVilleAdmin.setText(a.getAdresseVille());
+                    tfPaysAdmin.setText(a.getAdressePays());
+                    tfMailAdmin.setText(a.getAdministrateurMail());
+                    tfTelAdmin.setText(String.valueOf(a.getAdministrateurTel()));
+
+                /*DetailsOffreView detailsOffreView = new DetailsOffreView(os);
+                pDetails = detailsOffreView.getpDetailsOffre();
+
+                AdministrateurAccueilView.this.getContentPane().removeAll();
+
+                AdministrateurAccueilView.this.pDetails.updateUI();
+                AdministrateurAccueilView.this.pDetails.revalidate();
+                AdministrateurAccueilView.this.getContentPane().revalidate();
+                //AdministrateurAccueilView.this.setContentPane(container);
+                AdministrateurAccueilView.this.getContentPane().repaint();
+                AdministrateurAccueilView.this.setVisible(true);*/
+                }
             }
 
             @Override
@@ -188,6 +247,18 @@ public class AdministrateurAccueilView extends JFrame
             AdministrateurController administrateurController = new AdministrateurController(administrateurDAO);
             ResultSetTableModel offresRS = new ResultSetTableModel(new OffreStageDAO().listeOffres());
             AdministrateurAccueilView administrateurAccueilView = new AdministrateurAccueilView(administrateurController, offresRS);
+            AdministrateurAccueilView.this.dispose();
+        }
+    }
+
+    class BListeAdminsListener implements ActionListener
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            AdministrateurDAO administrateurDAO = new AdministrateurDAO();
+            AdministrateurController administrateurController = new AdministrateurController(administrateurDAO);
+            ResultSetTableModel adminsRS = new ResultSetTableModel(new AdministrateurDAO().listeAdmins());
+            AdministrateurAccueilView administrateurAccueilView = new AdministrateurAccueilView(administrateurController, adminsRS);
             AdministrateurAccueilView.this.dispose();
         }
     }
@@ -312,6 +383,22 @@ public class AdministrateurAccueilView extends JFrame
             bAnnuler.setEnabled(true);
             cbValide.setEditable(false);
             cbValide.setEnabled(true);
+        }
+    }
+
+    class BSupprimerAdminListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            if(JOptionPane.showConfirmDialog(null, "L'administrateur sera supprimé définitivement, en êtes-vous sûr ?")==JOptionPane.YES_OPTION)
+            {
+                String valeurId = String.valueOf(tContenu.getModel().getValueAt(tContenu.getSelectedRow(), 0)); //tContenu.getSelectedColumn()
+                Administrateur a = new AdministrateurDAO().find(Integer.valueOf(valeurId));
+                Utilisateur u = new UtilisateurDAO().find(a.getUtilisateur().getUitilisateurId());
+                new AdministrateurDAO().delete(a);
+                new UtilisateurDAO().delete(u);
+            }
         }
     }
 }

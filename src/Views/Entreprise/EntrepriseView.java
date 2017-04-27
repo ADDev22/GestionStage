@@ -3,27 +3,25 @@ package Views.Entreprise;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import Controllers.AuthentificationController;
 import Controllers.EntrepriseController;
-import Models.EtuPostStage;
-import Models.Etudiant;
-import Models.OffreModel;
-import Models.OffreStage;
+import Models.*;
+import Models.DAO.AdministrateurDAO;
+import Models.DAO.EntrepriseDAO;
 import Models.DAO.EtudiantDAO;
+import Models.DAO.UtilisateurDAO;
+import Views.Administrateur.AdministrateurAccueilView;
+import Views.Compte.AuthentificationView;
+import Views.Profil.ProfilAdministrateurView;
+import Views.Profil.ProfilEntrepriseView;
+import Views.Profil.ProfilEtudiantView;
+import Views.Profil.ProfilView;
 import jdk.nashorn.internal.scripts.JS;
 
-import javax.swing.JTabbedPane;
 import java.awt.GridLayout;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
-import javax.swing.JTable;
-import javax.swing.SwingConstants;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -36,6 +34,10 @@ public class EntrepriseView extends JFrame {
 	private JPanel contentPane;
 	private JTable table;
 	private EntrepriseController eCont;
+	private JMenuBar menuBar = new JMenuBar();
+	private JMenu menu = new JMenu("Fichier");
+	private JMenuItem sousMenu1 = new JMenuItem("Profil");
+	private JMenuItem sousMenu2 = new JMenuItem("Déconnexion");
 
 	/**
 	 * Launch the application.
@@ -61,6 +63,17 @@ public class EntrepriseView extends JFrame {
 		this.setTitle("ACCUEIL");
 		this.eCont = eCont;
 		eCont.setEntView(this);
+
+		sousMenu1.addActionListener(new SousMenu1ActionListener());
+		sousMenu2.addActionListener(new SousMenu2ActionListener());
+
+		//Menu
+		menuBar.add(menu);
+		//Ajout des sous menus
+		menu.add(sousMenu1);
+		menu.add(sousMenu2);
+		//Définition à l'intérieur du panel
+		this.setJMenuBar(menuBar);
 		
 		
 		
@@ -330,12 +343,52 @@ public class EntrepriseView extends JFrame {
 		}); 
 		setSize(1090,595);
 		setResizable(false);
-<<<<<<< HEAD
 		setVisible(true); 	
         }
-=======
-		setVisible(true); 
+
+	class SousMenu1ActionListener implements ActionListener
+	{
+		@Override
+		public void actionPerformed(ActionEvent e)
+		{
+			Utilisateur u = new Utilisateur();
+			if (u.getDroit() == 1)
+			{
+				Administrateur admin = new AdministrateurDAO().find(u.getIdU());
+				ProfilView profilView = new ProfilView(new ProfilAdministrateurView(admin).getpProfilAdministrateur());
+				EntrepriseView.this.dispose();
+			}
+			else if (u.getDroit() == 2)
+			{
+				Entreprise ent = new EntrepriseDAO().find(u.getIdU());
+				ProfilView profilView = new ProfilView(new ProfilEntrepriseView(ent).getpProfilEntreprise());
+				EntrepriseView.this.dispose();
+			}
+			else
+			{
+				Etudiant et = new EtudiantDAO().find(u.getIdU());
+				ProfilView profilView = new ProfilView(new ProfilEtudiantView(et).getpProfilEtudiant());
+				EntrepriseView.this.dispose();
+			}
+		}
 	}
-	
->>>>>>> 22b2ac3434cb8c932cccaef16803d1fcb5bf7f25
-}
+
+	class SousMenu2ActionListener implements ActionListener
+	{
+		@Override
+		public void actionPerformed(ActionEvent e)
+		{
+			//Attribution des variables statiques qui vont servir de session
+			new Utilisateur().setId(0);
+			new Utilisateur().setIdU(0);
+			new Utilisateur().setNom("");
+			new Utilisateur().setDroit(0);
+
+            /*Fentre Authentification*/
+			UtilisateurDAO uDAO = new UtilisateurDAO();
+			AuthentificationController authController = new AuthentificationController(uDAO);
+			AuthentificationView authentificationView = new AuthentificationView(authController);
+			EntrepriseView.this.dispose();
+		}
+	}
+	}

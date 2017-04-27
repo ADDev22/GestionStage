@@ -125,7 +125,7 @@ import java.awt.event.ActionEvent;
 			JLabel lblDateDeDebut = new JLabel("Date de debut :");
 			panel_5.add(lblDateDeDebut);
 
-			JDateChooser dateChooser = new JDateChooser();
+			final JDateChooser dateChooser = new JDateChooser();
 			dateChooser.getCalendarButton().addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 				}

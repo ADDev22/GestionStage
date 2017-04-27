@@ -29,7 +29,7 @@ public class PannelMesCandEtuView extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PannelMesCandEtuView(EtudiantController etCon) {
+	public PannelMesCandEtuView(final EtudiantController etCon) {
 		et=etCon;
 		setLayout(new BorderLayout(0, 0));
 		
