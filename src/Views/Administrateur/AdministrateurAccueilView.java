@@ -1,8 +1,10 @@
 package Views.Administrateur;
 
 import Controllers.AdministrateurController;
+import Controllers.AuthentificationController;
 import Models.*;
 import Models.DAO.*;
+import Views.Compte.AuthentificationView;
 import Views.Profil.ProfilAdministrateurView;
 import Views.Profil.ProfilEntrepriseView;
 import Views.Profil.ProfilEtudiantView;
@@ -246,7 +248,17 @@ public class AdministrateurAccueilView extends JFrame
         @Override
         public void actionPerformed(ActionEvent e)
         {
+            //Attribution des variables statiques qui vont servir de session
+            new Utilisateur().setId(0);
+            new Utilisateur().setIdU(0);
+            new Utilisateur().setNom("");
+            new Utilisateur().setDroit(0);
 
+            /*Fentre Authentification*/
+            UtilisateurDAO uDAO = new UtilisateurDAO();
+            AuthentificationController authController = new AuthentificationController(uDAO);
+            AuthentificationView authentificationView = new AuthentificationView(authController);
+            AdministrateurAccueilView.this.dispose();
         }
     }
 
@@ -264,6 +276,7 @@ public class AdministrateurAccueilView extends JFrame
             os.setDescriptifOffre(taDescriptif.getText());
             os.setDateDebut(tfDateDebut.getText());
             os.setDureeOffre(tfDuree.getText());
+            os.setEntreprise(new EntrepriseDAO().find(new Utilisateur().getIdU()));
             if (cbValide.getSelectedItem().toString().equals("En Attente"))
                 os.setIsValide(0);
             else if (cbValide.getSelectedItem().toString().equals("Validée"))

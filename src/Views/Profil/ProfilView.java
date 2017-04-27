@@ -1,14 +1,13 @@
 package Views.Profil;
 
+import Controllers.AuthentificationController;
 import Models.Administrateur;
-import Models.DAO.AdministrateurDAO;
-import Models.DAO.DAO;
-import Models.DAO.EntrepriseDAO;
-import Models.DAO.EtudiantDAO;
+import Models.DAO.*;
 import Models.Entreprise;
 import Models.Etudiant;
 import Models.Utilisateur;
 import Views.Administrateur.AdministrateurAccueilView;
+import Views.Compte.AuthentificationView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -83,7 +82,17 @@ public class ProfilView extends JFrame
         @Override
         public void actionPerformed(ActionEvent e)
         {
+            //Attribution des variables statiques qui vont servir de session
+            new Utilisateur().setId(0);
+            new Utilisateur().setIdU(0);
+            new Utilisateur().setNom("");
+            new Utilisateur().setDroit(0);
 
+            /*Fentre Authentification*/
+            UtilisateurDAO uDAO = new UtilisateurDAO();
+            AuthentificationController authController = new AuthentificationController(uDAO);
+            AuthentificationView authentificationView = new AuthentificationView(authController);
+            ProfilView.this.dispose();
         }
     }
 }

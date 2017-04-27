@@ -55,6 +55,7 @@ public class EntrepriseRecrtView extends JFrame {
 	 * Create the frame.
 	 */
 	public EntrepriseRecrtView(EntrepriseController e) {
+		this.setName("RECRUTEMENT");
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		this.eCont = e;
 		eCont.setEtView(this);
@@ -202,7 +203,7 @@ public class EntrepriseRecrtView extends JFrame {
 				}
 				else
 				{
-					//Voir cv
+					eCont.voirCV(eCont.geteTModel().getListEt().get(table.getSelectedRow()).getCv());
 				}
 				
 			}

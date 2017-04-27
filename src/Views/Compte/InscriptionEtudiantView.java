@@ -84,7 +84,8 @@ public class InscriptionEtudiantView extends JFrame
     {
         public void actionPerformed(ActionEvent e)
         {
-
+            StatutInscriptionView statutInscriptionView = new StatutInscriptionView();
+            InscriptionEtudiantView.this.dispose();
         }
     }
 }

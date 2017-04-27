@@ -15,6 +15,7 @@ import Models.DAO.EtuPostStageDAO;
 import Models.DAO.EtudiantDAO;
 import Models.DAO.OffreStageDAO;
 import Models.DAO.UtilisateurDAO;
+import Views.LecteurPDF;
 import Views.Compte.AuthentificationView;
 import Views.Entreprise.EntrepriseModifOffre;
 import Views.Entreprise.EntreprisePropOffreView;
@@ -110,6 +111,19 @@ public class EntrepriseController {
       UtilisateurDAO uDAO = new UtilisateurDAO();
       AuthentificationController authController = new AuthentificationController(uDAO);
       AuthentificationView authentificationView = new AuthentificationView(authController);
+	}
+	public void voirCV(String cv)
+	{
+		if(cv == null | cv=="")
+			JOptionPane.showMessageDialog(null, "Etudiant n'a pas mis de CV", "Information", JOptionPane.INFORMATION_MESSAGE);
+		else
+			try {
+				new LecteurPDF(cv);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 	}
 	public void ajouter()
 	{

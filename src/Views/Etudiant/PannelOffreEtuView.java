@@ -62,7 +62,7 @@ public class PannelOffreEtuView extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PannelOffreEtuView(EtudiantController etuCont) {
+	public PannelOffreEtuView(final EtudiantController etuCont) {
 		et=etuCont;
 		ofModel = et.getOfModel();
 		setLayout(new BorderLayout(0, 0));
