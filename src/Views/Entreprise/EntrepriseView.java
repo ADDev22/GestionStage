@@ -391,4 +391,4 @@ public class EntrepriseView extends JFrame {
 			EntrepriseView.this.dispose();
 		}
 	}
-        }
+}
