@@ -12,6 +12,7 @@ import Models.Utilisateur;
 import Views.Administrateur.AdministrateurAccueilView;
 import Views.Administrateur.ResultSetTableModel;
 import Views.Compte.AuthentificationView;
+import com.intellij.uiDesigner.core.GridLayoutManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -72,7 +73,7 @@ public class ProfilView extends JFrame {
      */
     private void $$$setupUI$$$() {
         container = new JPanel();
-        container.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        container.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         container.setPreferredSize(new Dimension(1090, 595));
     }
 
