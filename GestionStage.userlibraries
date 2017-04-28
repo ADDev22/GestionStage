@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eclipse-userlibraries>
+  <library name="GestStage">
+    <archive path="C:/Users/Allam/workspace/GestionStage/GestStage.zip" />
+    <archive path="C:/Users/Allam/Documents/Logiciels/mysql-connector-java-5.1.40/mysql-connector-java-5.1.40/mysql-connector-java-5.1.40-bin.jar" />
+  </library>
+</eclipse-userlibraries>
+
