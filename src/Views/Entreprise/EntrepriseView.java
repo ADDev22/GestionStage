@@ -42,18 +42,7 @@ public class EntrepriseView extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					//EntrepriseView frame = new EntrepriseView();
-					//frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the frame.
@@ -301,7 +290,6 @@ public class EntrepriseView extends JFrame {
 			domaine.setText(of.getDomaineOffre());
 			descriptif.setText(of.getDescriptifOffre());
 		    dateDebut.setText(of.getDateDebut());
-		   // System.out.println(of.getDateDebut());
 		    duree.setText(of.getDureeOffre());
 		    String status;
 		    switch(of.getIsValide())

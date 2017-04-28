@@ -183,9 +183,15 @@ public class OffreStageDAO implements DAO<OffreStage> {
 }
 public  ArrayList<OffreStage> getAllOffreStagePourEt(String domaine){
 	try {
+		PreparedStatement ps;
 		ArrayList<OffreStage> listOf = new ArrayList<OffreStage>();
-		PreparedStatement ps =connect.prepareStatement("SELECT * FROM offre_stage WHERE valide = 1 AND domaine = ?");
+		if(domaine =="TOUT")
+		 ps =connect.prepareStatement("SELECT * FROM offre_stage WHERE valide = 1");
+		else
+		{
+		ps =connect.prepareStatement("SELECT * FROM offre_stage WHERE valide = 1 AND domaine = ?");
 		ps.setString(1, domaine);
+		}
 		ResultSet rs = ps.executeQuery();
 		while(rs.next())
 		{   OffreStage of =new OffreStage();

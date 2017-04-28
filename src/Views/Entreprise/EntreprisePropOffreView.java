@@ -220,8 +220,8 @@ public class EntreprisePropOffreView extends JFrame {
 				        new OffreStageDAO().create(of);
 				        c=0;
 						
-						v.setVisible(true);
-						v.dispose();}
+						//v.setVisible(false);
+					    v.dispose();}
 			    }
 		});
 		panel.add(btnOk);

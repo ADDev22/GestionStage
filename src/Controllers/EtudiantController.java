@@ -55,7 +55,7 @@ public EtudiantController(Etudiant e)
     new EtudiantDAO().getAllMesCandidatures(et); // ->recup lis de mes cand
     this.etCand.loadCand(et.getListStagePostule());
 	this.ofModel = new OffreEtuModel();
-	this.ofModel.loadOffre(new OffreStageDAO().getAllOffreStagePourEt("A"));
+	this.ofModel.loadOffre(new OffreStageDAO().getAllOffreStagePourEt("TOUT"));
 	this.etView =new EtudiantView(this);
 	
 }
@@ -104,15 +104,18 @@ public void mettreCV()
 	}
 public void visualiser(OffreStage of)
 {
-	if(of.getCheminOffre()=="")
+	if(of.getCheminOffre()=="" || of.getCheminOffre() ==null )
 		JOptionPane.showMessageDialog(null, "Pas de descriptif complet ", "Information", JOptionPane.INFORMATION_MESSAGE);
+	else
 		
-	try {
-		new LecteurPDF(of.getCheminOffre());
-	} catch (Exception e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+	{	
+		try {
+			new LecteurPDF(of.getCheminOffre());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}	
 }
 public void recherche(String domaine)
 {

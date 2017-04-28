@@ -38,23 +38,12 @@ public class EntrepriseRecrtView extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-/*	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EntrepriseRecrtView frame = new EntrepriseRecrtView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
-
+	
 	/**
 	 * Create the frame.
 	 */
 	public EntrepriseRecrtView(EntrepriseController e) {
+		EntrepriseRecrtView v = this;
 		this.setName("RECRUTEMENT");
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		this.eCont = e;
@@ -168,8 +157,8 @@ public class EntrepriseRecrtView extends JFrame {
 		JPanel panelRech = new JPanel();
 		contentPane.add(panelRech, BorderLayout.NORTH);
 		
-		final JLabel lblDomaine = new JLabel("Niveau :");
-		panelRech.add(lblDomaine);
+		final JLabel lblDomaine1 = new JLabel("Niveau :");
+		panelRech.add(lblDomaine1);
 		
 		final JComboBox<String> comboBox = new JComboBox<String>();
 		         comboBox.addItem("BAC+1");
@@ -283,7 +272,7 @@ public class EntrepriseRecrtView extends JFrame {
 			id.setText(String.valueOf(et.getIdEtudiant()));
 			lbNom.setText(et.getNom());
 			lbPren.setText(et.getPrenom());
-			lblDomaine.setText(et.getDomEtude());
+			lbDomaine.setText(et.getDomEtude());
 		    lbNiv.setText(et.getNivEtude());
 		    lbMail.setText(et.getMail());
 		    lbTel.setText(et.getTel());	
@@ -305,6 +294,7 @@ public class EntrepriseRecrtView extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+			v.dispose();
            eCont.deconnexion();
 				
 			}
