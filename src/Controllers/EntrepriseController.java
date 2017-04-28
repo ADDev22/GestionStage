@@ -138,8 +138,14 @@ public class EntrepriseController {
 	public void suppOf(int row)
 	{
 		if(JOptionPane.showConfirmDialog(null, "L'offre sera supprimé definitivement dans notre base de donnée Voulez vous supprimer ?")==JOptionPane.YES_OPTION)
-		{
+		{   EtuPostStageDAO eD = new EtuPostStageDAO();
+			new OffreStageDAO().getAllPostulans(offreSelec); // recup ts les candi
+			for(EtuPostStage e : offreSelec.getListPostulant())
+			{
+				eD.delete(e);
+			}
 			new OffreStageDAO().delete(offreSelec);
+			
 			this.ofModel.removeRow(row);
 			this.ofModel.getListOf().remove(row);
 		}

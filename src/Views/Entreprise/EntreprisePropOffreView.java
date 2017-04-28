@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -18,6 +20,7 @@ import Models.DAO.OffreStageDAO;
 
 import java.awt.GridLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.FlowLayout;
 import javax.swing.JTextField;
@@ -27,6 +30,7 @@ import javax.swing.JTextArea;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import javax.swing.JDialog;
 import java.awt.BorderLayout;
@@ -182,18 +186,43 @@ public class EntreprisePropOffreView extends JFrame {
 		JButton btnOk = new JButton("Valider");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				of.setLibelleOffre(libelele.getText());
-				of.setDomaineOffre(comboBox.getSelectedItem().toString());
-				of.setDescriptifOffre(descripT.getText());
-				of.setDateDebut(dateChooser.getDateFormatString());
-				of.setDureeOffre(dureeT.getText());
-				of.setEntreprise(eCont.getE());
-		  
-				new OffreStageDAO().create(of);
 				
-				v.setVisible(true);
-				v.dispose();
-			}
+				Pattern motifNum =null;
+				motifNum = Pattern.compile("^0[1-68][0-9]{8}");
+				Matcher matcherNum = motifNum.matcher("");
+				
+				Pattern motifmel =null;
+				motifmel = Pattern.compile("^[a-z0-9._-]+@[a-z0-9._-]{2,}\\.[a-z]{2,4}");
+				Matcher matchermel = motifmel.matcher("");
+				int c=0;
+				if(libelele.getText().isEmpty())
+					c++;
+				if(descripT.getText().isEmpty())
+				    c++;
+				if(dureeT.getText().isEmpty())
+					c++;
+				if(dateChooser.getDate()==null)
+					c++;
+				
+				if(c != 0)
+				{JOptionPane.showMessageDialog(eCont.getEntView(), "Veuillez remplir tous les champs");}
+				else
+				{
+						of.setLibelleOffre(libelele.getText());
+						of.setDomaineOffre(comboBox.getSelectedItem().toString());
+						of.setDescriptifOffre(descripT.getText());
+						if(dateChooser.getDate()==null)
+						{}
+						else {
+						of.setDateDebut( new SimpleDateFormat("dd-MM-yyyy").format(dateChooser.getDate()));}
+						of.setDureeOffre(dureeT.getText());
+						of.setEntreprise(eCont.getE());
+				        new OffreStageDAO().create(of);
+				        c=0;
+						
+						v.setVisible(true);
+						v.dispose();}
+			    }
 		});
 		panel.add(btnOk);
 		setSize(1090,595);

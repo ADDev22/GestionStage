@@ -166,6 +166,7 @@ public boolean delete(Entreprise obj) {
 				     of.setValide(rs.getInt("valide"));
 				     of.setCheminOffre(rs.getString("cheminStockage"));
 				     of.setCommentaire(rs.getString("commentaire"));
+				     of.setDateDebut(rs.getString("dateDebut"));
 				     of.setEntreprise(obj);
 				     obj.addOffreStage(of);	     
 			}
@@ -196,6 +197,7 @@ public  void getAllOffreStage(Entreprise obj,String domaine){
 			     of.setCheminOffre(rs.getString("cheminStockage"));
 			     of.setCommentaire(rs.getString("commentaire"));
 			     of.setEntreprise(obj);
+			     of.setDateDebut(rs.getString("dateDebut"));
 			     obj.addOffreStage(of);	     
 		}
 		
